@@ -1,0 +1,31 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title 录件系统
+		link(rel="shortcut icon" href="/images/logo.png")
+		link(rel="bookmark" href="/images/logo.png")
+		link(rel="icon" href="/images/logo.png" type="image/png")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+		meta(http-equiv="X-UA-Compatible" content="ie=edge")
+		link(rel="apple-touch-icon" href="/images/logo.png")
+		meta(name="apple-mobile-web-app-title" content="录件系统")
+		meta(name="mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="white")
+		link(rel="stylesheet" href="/styles/zonghe.css")
+	body
+		img.chaedu_welcome(src="/images/fd_chae.png")
+		//- a.chaedu_new(href="/sys_home") 录新件
+		//- a.chaedu_old(href="/chaedu_profile") 已录件
+		//- a.chaedu_old(href="/chaedu_profile_1") 有效战绩
+		//- a.chaedu_old(href="/add_gonghao") 添加代理
+		//- a.chaedu_reg(href="#") 代理人规则
+		//- a.chaedu_jin(class="old_a") 领奖金(未激活)
+		a.chaedu_new(style=data.b_img href=data.url)=data.title_1
+		a.chaedu_old(href="/chaedu_profile") 已录件
+		a.chaedu_old(href="/chaedu_profile_1") 有效战绩
+		a.chaedu_old(style=data.b_img_2 href=data.url_1)=data.title_2
+		a.chaedu_reg(href="/chaedu_guize") 活动规则
+		a.chaedu_jin(class="old_a") 领奖金(未激活)
+	script(src="/js/jquery.min.js")
+	script(src="/js/chaedu_zonghe.js")

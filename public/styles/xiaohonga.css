@@ -1,0 +1,121 @@
+ *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Helvetica Neue,PingFang SC,Microsoft YaHei;
+    -webkit-font-smoothing:antialiased;/* chorm safari 抗锯齿*/
+    -webkit-overflow-scrolling:touch;
+    outline:none;
+}
+/* 滚动条样式调节*/
+::-webkit-scrollbar{margin-right:3px;width:4px;height:4px}
+::-webkit-scrollbar,::-webkit-scrollbar-track{background-color:transparent}
+::-webkit-scrollbar-thumb{width:4px;border-radius:2px;background-color:#e4e4e4}
+
+body,html{min-height:100%;background:#E7EBEE;}
+a,a:visited{text-decoration:none}
+h1,h2,h3,h4,h5,h6{font-weight:500}
+
+.remind-top{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width:100vw;
+	height:100vh;
+}
+
+.remind-img{
+	width:100%;
+	height: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+
+
+.remind-img img{
+	margin-top:30px;
+	width:100%;
+	height: auto;
+}
+
+.remind-title{
+	width:100%;
+	height: 120px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.remind-title text{
+	font-size: 25px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+
+.remind-profile{
+	width:90%;
+	height: 200px;
+	background-color: #fff;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 0 0 1px 0 rgba(0,0,0,0.10), 0 0 0 0 rgba(0,0,0,0.13), 0px 1px 1px 2px rgba(222,222,222,0.10);
+}
+
+.remind-profile-t{
+	width:100%;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+	color:#999;
+}
+
+.remind-profile-a{
+	width:90%;
+	height: 60px;
+	border:1px solid #eee;
+	display: flex;
+	flex-direction: row;
+}
+
+.remind-aa{
+	font-size: 18px;
+	width:33.3333%;
+	height: 100%;
+	border:1px solid #eee;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color:#333;
+}
+
+.remind-footer{
+	position: fixed;
+	bottom:0px;
+	color: #fff;
+	font-size: 22px;
+	width:100%;
+	height: 55px;
+	background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%);
+	text-align: center;
+	line-height: 55px;
+	font-weight: 600;
+}
+
+.remind-footer:hover{
+	background-color: #b71c1e;
+}
+
+
+.remind-time{
+	margin-top:20px;
+	font-size: 12px;
+	color:#999;
+}

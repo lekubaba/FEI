@@ -1,0 +1,21 @@
+{
+    "apps": [
+        {
+            "name": "feidaijun",
+            "script": "./index.js",
+            "exec_mode": "cluster",
+            "instances": 4,
+            "instance_var": "INSTANCE_ID",
+            "max_memory_restart": "200M",
+            "autorestart": true,
+            "env":{
+                "NODE_ENV":"production"
+            },
+            "env_dev":{
+                "NODE_ENV":"development"
+            },
+            "error_file" : "./logs/app-err.log",
+            "out_file"   : "./logs/app-out.log"
+        }
+    ]
+}

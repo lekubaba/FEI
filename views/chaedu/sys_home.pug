@@ -1,0 +1,80 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title 录件系统
+		link(rel="shortcut icon" href="/images/logo.png")
+		link(rel="bookmark" href="/images/logo.png")
+		link(rel="icon" href="/images/logo.png" type="image/png")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+		meta(http-equiv="X-UA-Compatible" content="ie=edge")
+		link(rel="apple-touch-icon" href="/images/logo.png")
+		meta(name="apple-mobile-web-app-title" content="录件系统")
+		meta(name="mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="white")
+		link(rel="stylesheet" href="/styles/chaedu.css")
+	body
+		div.chaedu_go
+			div.chaedu_go1
+			div.chaedu_go1
+			div.chaedu_go1
+			div.chaedu_go1
+			div.chaedu_go1
+		div.chaedu_input_info(style="display:")
+			input.chaedu_input1(style="margin-top:60px;" type="text" placeholder="输入客户姓名")
+			input.chaedu_input3(type="text" placeholder="输入客户身份证号")
+			input.chaedu_input2(type="text" placeholder="输入客户手机号")
+		div.chaedu_input_info(style="display:none;")
+			select(class="select_fang" name="fang")
+				option( class="option_fang" value="yn") 是否有按揭房
+				option(value="yes") 是
+				option(value="no") 否
+			input.chaedu_input04(class="aa" style="margin-top:30px;" type="number" placeholder="名下所有按揭房贷款总金额(元)")
+			input.chaedu_input4(class="aa" type="number" placeholder="第一套按揭房月供金额(元)")
+			input.chaedu_input5(class="aa" type="number" placeholder="第一套按揭房已还款期数")
+			input.chaedu_input6(class="aa" type="number" placeholder="第二套按揭房月供金额(元)")
+			input.chaedu_input7(class="aa" type="number" placeholder="第二套按揭房已还款期数")
+			input.chaedu_input8(class="aa" type="number" placeholder="第三套按揭房月供金额(元)")
+			input.chaedu_input9(class="aa" style="margin-bottom:100px;" type="number" placeholder="第三套按揭房已还款期数")
+		div.chaedu_input_info(style="display:none;")
+			select(class="select_xinyongka" name="ka")
+				option(class="option_ka" value="yn") 是否有信用卡
+				option(value="yes") 是
+				option(value="no") 否
+			input.chaedu_input10(class="bb" style="margin-top:60px;" type="number" placeholder="信用卡张数")
+			input.chaedu_input11(class="bb" type="number" placeholder="信用卡总额(元)")
+			input.chaedu_input12(class="bb" type="number" placeholder="已使用额度(元)")
+			input.chaedu_input13(class="bb" type="number" placeholder="6个月平均使用额度(元)")
+			input.chaedu_input14(class="bb" type="number" placeholder="最老的信用卡已使用期数")
+			input.chaedu_input15(class="bb" type="number" placeholder="满2年信用卡最大额度(元)")
+			input.chaedu_input16(class="bb" type="number" placeholder="最新的信用卡额度(元)")
+			input.chaedu_input17(class="bb" type="number" style="margin-bottom:100px;" placeholder="最新的信用卡剩余额度(元)")
+		div.chaedu_input_info(style="display:none;")
+			select(class="select_loan" name="loan")
+				option(class="option_loan" value="yn") 是否有其他贷款
+				option(value="yes") 是
+				option(value="no") 否
+			input.chaedu_input18(class="cc" style="margin-top:60px;" type="number" placeholder="其他贷款笔数")
+			input.chaedu_input19(class="cc" type="number" placeholder="其他贷款总额(元)")
+			input.chaedu_input20(class="cc" type="number" placeholder="近6个月贷款笔数")
+			input.chaedu_input21(class="cc" type="number" placeholder="近3个月贷款笔数")
+			input.chaedu_input22(class="cc" style="margin-bottom:100px;" type="number" placeholder="近1个月贷款笔数")
+		div.chaedu_input_info(style="display:none;")
+			div.chaedu_inputs 补充其他信息
+			input.chaedu_input23(class="dd" style="margin-top:40px;" type="text" placeholder="是否有‘止付’，‘关注’等异常，填‘是’或‘否’")
+			input.chaedu_input24(class="dd" type="text" placeholder="是否有当前逾期，填‘是’或‘否’")
+			input.chaedu_input25(class="dd" type="text" placeholder="是否有担保人代偿，填‘是’或‘否’")
+			input.chaedu_input26(class="dd" type="text" placeholder="是否为他人担保贷款，填‘是’或‘否’")
+			input.chaedu_input27(class="dd" type="text" placeholder="是否有法院执行，填‘是’或‘否’")
+			input.chaedu_input28(class="dd" type="text" placeholder="工作是否稳定，填‘是’或‘否’")
+			input.chaedu_input028(class="dd" type="text" placeholder="社保或公积金，填‘是’或‘否’")
+			input.chaedu_input029(class="dd" type="number" placeholder="公积金月还金额，无则填0")
+			input.chaedu_input29(class="dd" type="number" placeholder="6个月内审批查询次数")
+			input.chaedu_input30(class="dd" type="number" placeholder="3个月内审批查询次数")
+			input.chaedu_input31(class="dd" type="number" placeholder="1个月内审批查询次数")
+			input.chaedu_input32(class="dd" type="number" placeholder="单笔2年内逾期最多月数")
+			input.chaedu_input33(class="dd" type="number" placeholder="历史大于300元最长连续逾期月数")
+			input.chaedu_input34(class="dd" type="number" style="margin-bottom:100px;" placeholder="24个月内逾期次数总和")
+		div.chaedu_a
+	script(src="/js/jquery.min.js")
+	script(src="/js/chaedu_system.js")
