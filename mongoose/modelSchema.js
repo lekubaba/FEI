@@ -52,6 +52,8 @@ var haoSchema = new Schema({
 	gonghao:Number,
 	z_gonghao:Number,
 	isVip:String,
+	all_yeji:Number,
+	all_money:Number,
 	time:String
 });
 

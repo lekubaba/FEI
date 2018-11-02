@@ -1,0 +1,125 @@
+ *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Helvetica Neue,PingFang SC,Microsoft YaHei;
+    -webkit-font-smoothing:antialiased;/* chorm safari 抗锯齿*/
+    -webkit-overflow-scrolling:touch;
+    outline:none;
+}
+/* 滚动条样式调节*/
+::-webkit-scrollbar{margin-right:3px;width:4px;height:4px}
+::-webkit-scrollbar,::-webkit-scrollbar-track{background-color:transparent}
+::-webkit-scrollbar-thumb{width:4px;border-radius:2px;background-color:#e4e4e4}
+
+body,html{min-height:100%;background:#2e323c;}
+a,a:visited{text-decoration:none}
+h1,h2,h3,h4,h5,h6{font-weight:500}
+
+body{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.daili_top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:100vw;
+    height: auto;
+    background-color: #efefef;
+    padding:10px 0 20px 0;
+}
+
+.chaedu_zong{
+    width:93vw;
+    border-radius: 5px;
+    background-color: #fff;
+    margin:20px;
+    padding:15px 0 15px 0;
+}
+
+.chaedu_fen{
+    width:93vw;
+    border-radius: 5px;
+    background-color: #fff;
+    margin:0 20px 20px 20px;
+    padding:20px 0 20px 0;
+}
+
+
+
+.chaedu_daili{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom:1px solid #d32628;
+}
+
+.chaedu_daili_1,.chaedu_daili_2{
+    font-size: 16px;
+    font-weight:600;
+    width:26%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+}
+
+.chaedu_daili_2{
+    color:#d32628;
+}
+
+
+.chaedu_daili_3{
+    font-size: 12px;
+    font-weight:600;
+    width:20%;
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #333;
+}
+
+.chaedu_daili_4{
+    font-size: 12px;
+    font-weight:600;
+    width:20%;
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #333;
+}
+
+
+
+
+.chaedu_daili_a{
+    font-size: 12px;
+    font-weight:600;
+    width:30%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;    
+}
+
+.chaedu_daili_{
+    font-size: 10px;
+    font-weight:600;
+    width:30%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;    
+}

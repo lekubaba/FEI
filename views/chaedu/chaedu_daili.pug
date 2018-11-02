@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title 代理详情
+		link(rel="shortcut icon" href="/images/logo.png")
+		link(rel="bookmark" href="/images/logo.png")
+		link(rel="icon" href="/images/logo.png" type="image/png")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+		meta(http-equiv="X-UA-Compatible" content="ie=edge")
+		link(rel="apple-touch-icon" href="/images/logo.png")
+		meta(name="apple-mobile-web-app-title" content="代理详情")
+		meta(name="mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="white")
+		link(rel="stylesheet" href="/styles/chaedu_daili.css")
+	body
+		div.daili_top
+			div.chaedu_zong
+				div.chaedu_daili
+					div.chaedu_daili_1 代理人数
+					div.chaedu_daili_1 活跃人数
+					div.chaedu_daili_1 总战绩
+				div.chaedu_daili(style="border:none;")
+					div.chaedu_daili_2=counts
+					div.chaedu_daili_2 --
+					div.chaedu_daili_2=z_yeji
+			div.chaedu_fen
+				div.chaedu_daili
+					div.chaedu_daili_3(style="width:14%") 姓名
+					div.chaedu_daili_3(style="width:20%") 手机号
+					div.chaedu_daili_3(style="width:20%") 总战绩
+					div.chaedu_daili_a(style="width:46%") 日期
+				each item in datas.reverse()
+					div.chaedu_daili
+						div.chaedu_daili_4(style="width:14%")=item.ownername
+						div.chaedu_daili_4(style="width:20%")=item.ownerNumber
+						div.chaedu_daili_4(style="width:20%")=item.all_yeji
+						div.chaedu_daili_(style="width:46%")=item.time
+	script(src="/js/remind.js")

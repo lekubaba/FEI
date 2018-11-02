@@ -65,6 +65,8 @@ router.post('/gonghao',function(req,res){
 			ownerNumber:req.body.ownerNumber,
 			gonghao:req.body.gonghao,
 			isVip:"tong",
+			all_yeji:0,
+			all_money:0,
 			time:formatDate('yyyy-MM-dd hh:mm:ss')
 		});
 
@@ -93,6 +95,8 @@ router.post('/gonghao',function(req,res){
 			gonghao:req.body.gonghao,
 			z_gonghao:req.signedCookies.mycookies.gonghao,
 			isVip:"tong",
+			all_yeji:0,
+			all_money:0,
 			time:formatDate('yyyy-MM-dd hh:mm:ss')
 		});
 
@@ -448,7 +452,7 @@ router.get('/chaedu_zonghe',function(req,res){
 							url_1:"",
 							b_img:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
 							b_img_2:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
-							title_1:"录新件(未激活)",
+							title_1:"查额度(未激活)",
 							title_2:"添加代理(未激活)"
 						}
 						return res.render('chaedu/chaedu_zonghe',{data:datas});
@@ -458,7 +462,7 @@ router.get('/chaedu_zonghe',function(req,res){
 							url_1:"/add_gonghao",
 							b_img:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
 							b_img_2:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
-							title_1:"录新件(未激活)",
+							title_1:"查额度(未激活)",
 							title_2:"添加代理"
 						}
 						return res.render('chaedu/chaedu_zonghe',{data:datas});
@@ -468,7 +472,7 @@ router.get('/chaedu_zonghe',function(req,res){
 							url_1:"/add_gonghao",
 							b_img:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
 							b_img_2:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
-							title_1:"录新件",
+							title_1:"查额度",
 							title_2:"添加代理"
 						}
 						return res.render('chaedu/chaedu_zonghe',{data:datas});
@@ -530,7 +534,7 @@ router.get('/chaedu_profile_1',function(req,res){
 							
 						}
 					})
-				}else if(ret3.isVip==="jin"){
+				}else if(ret3.isVip==="jin"||ret3.isVip==="yin"){
 					Money.find({z_gonghao:gonghao},{_id:0},function(err,rets){
 						if(err){
 							return logger.error(err);
@@ -609,9 +613,6 @@ router.get('/chaedu_youxiao',function(req,res){
 
 router.post('/chaedu_youxiao',function(req,res){
 
-		
-
-
 	Hao.find({gonghao:{$in:[req.body.gonghao,req.body.z_gonghao]}},function(err,rets){
 		if(err){
 			logger.error(err)
@@ -643,8 +644,27 @@ router.post('/chaedu_youxiao',function(req,res){
 								if(err){
 									return logger.error(err);
 								}else{
-									var data ={code:200};
-									return res.json(data);
+
+									var all_yeji=parseInt(req.body.xiakuanEdu)
+									var all_money=parseInt(req.body.money)
+									Hao.update({gonghao:req.body.gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
+										if(err){
+											return logger.error(err);
+										}else{
+
+											Hao.update({gonghao:req.body.z_gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
+												if(err){
+													return logger.error(err)
+												}else{
+
+													var data ={code:200};
+													return res.json(data);		
+												}
+											})
+										}
+									})
+
+
 								}
 							})				
 						}
@@ -677,8 +697,24 @@ router.post('/chaedu_youxiao',function(req,res){
 								if(err){
 									return logger.error(err);
 								}else{
-									var data ={code:200};
-									return res.json(data);
+									var all_yeji=parseInt(req.body.xiakuanEdu)
+									var all_money=parseInt(req.body.money)
+									Hao.update({gonghao:req.body.gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
+										if(err){
+											return logger.error(err);
+										}else{
+
+											Hao.update({gonghao:req.body.z_gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
+												if(err){
+													return logger.error(err)
+												}else{
+
+													var data ={code:200};
+													return res.json(data);		
+												}
+											})
+										}
+									})
 								}
 							})				
 						}
@@ -710,6 +746,47 @@ router.get("/chaedu_guize",function(req,res){
 					return;
 				}else{
 					return res.render('chaedu/chaedu_guize')
+				}
+			}
+		})
+
+	}else{
+		return res.redirect('/chaedu_enter');
+	}	
+})
+
+
+
+//查看代理详细情况
+router.get('/chaedu_daili',function(req,res){
+	if(req.signedCookies.mycookies){
+		var gonghao = req.signedCookies.mycookies.gonghao;
+		Hao.find({gonghao:gonghao},function(err,rets){
+			if(err){
+				return logger.error(err);
+			}else{
+				if(rets.length===0){
+					return;
+				}else{
+
+					Hao.count({z_gonghao:gonghao},function(err,count){
+						if(err){
+							return logger.error(err)
+						}else{
+							
+							var counts = count;
+							var z_yeji = rets[0].all_yeji;
+
+							Hao.find({z_gonghao:gonghao},function(err,results){
+								if(err){
+									return logger.error(err);
+								}else{
+									return res.render('chaedu/chaedu_daili',{counts:counts,z_yeji:z_yeji,datas:results})
+								}
+							})
+
+						}
+					})
 				}
 			}
 		})
