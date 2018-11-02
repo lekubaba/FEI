@@ -270,6 +270,7 @@ if(all_money>0){
 	var pg = new Pg({
 			username:username,
 			number:usernumber,
+			card_id:card_id,
 			zonghefen:zonghefen,
 			jikexishu:jikexishu,
 			chushiedu:chushiedu,
@@ -288,20 +289,31 @@ if(all_money>0){
 			time:formatDate('yyyy-MM-dd hh:mm:ss')	
 	})
 
-	ping.save(function(err){
+	Pg.find({$or:[{number:usernumber},{card_id:card_id}]},function(err,ret9){
 		if(err){
-			logger.error(err);
-			return res.json({code:400})
+			return logger.error(err);
 		}else{
-			pg.save(function(err){
-				if(err){
-					logger.error(err);
-					return res.json({code:400})
-				}else{
-					return res.json({code:200});
-				}		
-			})
+			if(ret9.length===0){
+				ping.save(function(err){
+					if(err){
+						logger.error(err);
+						return res.json({code:400})
+					}else{
+						pg.save(function(err){
+							if(err){
+								logger.error(err);
+								return res.json({code:400})
+							}else{
+								return res.json({code:200});
+							}		
+						})
+					}
+				})				
+			}else{
+				return res.json({code:900});
+			}
 		}
+
 	})
 
 	
@@ -329,6 +341,7 @@ if(all_money>0){
 	var pg = new Pg({
 			username:username,
 			number:usernumber,
+			card_id:card_id,
 			zonghefen:zonghefen,
 			jikexishu:jikexishu,
 			chushiedu:chushiedu,
@@ -347,20 +360,31 @@ if(all_money>0){
 			time:formatDate('yyyy-MM-dd hh:mm:ss')	
 	})
 
-	ping.save(function(err){
+	Pg.find({$or:[{number:usernumber},{card_id:card_id}]},function(err,ret9){
 		if(err){
-			logger.error(err);
-			return res.json({code:400})
+			return logger.error(err);
 		}else{
-			pg.save(function(err){
-				if(err){
-					logger.error(err);
-					return res.json({code:400})
-				}else{
-					return res.json({code:200});
-				}		
-			})
+			if(ret9.length===0){
+				ping.save(function(err){
+					if(err){
+						logger.error(err);
+						return res.json({code:400})
+					}else{
+						pg.save(function(err){
+							if(err){
+								logger.error(err);
+								return res.json({code:400})
+							}else{
+								return res.json({code:200});
+							}		
+						})
+					}
+				})				
+			}else{
+				return res.json({code:900});
+			}
 		}
+
 	})
 
 }else{
@@ -370,6 +394,7 @@ if(all_money>0){
 	var pg = new Pg({
 			username:username,
 			number:usernumber,
+			card_id:card_id,
 			zonghefen:zonghefen,
 			jikexishu:jikexishu,
 			chushiedu:chushiedu,
@@ -388,20 +413,31 @@ if(all_money>0){
 			time:formatDate('yyyy-MM-dd hh:mm:ss')	
 	})
 
-	ping.save(function(err){
+	Pg.find({$or:[{number:usernumber},{card_id:card_id}]},function(err,ret9){
 		if(err){
-			logger.error(err);
-			return res.json({code:400})
+			return logger.error(err);
 		}else{
-			pg.save(function(err){
-				if(err){
-					logger.error(err);
-					return res.json({code:400})
-				}else{
-					return res.json({code:200});
-				}		
-			})
+			if(ret9.length===0){
+				ping.save(function(err){
+					if(err){
+						logger.error(err);
+						return res.json({code:400})
+					}else{
+						pg.save(function(err){
+							if(err){
+								logger.error(err);
+								return res.json({code:400})
+							}else{
+								return res.json({code:200});
+							}		
+						})
+					}
+				})				
+			}else{
+				return res.json({code:900});
+			}
 		}
+
 	})
 
 }
@@ -430,6 +466,28 @@ router.get('/chaedu_return_remind',function(req,res){
 	}	
 })
 
+
+//提交数据审核服务器返回200码后，客户端显示返回和提醒界面；
+
+router.get('/chaedu_return_reminds',function(req,res){
+	if(req.signedCookies.mycookies){
+		var gonghao = req.signedCookies.mycookies.gonghao;
+		Hao.find({gonghao:gonghao},function(err,rets){
+			if(err){
+				return logger.error(err);
+			}else{
+				if(rets.length===0){
+					return;
+				}else{
+					return res.render('chaedu/chaedu_return_reminds');
+				}
+			}
+		})
+
+	}else{
+		return res.redirect('/chaedu_enter');
+	}	
+})
 
 
 
@@ -613,120 +671,131 @@ router.get('/chaedu_youxiao',function(req,res){
 
 router.post('/chaedu_youxiao',function(req,res){
 
-	Hao.find({gonghao:{$in:[req.body.gonghao,req.body.z_gonghao]}},function(err,rets){
+	Money.find({username:req.body.username,number:req.body.number},function(err,ret12){
 		if(err){
-			logger.error(err)
+			return logger.error(err);
 		}else{
-			if(req.body.gonghao==req.body.z_gonghao){
+			if(ret12.length===0){
 
-				if(rets.length<1){
-					var data = {code:100};
-					return res.json(data);
-				}else{
+				Hao.find({gonghao:{$in:[req.body.gonghao,req.body.z_gonghao]}},function(err,rets){
+					if(err){
+						logger.error(err)
+					}else{
+						if(req.body.gonghao==req.body.z_gonghao){
 
-					Hao.findOne({gonghao:req.body.gonghao},function(err,ret5){
-						if(err){
-							return logger.error(err);
+							if(rets.length<1){
+								var data = {code:100};
+								return res.json(data);
+							}else{
+
+								Hao.findOne({gonghao:req.body.gonghao},function(err,ret5){
+									if(err){
+										return logger.error(err);
+									}else{
+										var money = new Money({
+											ownername:ret5.ownername,
+											ownerNumber:ret5.ownerNumber,
+											gonghao:req.body.gonghao,
+											z_gonghao:req.body.z_gonghao,
+											username:req.body.username,
+											number:req.body.number,
+											shenqingTime:req.body.shenqingTime,
+											shengxiaoTime:req.body.shengxiaoTime,
+											xiakuanEdu:req.body.xiakuanEdu,
+											money:req.body.money
+										});
+										money.save(function(err){
+											if(err){
+												return logger.error(err);
+											}else{
+
+												var all_yeji=parseInt(req.body.xiakuanEdu)
+												var all_money=parseInt(req.body.money)
+												Hao.update({gonghao:req.body.gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
+													if(err){
+														return logger.error(err);
+													}else{
+
+														Hao.update({gonghao:req.body.z_gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
+															if(err){
+																return logger.error(err)
+															}else{
+
+																var data ={code:200};
+																return res.json(data);		
+															}
+														})
+													}
+												})
+
+
+											}
+										})				
+									}
+
+								})
+							}
 						}else{
-							var money = new Money({
-								ownername:ret5.ownername,
-								ownerNumber:ret5.ownerNumber,
-								gonghao:req.body.gonghao,
-								z_gonghao:req.body.z_gonghao,
-								username:req.body.username,
-								number:req.body.number,
-								shenqingTime:req.body.shenqingTime,
-								shengxiaoTime:req.body.shengxiaoTime,
-								xiakuanEdu:req.body.xiakuanEdu,
-								money:req.body.money
-							});
-							money.save(function(err){
-								if(err){
-									return logger.error(err);
-								}else{
+							if(rets.length<2){
+								var data = {code:100};
+								return res.json(data);
+							}else{
 
-									var all_yeji=parseInt(req.body.xiakuanEdu)
-									var all_money=parseInt(req.body.money)
-									Hao.update({gonghao:req.body.gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
-										if(err){
-											return logger.error(err);
-										}else{
+								Hao.findOne({gonghao:req.body.gonghao},function(err,ret5){
+									if(err){
+										return logger.error(err);
+									}else{
+										var money = new Money({
+											ownername:ret5.ownername,
+											ownerNumber:ret5.ownerNumber,
+											gonghao:req.body.gonghao,
+											z_gonghao:req.body.z_gonghao,
+											username:req.body.username,
+											number:req.body.number,
+											shenqingTime:req.body.shenqingTime,
+											shengxiaoTime:req.body.shengxiaoTime,
+											xiakuanEdu:req.body.xiakuanEdu,
+											money:req.body.money
+										});
+										money.save(function(err){
+											if(err){
+												return logger.error(err);
+											}else{
+												var all_yeji=parseInt(req.body.xiakuanEdu)
+												var all_money=parseInt(req.body.money)
+												Hao.update({gonghao:req.body.gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
+													if(err){
+														return logger.error(err);
+													}else{
 
-											Hao.update({gonghao:req.body.z_gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
-												if(err){
-													return logger.error(err)
-												}else{
+														Hao.update({gonghao:req.body.z_gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
+															if(err){
+																return logger.error(err)
+															}else{
 
-													var data ={code:200};
-													return res.json(data);		
-												}
-											})
-										}
-									})
+																var data ={code:200};
+																return res.json(data);		
+															}
+														})
+													}
+												})
+											}
+										})				
+									}
 
+								})
+							}
 
-								}
-							})				
 						}
-
-					})
-				}
+					}
+				})
 			}else{
-				if(rets.length<2){
-					var data = {code:100};
-					return res.json(data);
-				}else{
 
-					Hao.findOne({gonghao:req.body.gonghao},function(err,ret5){
-						if(err){
-							return logger.error(err);
-						}else{
-							var money = new Money({
-								ownername:ret5.ownername,
-								ownerNumber:ret5.ownerNumber,
-								gonghao:req.body.gonghao,
-								z_gonghao:req.body.z_gonghao,
-								username:req.body.username,
-								number:req.body.number,
-								shenqingTime:req.body.shenqingTime,
-								shengxiaoTime:req.body.shengxiaoTime,
-								xiakuanEdu:req.body.xiakuanEdu,
-								money:req.body.money
-							});
-							money.save(function(err){
-								if(err){
-									return logger.error(err);
-								}else{
-									var all_yeji=parseInt(req.body.xiakuanEdu)
-									var all_money=parseInt(req.body.money)
-									Hao.update({gonghao:req.body.gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
-										if(err){
-											return logger.error(err);
-										}else{
-
-											Hao.update({gonghao:req.body.z_gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
-												if(err){
-													return logger.error(err)
-												}else{
-
-													var data ={code:200};
-													return res.json(data);		
-												}
-											})
-										}
-									})
-								}
-							})				
-						}
-
-					})
-				}
-
-
+				var data ={code:900};
+				return res.json(data);	
 			}
 		}
 	})
-
 
 })
 

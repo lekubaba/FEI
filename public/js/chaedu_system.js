@@ -387,7 +387,10 @@ $(document).ready(function(){
                 }
                 $.post('/chaedu_dashuju',data,function(dataa,status){
                     if(dataa.code===200){
-                        window.location.href='/chaedu_return_remind';
+                        return window.location.href='/chaedu_return_remind';
+                    }
+                    if(dataa.code===900){
+                        return window.location.href='/chaedu_return_reminds';
                     }
                 });
 

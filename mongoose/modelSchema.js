@@ -61,6 +61,7 @@ var haoSchema = new Schema({
 var pgSchema = new Schema({
 	username:String,
 	number:Number,
+	card_id:String,
 	zonghefen:Number,
 	jikexishu:Number,
 	chushiedu:Number,
