@@ -71,7 +71,7 @@ var routesPath = __dirname +'/routes/'
 
 /*初始化工具，传入参数*/
 
-route.init(app,routesPath)
+route.init(app,routesPath);
 
 // http.createServer(app).listen(80);
 http.createServer(app).listen(8066);
