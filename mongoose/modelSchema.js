@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
 	number:Number,
+	number_s:String,
 	authCode:Number,
 	gonghao:Number,
 	z_gonghao:Number,
@@ -57,7 +58,7 @@ var haoSchema = new Schema({
 	time:String
 });
 
-//买卖评估数据模型
+//评估系统评估数据模型
 var pgSchema = new Schema({
 	username:String,
 	number:Number,

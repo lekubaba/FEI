@@ -13,6 +13,7 @@ html(lang="en")
 		meta(name="mobile-web-app-capable" content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style" content="white")
 		link(rel="stylesheet" href="/styles/xiaohong.css")
+		script(src="/js/remind.js")
 	body
 		div.header-number
 			//- img(src="/images/syq1.png")
@@ -20,7 +21,7 @@ html(lang="en")
 		div.content
 			div.content-content
 				input#content-list-bb(type='text' placeholder="输入客户手机号")
-				input#content-list-aa(type='text' placeholder="输入授权工号")
+				input#content-list-aa(type='text' placeholder="推荐人手机号")
 			a.content-list-aa(href='/choose') 立即申请
 		div.footer
 			div.footer-a

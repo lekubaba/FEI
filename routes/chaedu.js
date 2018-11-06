@@ -593,7 +593,7 @@ router.get('/chaedu_profile_1',function(req,res){
 						}
 					})
 				}else if(ret3.isVip==="jin"||ret3.isVip==="yin"){
-					Money.find({z_gonghao:gonghao},{_id:0},function(err,rets){
+					Money.find({$or:[{z_gonghao:gonghao},{gonghao:gonghao}]},{_id:0},function(err,rets){
 						if(err){
 							return logger.error(err);
 						}else{
@@ -605,9 +605,6 @@ router.get('/chaedu_profile_1',function(req,res){
 				}
 			}
 		})
-
-
-
 	}else{
 		return res.redirect('/chaedu_enter');
 	}
