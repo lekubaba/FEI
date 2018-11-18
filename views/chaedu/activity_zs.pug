@@ -1,0 +1,37 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title 点赞拿代理
+		link(rel="shortcut icon" href="/images/logo.png")
+		link(rel="bookmark" href="/images/logo.png")
+		link(rel="icon" href="/images/logo.png" type="image/png")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+		meta(http-equiv="X-UA-Compatible" content="ie=edge")
+		link(rel="apple-touch-icon" href="/images/logo.png")
+		meta(name="apple-mobile-web-app-title" content="点赞拿代理")
+		meta(name="mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="white")
+		link(rel="stylesheet" href="/styles/activity.css")
+		script(src="/js/remind.js")
+	body
+		div.activity_top
+			img(src="http://up.xiaohongxian.com/feidaijun_r.png")
+		div.footer-a
+			img.footer-a-img(src="/images/syq5.png")
+		div.activity_footer
+			div.activity_footer_1
+			div.activity_footer_2
+				div.activity_footer_a(id="number" data-number=number) 点赞拿代理
+		div.mask_first(style="display:none")
+			div.mask_first_a
+		div.mask_two(style="display:none;")
+			div.mask_two_a
+				div.mask_two_1 成功加入<span style="color:red;">#{num}</span>人
+				div.content-content
+					input#content-list-bb(type='text' placeholder="输入姓名")
+					input#content-list-aa(type='text' placeholder="输入手机号")
+				div.content-list-aa 立即加入
+			img.clear(src="/images/clear.png")
+	script(src="/js/jquery.min.js")
+	script(src="/js/activity_zs.js")

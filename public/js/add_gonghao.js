@@ -16,6 +16,9 @@ $(document).ready(function(){
                 if(dataa.code===400){
                     $(".chaedu_input2").val("工号重复,添加失败"); 
                 }
+                if(dataa.code===310){
+                    $(".chaedu_input2").val("用户已存在"); 
+                }
             });
 
         }else{

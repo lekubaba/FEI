@@ -30,7 +30,7 @@ $(document).ready(function(){
             }
 
            if(gonghao.length===0){
-                 $(".chaedu_input2").val("请输入使用者工号"); 
+                 $(".chaedu_input2").val("输入工号或手机号后8位"); 
                  return;                
             }
             if(!myreg.test(gonghao)){ 

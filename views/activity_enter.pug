@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title 飞贷-福利
+		link(rel="shortcut icon" href="/images/logo.png")
+		link(rel="bookmark" href="/images/logo.png")
+		link(rel="icon" href="/images/logo.png" type="image/png")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+		meta(http-equiv="X-UA-Compatible" content="ie=edge")
+		link(rel="apple-touch-icon" href="/images/logo.png")
+		meta(name="apple-mobile-web-app-title" content="飞贷福利")
+		meta(name="mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="white")
+		link(rel="stylesheet" href="/styles/xiaohong.css")
+		script(src="/js/remind.js")
+	body
+		div.header-number
+			//- img(src="/images/syq1.png")
+			img(src="/images/fd_back.png")
+		div.content
+			div.content-content(style="height:50px;")
+				input#content-list-bb(style="border-radius:10px;" type='text' placeholder="输入申请手机号")
+			a.content-list-aa(href='/choose' id="number" data-number=number ) 立即申请
+		div.footer
+			div.footer-a
+				img.footer-a-img(src="/images/syq5.png")
+		script(src="/js/jquery.min.js")
+		script(src="/js/activity_enter.js")

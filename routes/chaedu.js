@@ -67,6 +67,9 @@ router.post('/gonghao',function(req,res){
 			isVip:"tong",
 			all_yeji:0,
 			all_money:0,
+			money_level:1,
+			act_zone:"no",
+			zan_num:0,
 			time:formatDate('yyyy-MM-dd hh:mm:ss')
 		});
 
@@ -97,27 +100,42 @@ router.post('/gonghao',function(req,res){
 			isVip:"tong",
 			all_yeji:0,
 			all_money:0,
+			money_level:1,
+			act_zone:"no",
+			zan_num:0,
 			time:formatDate('yyyy-MM-dd hh:mm:ss')
 		});
 
-		Hao.find({gonghao:req.body.gonghao},function(err,results){
+		Hao.find({ownerNumber:req.body.ownerNumber},function(err,retx){
 			if(err){
-				logger.error(err)
+				return logger.error(err);
 			}else{
-				if(results.length>0){
-					return res.json({code:400});
-				}
-				if(results.length===0){
-					hao.save(function(err){
+				if(retx.length>0){
+					return res.json({code:310});
+				}else{
+					Hao.find({gonghao:req.body.gonghao},function(err,results){
 						if(err){
-							logger.error(err)
+							return logger.error(err)
 						}else{
-							return res.json({code:200})
+							if(results.length>0){
+								return res.json({code:400});
+							}
+							if(results.length===0){
+								hao.save(function(err){
+									if(err){
+										return logger.error(err)
+									}else{
+										return res.json({code:200})
+									}
+								})
+							}
 						}
 					})
+					
 				}
 			}
 		})
+
 	}
 
 
@@ -250,6 +268,7 @@ if(all_money>0){
 	var zonghefen = zonghefen_fang(all_money,first_money,first_month,sec_money,sec_month,third_money,third_month,ka_num,ka_zong,ka_shengyu,ka_six,ka_first,ka_years,ka_last,ka_laste,loan_num,loan_all,loan_six,loan_three,loan_one,other_yc,other_dq,other_dc,other_zx,other_gjj,other_gjje,other_six,other_three,other_one,other_yfs,other_yqs,other_yqall);
 	var jikexishu = jikexishu_fang(all_money,first_money,first_month,sec_money,sec_month,third_money,third_month,ka_num,ka_zong,ka_shengyu,ka_six,ka_first,ka_years,ka_last,ka_laste,loan_num,loan_all,loan_six,loan_three,loan_one,other_yc,other_dq,other_dc,other_zx,other_gjj,other_gjje,other_six,other_three,other_one,other_yfs,other_yqs,other_yqall);
 	var chushiedu = Fang(all_money,first_money,first_month,sec_money,sec_month,third_money,third_month,ka_num,ka_zong,ka_shengyu,ka_six,ka_first,ka_years,ka_last,ka_laste,loan_num,loan_all,loan_three,loan_six,loan_one,other_yc,other_dq,other_dc,other_zx,other_gjj,other_gjje,other_six,other_three,other_one,other_yfs,other_yqs,other_yqall);
+	
 	if(jikexishu===3.6){
 		chushiedu = Maths(Math.round(chushiedu*1.1))>30?30:Maths(Math.round(chushiedu*1.3));
 	}else if(jikexishu===3.7){
@@ -294,11 +313,11 @@ if(all_money>0){
 			return logger.error(err);
 		}else{
 			if(ret9.length===0){
-				ping.save(function(err){
-					if(err){
-						logger.error(err);
-						return res.json({code:400})
-					}else{
+				// ping.save(function(err){
+				// 	if(err){
+				// 		logger.error(err);
+				// 		return res.json({code:400})
+				// 	}else{
 						pg.save(function(err){
 							if(err){
 								logger.error(err);
@@ -307,8 +326,8 @@ if(all_money>0){
 								return res.json({code:200});
 							}		
 						})
-					}
-				})				
+				// 	}
+				// })				
 			}else{
 				return res.json({code:900});
 			}
@@ -365,11 +384,11 @@ if(all_money>0){
 			return logger.error(err);
 		}else{
 			if(ret9.length===0){
-				ping.save(function(err){
-					if(err){
-						logger.error(err);
-						return res.json({code:400})
-					}else{
+				// ping.save(function(err){
+				// 	if(err){
+				// 		logger.error(err);
+				// 		return res.json({code:400})
+				// 	}else{
 						pg.save(function(err){
 							if(err){
 								logger.error(err);
@@ -378,8 +397,8 @@ if(all_money>0){
 								return res.json({code:200});
 							}		
 						})
-					}
-				})				
+					// }
+				// })				
 			}else{
 				return res.json({code:900});
 			}
@@ -418,11 +437,11 @@ if(all_money>0){
 			return logger.error(err);
 		}else{
 			if(ret9.length===0){
-				ping.save(function(err){
-					if(err){
-						logger.error(err);
-						return res.json({code:400})
-					}else{
+				// ping.save(function(err){
+				// 	if(err){
+				// 		logger.error(err);
+				// 		return res.json({code:400})
+				// 	}else{
 						pg.save(function(err){
 							if(err){
 								logger.error(err);
@@ -431,8 +450,8 @@ if(all_money>0){
 								return res.json({code:200});
 							}		
 						})
-					}
-				})				
+				// 	}
+				// })				
 			}else{
 				return res.json({code:900});
 			}
@@ -505,35 +524,92 @@ router.get('/chaedu_zonghe',function(req,res){
 					return;
 				}else{
 					if(rets[0].isVip==="tong"){
-						var datas={
-							url:"",
-							url_1:"",
-							b_img:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
-							b_img_2:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
-							title_1:"查额度(未激活)",
-							title_2:"添加代理(未激活)"
+						if(rets[0].act_zone==="no"){
+							var datas={
+								url:"",
+								url_1:"",
+								b_img:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
+								b_img_2:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
+								title_1:"查额度(未激活)",
+								title_2:"添加代理(未激活)",
+								number:rets[0].ownerNumber,
+								disp:"none",
+								displ:"none"
+							}
+							return res.render('chaedu/chaedu_zonghe',{data:datas});
 						}
-						return res.render('chaedu/chaedu_zonghe',{data:datas});
+						if(rets[0].act_zone==="yes"){
+							var datas={
+								url:"",
+								url_1:"",
+								b_img:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
+								b_img_2:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
+								title_1:"查额度(未激活)",
+								title_2:"添加代理(未激活)",
+								number:rets[0].ownerNumber,
+								disp:"",
+								displ:"none"
+							}
+							return res.render('chaedu/chaedu_zonghe',{data:datas});
+						}
 					}else if(rets[0].isVip==="yin"){
-						var datas={
-							url:"",
-							url_1:"/add_gonghao",
-							b_img:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
-							b_img_2:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
-							title_1:"查额度(未激活)",
-							title_2:"添加代理"
+						if(rets[0].act_zone==="no"){
+							var datas={
+								url:"",
+								url_1:"/add_gonghao",
+								b_img:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
+								b_img_2:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
+								title_1:"查额度(未激活)",
+								title_2:"添加代理",
+								number:rets[0].ownerNumber,
+								disp:"none",
+								displ:"none"
+							}
+							return res.render('chaedu/chaedu_zonghe',{data:datas});
 						}
-						return res.render('chaedu/chaedu_zonghe',{data:datas});
+						if(rets[0].act_zone==="yes"){
+							var datas={
+								url:"",
+								url_1:"/add_gonghao",
+								b_img:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
+								b_img_2:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
+								title_1:"查额度(未激活)",
+								title_2:"添加代理",
+								number:rets[0].ownerNumber,
+								disp:"",
+								displ:"none"
+							}
+							return res.render('chaedu/chaedu_zonghe',{data:datas});
+						}
 					}else{
-						var datas={
-							url:"/sys_home",
-							url_1:"/add_gonghao",
-							b_img:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
-							b_img_2:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
-							title_1:"查额度",
-							title_2:"添加代理"
+						if(rets[0].act_zone==="no"){
+							var datas={
+								url:"/sys_home",
+								url_1:"/add_gonghao",
+								b_img:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
+								b_img_2:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
+								title_1:"查额度",
+								title_2:"添加代理",
+								number:rets[0].ownerNumber,
+								disp:"none",
+								displ:""
+							}
+							return res.render('chaedu/chaedu_zonghe',{data:datas});	
 						}
-						return res.render('chaedu/chaedu_zonghe',{data:datas});
+						if(rets[0].act_zone==="yes"){
+							var datas={
+								url:"/sys_home",
+								url_1:"/add_gonghao",
+								b_img:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
+								b_img_2:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
+								title_1:"查额度",
+								title_2:"添加代理",
+								number:rets[0].ownerNumber,
+								disp:"",
+								displ:""
+							}
+							return res.render('chaedu/chaedu_zonghe',{data:datas});	
+						}
 					}
 				}
 			}
@@ -570,8 +646,7 @@ router.get('/chaedu_profile',function(req,res){
 })
 
 
-
-//进入到有效战绩待领取佣金页面
+//进入到有效战绩待页面
 router.get('/chaedu_profile_1',function(req,res){
 	if(req.signedCookies.mycookies){
 		var gonghao = req.signedCookies.mycookies.gonghao;
@@ -593,14 +668,78 @@ router.get('/chaedu_profile_1',function(req,res){
 						}
 					})
 				}else if(ret3.isVip==="jin"||ret3.isVip==="yin"){
-					Money.find({$or:[{z_gonghao:gonghao},{gonghao:gonghao}]},{_id:0},function(err,rets){
-						if(err){
-							return logger.error(err);
-						}else{
 
-							return res.render('chaedu/chaedu_profile_1',{rets:rets})
-							
-						}
+					var p1 = new Promise(function(resolve,reject){
+						//查自己的有效记录和下级的有效记录
+						Money.find({$or:[{z_gonghao:gonghao},{gonghao:gonghao}]},function(err,rets){
+							if(err){
+								reject(err);
+							}else{
+								//将查询的值传给下一步回调函数
+								resolve(rets);
+							}
+						})
+					});
+
+
+					p1.then(function(value){
+						var gonghao_1 = [];
+						//将所有的下级查出来
+						Hao.find({z_gonghao:gonghao},function(err,ret1){
+							if(err){
+								return err;
+							}else{
+									
+								const promise = ret1.map(function(item){
+									return Hao.find({z_gonghao:item.gonghao},function(err,ret2){
+										if(err){
+											return err;
+										}else{
+											return ret2;
+										}
+									})
+								})
+
+								Promise.all(promise).then(function(values){
+									for(i=0;i<values.length;i++){
+
+										//将所有下级拼接出来
+										gonghao_1 = gonghao_1.concat(values[i]);
+									}
+
+									return gonghao_1
+
+								}).then(function(values){
+									var money_1 = [];
+									const pros = values.map(function(item){
+										return Money.find({gonghao:item.gonghao},function(err,ret3){
+											if(err){
+												return err;
+											}else{
+												return ret3;
+											}
+										})
+									})
+
+									Promise.all(pros).then(function(val1){
+										for(i=0;i<val1.length;i++){
+											money_1 = money_1.concat(val1[i])
+										}
+
+										value =value.concat(money_1);
+										res.render('chaedu/chaedu_profile_1',{rets:value});
+									}).catch(function(reason){
+										logger.error(reason);
+									})
+
+								}).catch(function(reason){
+									logger.error(reason);
+								})
+							}
+						})
+
+					}).catch(function(reason){
+						logger.error(reason);
 					})
 				}
 			}
@@ -712,16 +851,17 @@ router.post('/chaedu_youxiao',function(req,res){
 													if(err){
 														return logger.error(err);
 													}else{
+														//给上游工号增加相应的金额
 
-														Hao.update({gonghao:req.body.z_gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
-															if(err){
-																return logger.error(err)
-															}else{
+														// Hao.update({gonghao:req.body.z_gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
+														// 	if(err){
+														// 		return logger.error(err)
+														// 	}else{
 
 																var data ={code:200};
 																return res.json(data);		
-															}
-														})
+														// 	}
+														// })
 													}
 												})
 
@@ -765,15 +905,15 @@ router.post('/chaedu_youxiao',function(req,res){
 														return logger.error(err);
 													}else{
 
-														Hao.update({gonghao:req.body.z_gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
-															if(err){
-																return logger.error(err)
-															}else{
+														// Hao.update({gonghao:req.body.z_gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
+														// 	if(err){
+														// 		return logger.error(err)
+														// 	}else{
 
 																var data ={code:200};
 																return res.json(data);		
-															}
-														})
+														// 	}
+														// })
 													}
 												})
 											}
@@ -835,24 +975,79 @@ router.get('/chaedu_daili',function(req,res){
 					return;
 				}else{
 
-					Hao.count({z_gonghao:gonghao},function(err,count){
-						if(err){
-							return logger.error(err)
-						}else{
+					// Hao.count({z_gonghao:gonghao},function(err,count){
+					// 	if(err){
+					// 		return logger.error(err)
+					// 	}else{
 							
-							var counts = count;
-							var z_yeji = rets[0].all_yeji;
+					// 		var counts = count;
+					// 		var z_yeji = rets[0].all_yeji;
 
-							Hao.find({z_gonghao:gonghao},function(err,results){
+					// 		Hao.find({$or:[{z_gonghao:gonghao},{gonghao:gonghao}]},function(err,results){
+					// 			if(err){
+					// 				return logger.error(err);
+					// 			}else{
+					// 				return res.render('chaedu/chaedu_daili',{counts:counts,z_yeji:z_yeji,datas:results})
+					// 			}
+					// 		}).sort({"all_money":-1});
+
+					// 	}
+					// })
+
+					Hao.find({gonghao:gonghao},function(err,retOne){
+						var hao3 = [];
+						if(err){
+							return logger.error(err);
+						}else{
+							Hao.find({z_gonghao:gonghao},function(err,retTwo){
 								if(err){
 									return logger.error(err);
 								}else{
-									return res.render('chaedu/chaedu_daili',{counts:counts,z_yeji:z_yeji,datas:results})
+									const promise = retTwo.map(function(item){
+										return Hao.find({z_gonghao:item.gonghao},function(err,ret3){
+											if(err){
+												return err;
+											}else{
+												return ret3;
+											}
+										})
+									})
+
+									Promise.all(promise).then(function(vals){
+										for(i=0;i<vals.length;i++){
+											hao3 = hao3.concat(vals[i]);
+										}
+
+										return hao3
+									}).then(function(val4){
+										retOne[0].__v = 1;
+
+										for(i=0;i<retTwo.length;i++){
+											retTwo[i].__v = 2;
+										}
+
+
+										for(i=0;i<val4.length;i++){
+											val4[i].__v= 3;
+										}
+										var datas = val4.concat(retTwo,retOne);
+
+										var len = datas.length;
+
+										var all_yeji=0;
+										for(i=0;i<datas.length;i++){
+											all_yeji = all_yeji+datas[i].all_yeji;
+										}
+
+										res.render('chaedu/chaedu_daili',{counts:len,z_yeji:all_yeji,datas:datas})
+
+									})
+
 								}
 							})
-
 						}
 					})
+
 				}
 			}
 		})

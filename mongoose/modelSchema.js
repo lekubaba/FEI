@@ -55,6 +55,9 @@ var haoSchema = new Schema({
 	isVip:String,
 	all_yeji:Number,
 	all_money:Number,
+	money_level:Number,
+	act_zone:String,
+	zan_num:Number,
 	time:String
 });
 

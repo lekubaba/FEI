@@ -27,13 +27,13 @@ html(lang="en")
 					div.chaedu_daili_2=z_yeji
 			div.chaedu_fen
 				div.chaedu_daili
-					div.chaedu_daili_3(style="width:14%") 姓名
-					div.chaedu_daili_3(style="width:20%") 手机号
+					div.chaedu_daili_3(style="width:25%") 姓名
+					div.chaedu_daili_3(style="width:25%") 手机号
 					div.chaedu_daili_3(style="width:20%") 总战绩
-					div.chaedu_daili_a(style="width:46%") 日期
+					div.chaedu_daili_a(style="width:30%") 代理等级
 				each item in datas.reverse()
 					div.chaedu_daili
-						div.chaedu_daili_4(style="width:14%")=item.ownername
-						div.chaedu_daili_4(style="width:20%")=item.ownerNumber
+						div.chaedu_daili_4(style="width:25%")=item.ownername
+						div.chaedu_daili_4(style="width:25%")=item.ownerNumber
 						div.chaedu_daili_4(style="width:20%")=item.all_yeji
-						div.chaedu_daili_(style="width:46%")=item.time
+						div.chaedu_daili_(style="width:30%")=item.__v

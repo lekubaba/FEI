@@ -439,7 +439,7 @@ var zonghefen_fang =function(all_money,first_money,first_month,sec_money,sec_mon
 		return 85;
 	}
 
-	return zonghefen;
+	return zong_fen;
 
 }
 

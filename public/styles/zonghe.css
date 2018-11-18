@@ -203,6 +203,19 @@ body{
     margin-bottom: 20px;
 }
 
+.chaedu_reg_1{
+    margin-top:20px;
+    width:93vw;
+    height: 50px;
+    background-color: #d32628;
+    background-image: linear-gradient(135deg,#5370ac 0%,#d13467 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    color:#fff;
+}
+
 .chaedu_reg{
     margin-top:20px;
     width:93vw;
@@ -230,3 +243,74 @@ body{
     color:#fff;
 }
 
+
+.qrcode_zs{
+    position: fixed;
+    top:0px;
+    width:100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,.5);
+
+}
+
+.qrcode_zs_b{
+    width:320px;
+    height: 491px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('/images/feidaijun_zhao.png');
+    background-repeat:no-repeat; 
+    background-size:100% 100%;
+    -moz-background-size:100% 100%;
+    border-radius: 10px;
+    margin-top:-20px;
+
+}
+
+
+.qrcode_sq{
+    position: fixed;
+    top:0px;
+    width:100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,.5);
+
+}
+
+.qrcode_tg_b{
+    width:320px;
+    height: 491px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('/images/feidaijun_tg.png');
+    background-repeat:no-repeat; 
+    background-size:100% 100%;
+    -moz-background-size:100% 100%;
+    border-radius: 10px;
+    margin-top:-20px;
+
+}
+
+#qrcode_t{
+    margin-top:165px;
+}
+
+#qrcode{
+    margin-top:160px;
+}
+
+.clear_t,.clear_a{
+    cursor: pointer;
+}
