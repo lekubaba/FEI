@@ -533,6 +533,8 @@ router.get('/chaedu_zonghe',function(req,res){
 								title_1:"查额度(未激活)",
 								title_2:"添加代理(未激活)",
 								number:rets[0].ownerNumber,
+								name:rets[0].ownername,
+								disba:"none",
 								disp:"none",
 								displ:"none"
 							}
@@ -547,6 +549,8 @@ router.get('/chaedu_zonghe',function(req,res){
 								title_1:"查额度(未激活)",
 								title_2:"添加代理(未激活)",
 								number:rets[0].ownerNumber,
+								name:rets[0].ownername,
+								disba:"",
 								disp:"",
 								displ:"none"
 							}
@@ -562,6 +566,8 @@ router.get('/chaedu_zonghe',function(req,res){
 								title_1:"查额度(未激活)",
 								title_2:"添加代理",
 								number:rets[0].ownerNumber,
+								name:rets[0].ownername,
+								disba:"none",
 								disp:"none",
 								displ:"none"
 							}
@@ -576,6 +582,8 @@ router.get('/chaedu_zonghe',function(req,res){
 								title_1:"查额度(未激活)",
 								title_2:"添加代理",
 								number:rets[0].ownerNumber,
+								name:rets[0].ownername,
+								disba:"",
 								disp:"",
 								displ:"none"
 							}
@@ -591,6 +599,8 @@ router.get('/chaedu_zonghe',function(req,res){
 								title_1:"查额度",
 								title_2:"添加代理",
 								number:rets[0].ownerNumber,
+								name:rets[0].ownername,
+								disba:"none",
 								disp:"none",
 								displ:""
 							}
@@ -605,6 +615,8 @@ router.get('/chaedu_zonghe',function(req,res){
 								title_1:"查额度",
 								title_2:"添加代理",
 								number:rets[0].ownerNumber,
+								name:rets[0].ownername,
+								disba:"",
 								disp:"",
 								displ:""
 							}

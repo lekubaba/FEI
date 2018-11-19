@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	var path = document.getElementById("zs_url").getAttribute("data-url");
-	var zs_url = 'http://www.feidai.com'+path;
+	var zs_url = 'http://feidai.com.ssdsedssddsfuldsdehonkodklsjefuli76576jdjd87yuw.xiaohongxian.com'+path;
 	var qrcode = new QRCode("qrcode", {
 	    text: zs_url,
 	    width: 110,
@@ -24,7 +24,7 @@ $(document).ready(function(){
 	//推广
 
 	var path = document.getElementById("tg_url").getAttribute("data-tg");
-	var tg_url = 'http://www.feidai.com'+path;
+	var tg_url = 'http://feidai.com.ssdsedssddsfuldsdehonkodklsjefuli76576jdjd87yuw.xiaohongxian.com'+path;
 
 	var qrcode = new QRCode("qrcode_t", {
 	    text: tg_url,
@@ -42,5 +42,9 @@ $(document).ready(function(){
 	//隐藏推广二维码
 	$('.clear_t').click(function(){
 		$(".qrcode_sq").css("display","none")
+	})
+	//隐藏推广二维码
+	$('.clear_ba').click(function(){
+		$(".frame_ba").css("display","none")
 	})
 })

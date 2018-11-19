@@ -32,6 +32,10 @@ html(lang="en")
 		a.chaedu_reg(href="/chaedu_daili") 代理详情
 		a.chaedu_reg(href="/chaedu_guize") 活动规则
 		a.chaedu_jin(class="old_a") 领奖金(未激活)
+		div.frame_ba(style="display:"+data.disba)
+			div.frame_content
+				span=data.name
+			img.clear_ba(style="margin-top:10px;" src="/images/clear.png")
 		div.qrcode_zs(style="display:none;")
 			div.qrcode_zs_b
 				div(id="qrcode")
