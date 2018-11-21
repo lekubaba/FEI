@@ -192,6 +192,7 @@ input{
 	/*background-color: #cc2b2c;*/
 	background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%);
 	font-size: 18px;
+	font-weight: bold;
 	color:#000;
 	transition: background-color .2s;
 	cursor: pointer;

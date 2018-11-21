@@ -1,5 +1,3 @@
-
-
 //将金额转化成万为单位的值
 var Maths =function(value){
 	//将数值转换成字符串
@@ -127,20 +125,20 @@ var loan_bi_fen = function(all_money,loan_all){
 		return 0;
 	}
 	if(all_money>0&&loan_all===0){
-		return 4;
+		return 3;
 	}
 	var loan_xs = loan_all/all_money;
 	if(loan_xs<0.3){
-		return 2;
-	}
-	if(loan_xs>=0.3&&loan_xs<=0.5){
 		return 1;
 	}
-	if(loan_xs>0.5&&loan_xs<1){
+	if(loan_xs>=0.3&&loan_xs<=0.5){
 		return 0;
 	}
-	if(loan_xs>=1){
+	if(loan_xs>0.5&&loan_xs<1){
 		return -1;
+	}
+	if(loan_xs>=1){
+		return -2;
 	}
 }
 
@@ -151,7 +149,7 @@ var loan_bi_fen = function(all_money,loan_all){
 
 var loan_shu_fen = function(first_money,sec_money,third_money,loan_num,ka_num){
 
-	if(loan_num>=6&&loan_num<8){
+	if(loan_num>=5&&loan_num<8){
 		return -1
 	}
 
@@ -166,7 +164,7 @@ var loan_shu_fen = function(first_money,sec_money,third_money,loan_num,ka_num){
 
 var other_one_fen = function(other_one){
 	if(other_one===0){
-		return 3;
+		return 2;
 	}
 	if(other_one===1){
 		return 1;
@@ -189,7 +187,7 @@ var other_one_fen = function(other_one){
 
 var other_three_fen = function(other_three){
 	if(other_three===0){
-		return 2;
+		return 3;
 	}
 	if(other_three===1){
 		return 2;
@@ -207,10 +205,10 @@ var other_three_fen = function(other_three){
 		return -1;
 	}
 	if(other_three===6){
-		return -3;
+		return -2;
 	}
 	if(other_three>6){
-		return -4;
+		return -3;
 	}
 }
 
@@ -219,10 +217,10 @@ var other_three_fen = function(other_three){
 
 var other_six_fen = function(other_six){
 	if(other_six===0){
-		return 1;
+		return 2;
 	}
 	if(other_six===1){
-		return 0;
+		return 1;
 	}
 	if(other_six===2){
 		return 0;
@@ -348,15 +346,15 @@ var other_yqall_fen = function(other_yqall){
 	}
 	if(other_yqall===4){
 
-		return -1;
+		return -2;
 	}
 	if(other_yqall===5){
 
-		return -2;
+		return -3;
 	}
 	if(other_yqall===6){
 
-		return -2;
+		return -3;
 	}
 	if(other_yqall===7){
 
@@ -407,7 +405,7 @@ var zonghefen_fang =function(all_money,first_money,first_month,sec_money,sec_mon
 
 	var zong_fen = 72+first_month_fen(first_month)+ka_first_fen(first_money,sec_money,third_money,ka_first,loan_num,ka_num)+ka_pingjun_fen(ka_six,ka_zong)+ka_shengyu_fen(ka_zong,ka_shengyu)+loan_bi_fen(all_money,loan_all)+loan_shu_fen(first_money,sec_money,third_money,loan_num,ka_num)+other_one_fen(other_one)+other_three_fen(other_three)+other_six_fen(other_six)+other_yqs_fen(first_money,sec_money,third_money,other_yqs,loan_num,ka_num)+other_yfs_fen(first_money,sec_money,third_money,other_yfs,loan_num,ka_num)+other_yqall_fen(other_yqall)+yes_no_fen(other_yc,other_dq,other_dc,other_zx,other_gjj)
 	
-	if(zong_fen>=69&&zong_fen<72){
+	if(zong_fen>=66&&zong_fen<72){
 		return 75;
 	}	
 	if(zong_fen>=72&&zong_fen<74){
@@ -417,26 +415,56 @@ var zonghefen_fang =function(all_money,first_money,first_month,sec_money,sec_mon
 	if(zong_fen>=74&&zong_fen<76){
 		return 77;
 	}
-	if(zong_fen>=76&&zong_fen<=78){
+	if(zong_fen>=76&&zong_fen<=79){
 		return 78;
 	}
-	if(zong_fen>78&&zong_fen<=82){
-		return 79;
+	if(zong_fen>79&&zong_fen<=82){
+		if(first_month<24&&ka_first<24){
+			return 78;
+		}else{
+			return 79;
+		}
+		
 	}
 	if(zong_fen>82&&zong_fen<=84){
-		return 80;
+		if(first_month<24&&ka_first<24){
+			return 78;
+		}else{
+
+			return 79;
+		}
 	}
 	if(zong_fen>85&&zong_fen<=88){
-		return 81;
+		if(first_month<24&&ka_first<24){
+			return 78;
+		}else{
+
+			return 80;
+		}
 	}
 	if(zong_fen>88&&zong_fen<=90){
-		return 82;
+		if(first_month<24&&ka_first<24){
+			return 78;
+		}else{
+
+			return 81;
+		}
 	}
 	if(zong_fen>90&&zong_fen<=93){
-		return 83;
+		if(first_month<24&&ka_first<24){
+			return 79;
+		}else{
+
+			return 82;
+		}
 	}
 	if(zong_fen>93){
-		return 85;
+		if(first_month<24&&ka_first<24){
+			return 79;
+		}else{
+
+			return 83;
+		}
 	}
 
 	return zong_fen;
@@ -478,7 +506,7 @@ var other_one_xi = function(other_one){
 		return 3.8;
 	}
 	if(other_one===2){
-		return 3.8;
+		return 3.9;
 	}
 	if(other_one===3){
 		return 3.9;
