@@ -419,7 +419,7 @@ var zonghefen_fang =function(all_money,first_money,first_month,sec_money,sec_mon
 		return 78;
 	}
 	if(zong_fen>79&&zong_fen<=82){
-		if(first_month<24&&ka_first<24){
+		if(first_month<24||ka_first<24){
 			return 78;
 		}else{
 			return 79;
@@ -427,7 +427,7 @@ var zonghefen_fang =function(all_money,first_money,first_month,sec_money,sec_mon
 		
 	}
 	if(zong_fen>82&&zong_fen<=84){
-		if(first_month<24&&ka_first<24){
+		if(first_month<24||ka_first<24){
 			return 78;
 		}else{
 
@@ -435,7 +435,7 @@ var zonghefen_fang =function(all_money,first_money,first_month,sec_money,sec_mon
 		}
 	}
 	if(zong_fen>85&&zong_fen<=88){
-		if(first_month<24&&ka_first<24){
+		if(first_month<24||ka_first<24){
 			return 78;
 		}else{
 
@@ -443,7 +443,7 @@ var zonghefen_fang =function(all_money,first_money,first_month,sec_money,sec_mon
 		}
 	}
 	if(zong_fen>88&&zong_fen<=90){
-		if(first_month<24&&ka_first<24){
+		if(first_month<24||ka_first<24){
 			return 78;
 		}else{
 
@@ -451,7 +451,7 @@ var zonghefen_fang =function(all_money,first_money,first_month,sec_money,sec_mon
 		}
 	}
 	if(zong_fen>90&&zong_fen<=93){
-		if(first_month<24&&ka_first<24){
+		if(first_month<24||ka_first<24){
 			return 79;
 		}else{
 
@@ -459,7 +459,7 @@ var zonghefen_fang =function(all_money,first_money,first_month,sec_money,sec_mon
 		}
 	}
 	if(zong_fen>93){
-		if(first_month<24&&ka_first<24){
+		if(first_month<24||ka_first<24){
 			return 79;
 		}else{
 
