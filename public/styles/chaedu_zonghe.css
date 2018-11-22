@@ -258,7 +258,7 @@ body{
 .frame_content{
     width:320px;
     height: 491px;
-    background-image: url('/images/feidaijun_ba.png');
+    background-image: url('http://feidaijun.xiaohongxian.com/feidaijun_ba.png');
     background-repeat:no-repeat; 
     background-size:100% 100%;
     -moz-background-size:100% 100%;
@@ -299,7 +299,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: url('/images/feidaijun_zhao.png');
+    background-image: url('http://feidaijun.xiaohongxian.com/feidaijun_zhao.png');
     background-repeat:no-repeat; 
     background-size:100% 100%;
     -moz-background-size:100% 100%;
@@ -329,7 +329,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: url('/images/feidaijun_tg.png');
+    background-image: url('http://feidaijun.xiaohongxian.com/feidaijun_tg.png');
     background-repeat:no-repeat; 
     background-size:100% 100%;
     -moz-background-size:100% 100%;
