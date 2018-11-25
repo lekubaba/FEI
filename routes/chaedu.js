@@ -60,86 +60,158 @@ router.get('/chaedu_gonghao',function(req,res){
 router.post('/gonghao',function(req,res){
 
 	if(!req.signedCookies.mycookies){
-		var hao = new Hao({
-			ownername:req.body.ownername,
-			ownerNumber:req.body.ownerNumber,
-			gonghao:req.body.gonghao,
-			isVip:"tong",
-			all_yeji:0,
-			all_money:0,
-			one_money:0,
-			money_level:1,
-			act_zone:"no",
-			zan_num:0,
-			time:formatDate('yyyy-MM-dd hh:mm:ss')
-		});
-
-		Hao.find({gonghao:req.body.gonghao},function(err,results){
-			if(err){
-				logger.error(err)
-			}else{
-				if(results.length>0){
-					return res.json({code:400});
-				}
-				if(results.length===0){
-					hao.save(function(err){
-						if(err){
-							logger.error(err)
-						}else{
-							return res.json({code:200})
-						}
-					})
-				}
-			}
-		})		
+		return res.json({code:400});
 	}else{	
-		var hao = new Hao({
-			ownername:req.body.ownername,
-			ownerNumber:req.body.ownerNumber,
-			gonghao:req.body.gonghao,
-			z_gonghao:req.signedCookies.mycookies.gonghao,
-			isVip:"tong",
-			all_yeji:0,
-			all_money:0,
-			one_money:0,
-			money_level:1,
-			act_zone:"no",
-			zan_num:0,
-			time:formatDate('yyyy-MM-dd hh:mm:ss')
-		});
 
-		Hao.find({ownerNumber:req.body.ownerNumber},function(err,retx){
-			if(err){
-				return logger.error(err);
-			}else{
-				if(retx.length>0){
-					return res.json({code:310});
+		var gonghao_cookies = Number(req.signedCookies.mycookies.gonghao);
+		//如果是王亦翔添加的代理，那么这样保存数据
+		if(gonghao_cookies===74874189){
+			var hao = new Hao({
+				ownername:req.body.ownername,
+				ownerNumber:req.body.ownerNumber,
+				gonghao:req.body.gonghao,
+				z_gonghao:req.signedCookies.mycookies.gonghao,
+				top_gonghao:req.body.gonghao,
+				isVip:"tong",
+				all_yeji:0,
+				all_money:0,
+				one_money:0,
+				money_level:1,
+				act_zone:"no",
+				zan_num:0,
+				time:formatDate('yyyy-MM-dd hh:mm:ss')
+			});
+			Hao.find({ownerNumber:req.body.ownerNumber},function(err,retx){
+				if(err){
+					return logger.error(err);
 				}else{
-					Hao.find({gonghao:req.body.gonghao},function(err,results){
-						if(err){
-							return logger.error(err)
-						}else{
-							if(results.length>0){
-								return res.json({code:400});
+					if(retx.length>0){
+						return res.json({code:310});
+					}else{
+						Hao.find({gonghao:req.body.gonghao},function(err,results){
+							if(err){
+								return logger.error(err)
+							}else{
+								if(results.length>0){
+									return res.json({code:400});
+								}
+								if(results.length===0){
+									hao.save(function(err){
+										if(err){
+											return logger.error(err)
+										}else{
+											return res.json({code:200})
+										}
+									})
+								}
 							}
-							if(results.length===0){
-								hao.save(function(err){
-									if(err){
-										return logger.error(err)
-									}else{
-										return res.json({code:200})
-									}
-								})
-							}
-						}
-					})
-					
+						})
+						
+					}
 				}
-			}
-		})
+			})
+		}else{
+			Hao.findOne({gonghao:gonghao_cookies},function(err,retG){
+				if(err){
+					return logger.error(err);
+				}else{
+					//如果上级代理是王亦翔，就这样保存数据
+					if(retG.z_gonghao===74874189){
+						var hao = new Hao({
+							ownername:req.body.ownername,
+							ownerNumber:req.body.ownerNumber,
+							gonghao:req.body.gonghao,
+							z_gonghao:req.signedCookies.mycookies.gonghao,
+							top_gonghao:gonghao_cookies,
+							isVip:"tong",
+							all_yeji:0,
+							all_money:0,
+							one_money:0,
+							money_level:1,
+							act_zone:"no",
+							zan_num:0,
+							time:formatDate('yyyy-MM-dd hh:mm:ss')
+						});
+						Hao.find({ownerNumber:req.body.ownerNumber},function(err,retx){
+							if(err){
+								return logger.error(err);
+							}else{
+								if(retx.length>0){
+									return res.json({code:310});
+								}else{
+									Hao.find({gonghao:req.body.gonghao},function(err,results){
+										if(err){
+											return logger.error(err)
+										}else{
+											if(results.length>0){
+												return res.json({code:400});
+											}
+											if(results.length===0){
+												hao.save(function(err){
+													if(err){
+														return logger.error(err)
+													}else{
+														return res.json({code:200})
+													}
+												})
+											}
+										}
+									})
+									
+								}
+							}
+						})						
+					}else{
+						var hao = new Hao({
+							ownername:req.body.ownername,
+							ownerNumber:req.body.ownerNumber,
+							gonghao:req.body.gonghao,
+							z_gonghao:req.signedCookies.mycookies.gonghao,
+							top_gonghao:retG.z_gonghao,
+							isVip:"tong",
+							all_yeji:0,
+							all_money:0,
+							one_money:0,
+							money_level:1,
+							act_zone:"no",
+							zan_num:0,
+							time:formatDate('yyyy-MM-dd hh:mm:ss')
+						});
+						Hao.find({ownerNumber:req.body.ownerNumber},function(err,retx){
+							if(err){
+								return logger.error(err);
+							}else{
+								if(retx.length>0){
+									return res.json({code:310});
+								}else{
+									Hao.find({gonghao:req.body.gonghao},function(err,results){
+										if(err){
+											return logger.error(err)
+										}else{
+											if(results.length>0){
+												return res.json({code:400});
+											}
+											if(results.length===0){
+												hao.save(function(err){
+													if(err){
+														return logger.error(err)
+													}else{
+														return res.json({code:200})
+													}
+												})
+											}
+										}
+									})
+									
+								}
+							}
+						})		
+					}
+				}
+			})
+		}
 
 	}
-
 
 })
 //验证工号，进入到录件系统首页
@@ -173,7 +245,12 @@ router.get('/sys_home',function(req,res){
 				if(rets.length===0){
 					return;
 				}else{
-					return res.render('chaedu/sys_home');
+					if(rets[0].isVip!=="jin"){
+						return res.send("不存在！");
+					}else{
+
+						return res.render('chaedu/sys_home');
+					}
 				}
 			}
 		})
@@ -390,14 +467,24 @@ router.get('/chaedu_profile_1',function(req,res){
 			if(err){
 				return logger.error(err);
 			}else{
-				if(ret3.isVip==="tong"){
+				if(ret3.gonghao===74874189){
+					Money.find({},function(err,rets){
+						if(err){
+							return logger.error(err);
+						}else{
+
+							return res.render('chaedu/chaedu_profile_1',{rets:rets,count:rets.length})
+							
+						}
+					})					
+				}else if(ret3.isVip==="tong"){
 
 					Money.find({gonghao:gonghao},{_id:0},function(err,rets){
 						if(err){
 							return logger.error(err);
 						}else{
 
-							return res.render('chaedu/chaedu_profile_1',{rets:rets})
+							return res.render('chaedu/chaedu_profile_1',{rets:rets,count:rets.length})
 							
 						}
 					})
@@ -461,7 +548,7 @@ router.get('/chaedu_profile_1',function(req,res){
 										}
 
 										value =value.concat(money_1);
-										res.render('chaedu/chaedu_profile_1',{rets:value});
+										res.render('chaedu/chaedu_profile_1',{rets:value,count:value.length});
 									}).catch(function(reason){
 										logger.error(reason);
 									})
@@ -695,96 +782,64 @@ router.get("/chaedu_guize",function(req,res){
 	}	
 })
 
-
-
 //查看代理详细情况
 router.get('/chaedu_daili',function(req,res){
 	if(req.signedCookies.mycookies){
-		var gonghao = req.signedCookies.mycookies.gonghao;
-		Hao.find({gonghao:gonghao},function(err,rets){
-			if(err){
-				return logger.error(err);
-			}else{
-				if(rets.length===0){
-					return;
+		var gonghao = Number(req.signedCookies.mycookies.gonghao);
+		//如果是杨锦旋本人查看代理想详情
+		if(gonghao===74874189){
+			Hao.find({},function(err,rets){
+				if(err){
+					return logger.error(err);
 				}else{
-
-					// Hao.count({z_gonghao:gonghao},function(err,count){
-					// 	if(err){
-					// 		return logger.error(err)
-					// 	}else{
-							
-					// 		var counts = count;
-					// 		var z_yeji = rets[0].all_yeji;
-
-					// 		Hao.find({$or:[{z_gonghao:gonghao},{gonghao:gonghao}]},function(err,results){
-					// 			if(err){
-					// 				return logger.error(err);
-					// 			}else{
-					// 				return res.render('chaedu/chaedu_daili',{counts:counts,z_yeji:z_yeji,datas:results})
-					// 			}
-					// 		}).sort({"all_money":-1});
-
-					// 	}
-					// })
-
-					Hao.find({gonghao:gonghao},function(err,retOne){
-						var hao3 = [];
-						if(err){
-							return logger.error(err);
-						}else{
-							Hao.find({z_gonghao:gonghao},function(err,retTwo){
-								if(err){
-									return logger.error(err);
-								}else{
-									const promise = retTwo.map(function(item){
-										return Hao.find({z_gonghao:item.gonghao},function(err,ret3){
-											if(err){
-												return err;
-											}else{
-												return ret3;
-											}
-										})
-									})
-
-									Promise.all(promise).then(function(vals){
-										for(i=0;i<vals.length;i++){
-											hao3 = hao3.concat(vals[i]);
-										}
-
-										return hao3
-									}).then(function(val4){
-										retOne[0].__v = 1;
-
-										for(i=0;i<retTwo.length;i++){
-											retTwo[i].__v = 2;
-										}
-
-
-										for(i=0;i<val4.length;i++){
-											val4[i].__v= 3;
-										}
-										var datas = val4.concat(retTwo,retOne);
-
-										var len = datas.length;
-
-										var all_yeji=0;
-										for(i=0;i<datas.length;i++){
-											all_yeji = all_yeji+datas[i].all_yeji;
-										}
-
-										res.render('chaedu/chaedu_daili',{counts:len,z_yeji:all_yeji,datas:datas})
-
-									})
-
-								}
-							})
-						}
-					})
-
+					var len = rets.length;
+					var all_yeji=0;
+					for(i=0;i<rets.length;i++){
+						all_yeji = all_yeji+rets[i].all_yeji;
+						rets[i]._v=0;
+					}
+					return res.render('chaedu/chaedu_daili',{counts:len,z_yeji:all_yeji,datas:rets})
 				}
-			}
-		})
+			}).sort({all_yeji:1})
+		}else{
+			Hao.findOne({gonghao:gonghao},function(err,ret1){
+				if(err){
+					return logger.error(err);
+				}else{
+					//如果是杨锦旋的直属下级代理查看详情
+					if(ret1.z_gonghao===74874189){
+						Hao.find({top_gonghao:gonghao},function(err,ret2){
+							if(err){
+								return logger.error(err);
+							}else{
+								var len = ret2.length;
+								var all_yeji=0;
+								for(i=0;i<ret2.length;i++){
+									all_yeji = all_yeji+ret2[i].all_yeji;
+									ret2[i]._v=0;
+								}
+								return res.render('chaedu/chaedu_daili',{counts:len,z_yeji:all_yeji,datas:ret2})
+							}
+						}).sort({all_yeji:1})
+					}else{
+						//如果是杨锦旋直属代理的下级或者下下级查看代理详情
+						Hao.find({$or:[{z_gonghao:gonghao},{gonghao:gonghao}]},function(err,ret3){
+							if(err){
+								return logger.error(err);
+							}else{
+								var len = ret3.length;
+								var all_yeji=0;
+								for(i=0;i<ret3.length;i++){
+									all_yeji = all_yeji+ret3[i].all_yeji;
+									ret3[i]._v=0;
+								}
+								return res.render('chaedu/chaedu_daili',{counts:len,z_yeji:all_yeji,datas:ret3})
+							}
+						}).sort({all_yeji:1})
+					}
+				}
+			})
+		}
 
 	}else{
 		return res.redirect('/chaedu_enter');

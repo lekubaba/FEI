@@ -117,12 +117,15 @@ router.post("/activity_gonghao_add",function(req,res){
 										return res.json({code:310});
 									}else{
 
-										if(rety[0].gonghao===1111111122){
+										//如果是杨锦旋自己招商的渠道
+
+										if(rety[0].gonghao===74874189){
 											var hao = new Hao({
 												ownername:req.body.ownername,
 												ownerNumber:req.body.ownerNumber,
 												gonghao:gonghao_1,
 												z_gonghao:rety[0].gonghao,
+												top_gonghao:gonghao_1,
 												isVip:"tong",
 												all_yeji:0,
 												all_money:0,
@@ -147,12 +150,49 @@ router.post("/activity_gonghao_add",function(req,res){
 													})
 												}
 											})
+											//如果是杨锦旋的直属渠道招商，比如万力在招商
+										}else if(rety[0].z_gonghao===74874189){
+											var hao = new Hao({
+												ownername:req.body.ownername,
+												ownerNumber:req.body.ownerNumber,
+												gonghao:gonghao_1,
+												z_gonghao:rety[0].gonghao,
+												top_gonghao:rety[0].gonghao,
+												isVip:"tong",
+												all_yeji:0,
+												all_money:0,
+												one_money:0,
+												money_level:1,
+												act_zone:"yes",
+												zan_num:0,
+												time:formatDate('yyyy-MM-dd hh:mm:ss')
+											});
+											hao.save(function(err){
+												if(err){
+													return logger.error(err)
+												}else{
+
+													Hao.update({ownerNumber:req.body.z_number},{$inc:{zan_num:1}},function(err){
+														if(err){
+															return logger.error(err);
+														}else{
+
+															return res.json({code:200,ownername:req.body.ownername})
+															
+														}
+													})
+												}
+											})
+
+											//如果是下下级招商，比如万力的直属
+
 										}else{
 											var hao = new Hao({
 												ownername:req.body.ownername,
 												ownerNumber:req.body.ownerNumber,
 												gonghao:gonghao_1,
 												z_gonghao:rety[0].gonghao,
+												top_gonghao:rety[0].z_gonghao,
 												isVip:"tong",
 												all_yeji:0,
 												all_money:0,
@@ -177,8 +217,7 @@ router.post("/activity_gonghao_add",function(req,res){
 														}
 													})
 												}
-											})
-
+											})	
 										}
 
 									}
