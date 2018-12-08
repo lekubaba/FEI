@@ -1,0 +1,36 @@
+.daili_top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:100vw;
+    height: auto;
+    background-color: #efefef;
+    padding:10px 0 20px 0;
+}
+
+.chaedu_daili_bar{
+
+    width:93vw;
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.bar_1{
+    width:20%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color:#fff;
+    background-color: #2e323c;
+    border-left: 1px solid #fff;
+    cursor: pointer;
+}
+
+.active{
+    background-color: #d32628;
+}

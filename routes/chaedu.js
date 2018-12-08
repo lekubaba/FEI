@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 let {User,Code,Ping,Money,Hao,Pg} = require('../mongoose/modelSchema')
 var express = require('express');
 var router = express.Router();
@@ -167,7 +169,7 @@ router.post('/gonghao',function(req,res){
 							ownerNumber:req.body.ownerNumber,
 							gonghao:req.body.gonghao,
 							z_gonghao:req.signedCookies.mycookies.gonghao,
-							top_gonghao:retG.z_gonghao,
+							top_gonghao:retG.top_gonghao,
 							isVip:"tong",
 							all_yeji:0,
 							all_money:0,
@@ -457,121 +459,6 @@ router.get('/chaedu_profile',function(req,res){
 })
 
 
-//进入到有效战绩待页面
-router.get('/chaedu_profile_1',function(req,res){
-	if(req.signedCookies.mycookies){
-		var gonghao = req.signedCookies.mycookies.gonghao;
-		gonghao = Number(gonghao);
-
-		Hao.findOne({gonghao:gonghao},function(err,ret3){
-			if(err){
-				return logger.error(err);
-			}else{
-				if(ret3.gonghao===74874189){
-					Money.find({},function(err,rets){
-						if(err){
-							return logger.error(err);
-						}else{
-
-							return res.render('chaedu/chaedu_profile_1',{rets:rets,count:rets.length})
-							
-						}
-					})					
-				}else if(ret3.isVip==="tong"){
-
-					Money.find({gonghao:gonghao},{_id:0},function(err,rets){
-						if(err){
-							return logger.error(err);
-						}else{
-
-							return res.render('chaedu/chaedu_profile_1',{rets:rets,count:rets.length})
-							
-						}
-					})
-				}else if(ret3.isVip==="jin"||ret3.isVip==="yin"){
-
-					var p1 = new Promise(function(resolve,reject){
-						//查自己的有效记录和下级的有效记录
-						Money.find({$or:[{z_gonghao:gonghao},{gonghao:gonghao}]},function(err,rets){
-							if(err){
-								reject(err);
-							}else{
-								//将查询的值传给下一步回调函数
-								resolve(rets);
-							}
-						})
-					});
-
-
-					p1.then(function(value){
-						var gonghao_1 = [];
-						//将所有的下级查出来
-						Hao.find({z_gonghao:gonghao},function(err,ret1){
-							if(err){
-								return err;
-							}else{
-									
-								const promise = ret1.map(function(item){
-									return Hao.find({z_gonghao:item.gonghao},function(err,ret2){
-										if(err){
-											return err;
-										}else{
-											return ret2;
-										}
-									})
-								})
-
-								Promise.all(promise).then(function(values){
-									for(i=0;i<values.length;i++){
-
-										//将所有下级拼接出来
-										gonghao_1 = gonghao_1.concat(values[i]);
-									}
-
-									return gonghao_1
-
-								}).then(function(values){
-									var money_1 = [];
-									const pros = values.map(function(item){
-										return Money.find({gonghao:item.gonghao},function(err,ret3){
-											if(err){
-												return err;
-											}else{
-												return ret3;
-											}
-										})
-									})
-
-									Promise.all(pros).then(function(val1){
-										for(i=0;i<val1.length;i++){
-											money_1 = money_1.concat(val1[i])
-										}
-
-										value =value.concat(money_1);
-										res.render('chaedu/chaedu_profile_1',{rets:value,count:value.length});
-									}).catch(function(reason){
-										logger.error(reason);
-									})
-
-								}).catch(function(reason){
-									logger.error(reason);
-								})
-							}
-						})
-
-					}).catch(function(reason){
-						logger.error(reason);
-					})
-				}
-			}
-		})
-	}else{
-		return res.redirect('/chaedu_enter');
-	}
-
-	
-})
-
 
 
 //------------------------------------------------------------------------------管理控制
@@ -638,112 +525,50 @@ router.post('/chaedu_youxiao',function(req,res){
 					if(err){
 						logger.error(err)
 					}else{
-						if(req.body.gonghao==req.body.z_gonghao){
 
-							if(rets.length<1){
-								var data = {code:100};
-								return res.json(data);
-							}else{
-
-								Hao.findOne({gonghao:req.body.gonghao},function(err,ret5){
-									if(err){
-										return logger.error(err);
-									}else{
-										var money = new Money({
-											ownername:ret5.ownername,
-											ownerNumber:ret5.ownerNumber,
-											gonghao:req.body.gonghao,
-											z_gonghao:req.body.z_gonghao,
-											username:req.body.username,
-											number:req.body.number,
-											shenqingTime:req.body.shenqingTime,
-											shengxiaoTime:req.body.shengxiaoTime,
-											xiakuanEdu:req.body.xiakuanEdu,
-											money:req.body.money
-										});
-										money.save(function(err){
-											if(err){
-												return logger.error(err);
-											}else{
-
-												var all_yeji=parseInt(req.body.xiakuanEdu)
-												var all_money=parseInt(req.body.money)
-												Hao.update({gonghao:req.body.gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
-													if(err){
-														return logger.error(err);
-													}else{
-														//给上游工号增加相应的金额
-
-														// Hao.update({gonghao:req.body.z_gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
-														// 	if(err){
-														// 		return logger.error(err)
-														// 	}else{
-
-																var data ={code:200};
-																return res.json(data);		
-														// 	}
-														// })
-													}
-												})
-
-
-											}
-										})				
-									}
-
-								})
-							}
+						if(rets.length!==2){
+							var data = {code:100};
+							return res.json(data);
 						}else{
-							if(rets.length<2){
-								var data = {code:100};
-								return res.json(data);
-							}else{
+							Hao.findOne({gonghao:req.body.gonghao},function(err,ret5){
+								if(err){
+									return logger.error(err);
+								}else{
+									var money = new Money({
+										ownername:ret5.ownername,
+										ownerNumber:ret5.ownerNumber,
+										gonghao:req.body.gonghao,
+										z_gonghao:req.body.z_gonghao,
+										top_gonghao:ret5.top_gonghao,
+										username:req.body.username,
+										number:req.body.number,
+										shenqingTime:req.body.shenqingTime,
+										shengxiaoTime:req.body.shengxiaoTime,
+										xiakuanEdu:req.body.xiakuanEdu,
+										money:req.body.money,
+										isSuccess:false, //佣金是否发放
+										isBecause:'--', //未发放的原因
+										isMyself:false//是不是本人提交
+									});
+									money.save(function(err){
+										if(err){
+											return logger.error(err);
+										}else{
+											var all_yeji=parseInt(req.body.xiakuanEdu)
+											var all_money=parseInt(req.body.money)
+											Hao.update({gonghao:req.body.gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
+												if(err){
+													return logger.error(err);
+												}else{
+													var data ={code:200};
+													return res.json(data);		
+												}
+											})
+										}
+									})				
+								}
 
-								Hao.findOne({gonghao:req.body.gonghao},function(err,ret5){
-									if(err){
-										return logger.error(err);
-									}else{
-										var money = new Money({
-											ownername:ret5.ownername,
-											ownerNumber:ret5.ownerNumber,
-											gonghao:req.body.gonghao,
-											z_gonghao:req.body.z_gonghao,
-											username:req.body.username,
-											number:req.body.number,
-											shenqingTime:req.body.shenqingTime,
-											shengxiaoTime:req.body.shengxiaoTime,
-											xiakuanEdu:req.body.xiakuanEdu,
-											money:req.body.money
-										});
-										money.save(function(err){
-											if(err){
-												return logger.error(err);
-											}else{
-												var all_yeji=parseInt(req.body.xiakuanEdu)
-												var all_money=parseInt(req.body.money)
-												Hao.update({gonghao:req.body.gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
-													if(err){
-														return logger.error(err);
-													}else{
-
-														// Hao.update({gonghao:req.body.z_gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
-														// 	if(err){
-														// 		return logger.error(err)
-														// 	}else{
-
-																var data ={code:200};
-																return res.json(data);		
-														// 	}
-														// })
-													}
-												})
-											}
-										})				
-									}
-
-								})
-							}
-
+							})
 						}
 					}
 				})
@@ -781,74 +606,5 @@ router.get("/chaedu_guize",function(req,res){
 		return res.redirect('/chaedu_enter');
 	}	
 })
-
-//查看代理详细情况
-router.get('/chaedu_daili',function(req,res){
-	if(req.signedCookies.mycookies){
-		var gonghao = Number(req.signedCookies.mycookies.gonghao);
-		//如果是杨锦旋本人查看代理想详情
-		if(gonghao===74874189){
-			Hao.find({},function(err,rets){
-				if(err){
-					return logger.error(err);
-				}else{
-					var len = rets.length;
-					var all_yeji=0;
-					for(i=0;i<rets.length;i++){
-						all_yeji = all_yeji+rets[i].all_yeji;
-						rets[i]._v=0;
-					}
-					return res.render('chaedu/chaedu_daili',{counts:len,z_yeji:all_yeji,datas:rets})
-				}
-			}).sort({all_yeji:1})
-		}else{
-			Hao.findOne({gonghao:gonghao},function(err,ret1){
-				if(err){
-					return logger.error(err);
-				}else{
-					//如果是杨锦旋的直属下级代理查看详情
-					if(ret1.z_gonghao===74874189){
-						Hao.find({top_gonghao:gonghao},function(err,ret2){
-							if(err){
-								return logger.error(err);
-							}else{
-								var len = ret2.length;
-								var all_yeji=0;
-								for(i=0;i<ret2.length;i++){
-									all_yeji = all_yeji+ret2[i].all_yeji;
-									ret2[i]._v=0;
-								}
-								return res.render('chaedu/chaedu_daili',{counts:len,z_yeji:all_yeji,datas:ret2})
-							}
-						}).sort({all_yeji:1})
-					}else{
-						//如果是杨锦旋直属代理的下级或者下下级查看代理详情
-						Hao.find({$or:[{z_gonghao:gonghao},{gonghao:gonghao}]},function(err,ret3){
-							if(err){
-								return logger.error(err);
-							}else{
-								var len = ret3.length;
-								var all_yeji=0;
-								for(i=0;i<ret3.length;i++){
-									all_yeji = all_yeji+ret3[i].all_yeji;
-									ret3[i]._v=0;
-								}
-								return res.render('chaedu/chaedu_daili',{counts:len,z_yeji:all_yeji,datas:ret3})
-							}
-						}).sort({all_yeji:1})
-					}
-				}
-			})
-		}
-
-	}else{
-		return res.redirect('/chaedu_enter');
-	}	
-})
-
-
-
-
-
 
 module.exports = router;

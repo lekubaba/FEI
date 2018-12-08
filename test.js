@@ -1,15 +1,13 @@
-var datas = [{a:3,b:"haha"},{a:5,b:"hehe"},{a:1,b:"xixi"},{a:9,b:"lele"},{a:0,b:"lesle"},{a:11,b:"lelee"},{a:0,b:"lerle"},{a:0,b:"letle"}];
+var add = [[1,2],[2,3],[3,4],4,5];
 
-var da = [];
+const promise = add.map(function(item){
+	return item
+})
 
-for(i=0;i<datas.length;i++){
-	if(datas[i].a>0){
-		da = da.push(datas[i]);
 
-	}else{
-		datas = datas;
-	}
-}
+Promise.all(promise).then(function(value){
+	console.log(value)
+})
 
-console.log(da)
+
 

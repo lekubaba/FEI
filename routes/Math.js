@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 let {User,Code,Ping,Money,Hao,Pg} = require('../mongoose/modelSchema')
 var express = require('express');
 var router = express.Router();
@@ -11,7 +13,7 @@ let {Maths,Fang,Ka,Other,zonghefen_fang,jikexishu_fang} = require('../utils/Math
 //接受所有录入的数据并且处理数据得出结果
 
 router.post('/chaedu_dashuju',function(req,res){
-	var gonghao = req.signedCookies.mycookies.gonghao;
+	var gonghao = Number(req.signedCookies.mycookies.gonghao);
     var username = req.body.username;
     var card_id = req.body.card_id;
     var usernumber = Number(req.body.usernumber);
@@ -139,21 +141,33 @@ router.post('/chaedu_dashuju',function(req,res){
 				return logger.error(err);
 			}else{
 				if(ret9.length===0){
-					// ping.save(function(err){
-					// 	if(err){
-					// 		logger.error(err);
-					// 		return res.json({code:400})
-					// 	}else{
-							pg.save(function(err){
-								if(err){
-									logger.error(err);
-									return res.json({code:400})
-								}else{
-									return res.json({code:200});
-								}		
-							})
-					// 	}
-					// })				
+
+					if(gonghao===19890113||gonghao===20378536){
+						ping.save(function(err){
+							if(err){
+								logger.error(err);
+								return res.json({code:400})
+							}else{
+								pg.save(function(err){
+									if(err){
+										logger.error(err);
+										return res.json({code:400})
+									}else{
+										return res.json({code:200});
+									}		
+								})
+							}
+						})				
+					}else{
+						pg.save(function(err){
+							if(err){
+								logger.error(err);
+								return res.json({code:400})
+							}else{
+								return res.json({code:200});
+							}		
+						})
+					}
 				}else{
 					return res.json({code:900});
 				}
@@ -210,21 +224,32 @@ router.post('/chaedu_dashuju',function(req,res){
 				return logger.error(err);
 			}else{
 				if(ret9.length===0){
-					// ping.save(function(err){
-					// 	if(err){
-					// 		logger.error(err);
-					// 		return res.json({code:400})
-					// 	}else{
-							pg.save(function(err){
-								if(err){
-									logger.error(err);
-									return res.json({code:400})
-								}else{
-									return res.json({code:200});
-								}		
-							})
-						// }
-					// })				
+					if(gonghao===19890113||gonghao===20378536){
+						ping.save(function(err){
+							if(err){
+								logger.error(err);
+								return res.json({code:400})
+							}else{
+								pg.save(function(err){
+									if(err){
+										logger.error(err);
+										return res.json({code:400})
+									}else{
+										return res.json({code:200});
+									}		
+								})
+							}
+						})				
+					}else{
+						pg.save(function(err){
+							if(err){
+								logger.error(err);
+								return res.json({code:400})
+							}else{
+								return res.json({code:200});
+							}		
+						})
+					}			
 				}else{
 					return res.json({code:900});
 				}
@@ -263,21 +288,32 @@ router.post('/chaedu_dashuju',function(req,res){
 				return logger.error(err);
 			}else{
 				if(ret9.length===0){
-					// ping.save(function(err){
-					// 	if(err){
-					// 		logger.error(err);
-					// 		return res.json({code:400})
-					// 	}else{
-							pg.save(function(err){
-								if(err){
-									logger.error(err);
-									return res.json({code:400})
-								}else{
-									return res.json({code:200});
-								}		
-							})
-					// 	}
-					// })				
+					if(gonghao===19890113||gonghao===20378536){
+						ping.save(function(err){
+							if(err){
+								logger.error(err);
+								return res.json({code:400})
+							}else{
+								pg.save(function(err){
+									if(err){
+										logger.error(err);
+										return res.json({code:400})
+									}else{
+										return res.json({code:200});
+									}		
+								})
+							}
+						})				
+					}else{
+						pg.save(function(err){
+							if(err){
+								logger.error(err);
+								return res.json({code:400})
+							}else{
+								return res.json({code:200});
+							}		
+						})
+					}			
 				}else{
 					return res.json({code:900});
 				}

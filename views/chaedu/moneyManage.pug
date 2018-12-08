@@ -1,0 +1,45 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title 领佣金
+		link(rel="shortcut icon" href="http://feidaijun.xiaohongxian.com/logo.png")
+		link(rel="bookmark" href="http://feidaijun.xiaohongxian.com/logo.png")
+		link(rel="icon" href="http://feidaijun.xiaohongxian.com/logo.png" type="image/png")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+		meta(http-equiv="X-UA-Compatible" content="ie=edge")
+		link(rel="apple-touch-icon" href="http://feidaijun.xiaohongxian.com/logo.png")
+		meta(name="apple-mobile-web-app-title" content="领佣金")
+		meta(name="mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="white")
+		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/getMoney.css")
+		//- script(src="http://feidaijun.xiaohongxian.com/reminds.js")
+	body
+		div.getMoneys(style="margin-top:10px;") 达到有效时间的客户
+		div.getMoney_a
+			div.getMoney_content
+				div.getMoney_weeks 姓名
+				div.getMoney_weeks 电话
+				div.getMoney_weeks 下款额度
+				div.getMoney_weeks 生效时间
+			div.getMoney_content(style="margin-bottom:10px;")
+				div.getMoney_weeks_1 佣金归属
+				div.getMoney_weeks_1 佣金发放状态
+		if len===0
+			div(style="margin-top:50px;font-size:20px;color:#000;") --哦耶！没有要结算的数据--
+		else
+			each item in data
+				div.getMoney_as(style="margin-top:10px;")
+					div.getMoney_content
+						div.getMoney_weeks=item.username
+						div.getMoney_weeks=item.number
+						div.getMoney_weeks=item.xiakuanEdu
+						div.getMoney_weeks=item.shengxiaoTime
+					div.getMoney_content
+						div.getMoney_weeks_1=item.top_gonghao
+						if item.isSuccess
+							div.getMoney_weeks_1 已完成佣金发放
+						else
+							div.getMoney_weeks_2(id=item._id) 提交完成
+	script(src="http://feidaijun.xiaohongxian.com/jquery.min.js")
+	script(src="http://feidaijun.xiaohongxian.com/getMoneys.js")

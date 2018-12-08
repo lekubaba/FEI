@@ -1,0 +1,70 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title 领佣金
+		link(rel="shortcut icon" href="http://feidaijun.xiaohongxian.com/logo.png")
+		link(rel="bookmark" href="http://feidaijun.xiaohongxian.com/logo.png")
+		link(rel="icon" href="http://feidaijun.xiaohongxian.com/logo.png" type="image/png")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+		meta(http-equiv="X-UA-Compatible" content="ie=edge")
+		link(rel="apple-touch-icon" href="http://feidaijun.xiaohongxian.com/logo.png")
+		meta(name="apple-mobile-web-app-title" content="领佣金")
+		meta(name="mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="white")
+		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/getMoney.css")
+		script(src="http://feidaijun.xiaohongxian.com/reminds.js")
+	body
+		div.getMoney 11月成绩
+		div.getMoney_content
+			div.getMoney_week 第一周
+			div.getMoney_week 第二周
+			div.getMoney_week 第三周
+			div.getMoney_week 第四周
+		div.getMoney_content
+			div.getMoney_week=week1
+			div.getMoney_week=week2
+			div.getMoney_week=week3
+			div.getMoney_week=week4
+		div.getMoneys(style="margin-top:10px;") 达到有效时间的客户
+		div.getMoney_a
+			div.getMoney_content
+				div.getMoney_weeks 姓名
+				div.getMoney_weeks 电话
+				div.getMoney_weeks 下款额度
+				div.getMoney_weeks 生效时间
+			div.getMoney_content(style="margin-bottom:10px;")
+				div.getMoney_weeks 业务归属
+				div.getMoney_weeks 归属者手机号
+				div.getMoney_weeks 佣金是否发出
+				div.getMoney_weeks 其他
+		if len===0
+			div(style="margin-top:10px;font-size:12px;color:#666;") --没有要结算的数据--
+		else
+			each item in data
+				div.getMoney_as(style="margin-top:10px;")
+					div.getMoney_content
+						div.getMoney_weeks=item.username
+						div.getMoney_weeks=item.number
+						div.getMoney_weeks=item.xiakuanEdu
+						div.getMoney_weeks=item.shengxiaoTime
+					div.getMoney_content
+						div.getMoney_weeks=item.ownername
+						div.getMoney_weeks=item.ownerNumber
+						if item.isSuccess
+							div.getMoney_weeks 佣金已发至上级
+						else
+							div.getMoney_weeks 佣金还未发
+						div.getMoney_weeks=item.isBecause
+		div.footer 领佣金须知
+		div.footer_a(style="display:none;")
+			div.getMoney_message
+				div.chaedu_guize
+					p.p_guize <span class="span_guize">1</span>佣金发放：各级佣金直接由上级发放，也就是谁邀请你成为代理就由谁发放；
+					p.p_guize <span class="span_guize">2</span>支付宝账号：代理登记的手机号即为支付宝账号，姓名也是登记的姓名，如果不对，请及时联系"结算助手"变更；
+					p.p_guize <span class="span_guize">3</span>佣金多久到账：当佣金生效以后，1-2个工作日内会发至上级账户，即可前往上级领取，请留意佣金发放进度变化，当佣金已发放至上级，会显示"佣金已发至上级"；未发放则显示"佣金还未发"；
+					p.p_guize <span class="span_guize">4</span>结算遇到问题：加结算助手微信2445255646解决；
+					p.p_guize <span class="span_guize">5</span>注意：节假日生效的佣金延后到第一个工作日发放。
+			img.clear_t(style="margin-top:10px;" src="http://feidaijun.xiaohongxian.com/clear.png")
+	script(src="http://feidaijun.xiaohongxian.com/jquery.min.js")
+	script(src="http://feidaijun.xiaohongxian.com/getMoneys.js")

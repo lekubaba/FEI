@@ -12,28 +12,17 @@ html(lang="en")
 		meta(name="apple-mobile-web-app-title" content="代理详情")
 		meta(name="mobile-web-app-capable" content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style" content="white")
-		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/chaedu_daili.css")
+		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/chaedu_dailis.css")
 		script(src="http://feidaijun.xiaohongxian.com/reminds.js")
 	body
 		div.daili_top
-			div.chaedu_zong
-				div.chaedu_daili
-					div.chaedu_daili_1 代理人数
-					div.chaedu_daili_1 活跃人数
-					div.chaedu_daili_1 总战绩
-				div.chaedu_daili(style="border:none;")
-					div.chaedu_daili_2=counts
-					div.chaedu_daili_2 --
-					div.chaedu_daili_2=z_yeji
-			div.chaedu_fen
-				div.chaedu_daili
-					div.chaedu_daili_3(style="width:25%") 姓名
-					div.chaedu_daili_3(style="width:25%") 手机号
-					div.chaedu_daili_3(style="width:20%") 总战绩
-					div.chaedu_daili_a(style="width:30%") 代理等级
-				each item in datas.reverse()
-					div.chaedu_daili
-						div.chaedu_daili_4(style="width:25%")=item.ownername
-						div.chaedu_daili_4(style="width:25%")=item.ownerNumber
-						div.chaedu_daili_4(style="width:20%")=item.all_yeji
-						div.chaedu_daili_(style="width:30%")=item.__v
+			div.chaedu_daili_bar
+				div.bar_1(id="mySelf") 自身
+				div.bar_1(class="active" id="zhiShu") 一
+				div.bar_1(id="erji") 二
+				div.bar_1(id="sanji") 三
+				div.bar_1(id="siji") 四
+			div.daili_content
+				include ../component/daili_profile.pug
+	script(src="http://feidaijun.xiaohongxian.com/jquery.min.js")
+	script(src="http://feidaijun.xiaohongxian.com/chaedu_daili.js")

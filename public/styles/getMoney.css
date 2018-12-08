@@ -1,0 +1,172 @@
+ *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Helvetica Neue,PingFang SC,Microsoft YaHei;
+    -webkit-font-smoothing:antialiased;/* chorm safari 抗锯齿*/
+    -webkit-overflow-scrolling:touch;
+    outline:none;
+}
+/* 滚动条样式调节*/
+::-webkit-scrollbar{margin-right:3px;width:4px;height:4px}
+::-webkit-scrollbar,::-webkit-scrollbar-track{background-color:transparent}
+::-webkit-scrollbar-thumb{width:4px;border-radius:2px;background-color:#e4e4e4}
+
+body,html{min-height:100%;background:#fff;}
+a,a:visited{text-decoration:none}
+h1,h2,h3,h4,h5,h6{font-weight:500}
+input{
+	border-radius: 0px;
+}
+body{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.getMoney{
+    width:100vw;
+    height: 42px;
+    background-color: #bb3a34;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.getMoneys{
+    width:100vw;
+    height: 28px;
+    background-color: #bb3a34;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+}
+
+
+.getMoney_content{
+    width:100vw;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.getMoney_week{
+    width:25%;
+    height: 26px;
+    border:1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.getMoney_weeks{
+    width:25%;
+    height: 26px;
+    border:1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #333;
+}
+
+.getMoney_a,.getMoney_as{
+    background-color: #fff;
+}
+
+.getMoney_as:nth-child(even){
+    background-color: #ddd;
+}
+
+.footer{
+    position: fixed;
+    bottom: 0px;
+    height: 52px;
+    width: 100vw;
+    background-color: #bb3a34;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
+
+.footer_a{
+    width:100vw;
+    top:0px;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,.5);
+}
+
+.getMoney_message{
+   
+    width:80vw;
+    height: 70vh;
+    background-color: #2e323c;
+    border-radius: 10px;
+    border:3px solid #eee;
+}
+
+.chaedu_guize{
+    width:95%;
+    height: auto;
+    padding:15px 0 15px 15px;
+    border-radius: 10px;
+    font-size: 12px;
+    color:#fff;
+    font-weight: normal;
+    margin-bottom: 30px;
+}
+
+.p_guize{
+    margin-top:10px;
+}
+
+.span_guize{
+    display:inline-block;
+    text-align: center;
+    width:14px;
+    height: 14px;
+    background-color: #d53334;
+    border-radius: 50%;
+    margin-right: 3px;
+}
+
+.clear_t{
+    cursor: pointer;
+}
+
+.getMoney_weeks_1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:50%;
+    height: 40px;
+    border:1px solid #000 ;
+}
+
+.getMoney_weeks_2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:50%;
+    height: 40px;
+    border:1px solid #bb3a34 ;
+    background-color: #bb3a34;
+    color: #fff;
+    cursor: pointer;
+}

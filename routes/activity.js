@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 let {User,Code,Ping,Money,Hao,Pg} = require('../mongoose/modelSchema')
 var express = require('express');
 var router = express.Router();
@@ -192,7 +194,7 @@ router.post("/activity_gonghao_add",function(req,res){
 												ownerNumber:req.body.ownerNumber,
 												gonghao:gonghao_1,
 												z_gonghao:rety[0].gonghao,
-												top_gonghao:rety[0].z_gonghao,
+												top_gonghao:rety[0].top_gonghao,
 												isVip:"tong",
 												all_yeji:0,
 												all_money:0,
@@ -253,6 +255,9 @@ router.get("/activity_success/:ownername",function(req,res){
 router.get('/newEnter/:id',function(req,res){
 	return res.render('activity_enter',{number:req.params.id});
 })
+
+
+//结算页面
 
 
 module.exports = router;

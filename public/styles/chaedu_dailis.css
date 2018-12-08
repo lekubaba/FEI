@@ -44,7 +44,6 @@ body{
 
 .chaedu_fen{
     width:93vw;
-    border-radius: 5px;
     background-color: #fff;
     margin:0 20px 20px 20px;
     padding:20px 0 20px 0;
@@ -122,4 +121,30 @@ body{
     justify-content: center;
     align-items: center;
     color: #333;    
+}
+
+.chaedu_daili_bar{
+
+    width:93vw;
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.bar_1{
+    width:20%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color:#fff;
+    background-color: #2e323c;
+    border-left: 1px solid #fff;
+    cursor: pointer;
+}
+
+.active{
+    background-color: #d32628;
 }

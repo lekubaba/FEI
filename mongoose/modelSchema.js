@@ -10,6 +10,8 @@ var userSchema = new Schema({
 	authCode:Number,
 	gonghao:Number,
 	z_gonghao:Number,
+	top_gonghao:Number,
+	top_name:String,
 	time:String
 });
 
@@ -43,6 +45,9 @@ var moneySchema = new Schema({
 	shengxiaoTime:String,
 	xiakuanEdu:Number,
 	money:Number,
+	isSuccess:Boolean, //佣金是否发放
+	isBecause:String, //未发放的原因
+	isMyself:Boolean, //是本人发起的请求？
 	time:String
 });
 
@@ -58,6 +63,7 @@ var haoSchema = new Schema({
 	all_yeji:Number,
 	all_money:Number,
 	one_money:Number,  //团队总业绩
+	alipay:String,
 	money_level:Number,
 	act_zone:String,
 	zan_num:Number,

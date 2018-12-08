@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 let {User,Code,Ping,Money,Hao,Pg} = require('../mongoose/modelSchema')
 var express = require('express');
 var router = express.Router();
@@ -39,6 +41,7 @@ router.post('/save_number',function(req,res){
 					authCode:req.body.authCode,
 					gonghao:results[0].gonghao,
 					z_gonghao:results[0].z_gonghao,
+					top_gonghao:results[0].top_gonghao,
 					time:formatDate('yyyy-MM-dd hh:mm:ss')
 				})
 				user.save(function(err){

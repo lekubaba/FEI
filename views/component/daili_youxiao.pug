@@ -1,0 +1,15 @@
+div(style="font-size:12px;color:#333;margin-top:15px;") 下款客户数：<span style="color:red;">#{count}<span/>
+div.chaedu_content
+	each item in rets
+		div.chaedu_profile(style="margin-top:5px;")
+			div.chaedu_profile_1
+				div.chaedu_profile_3=item.ownername
+				div.chaedu_profile_3=item.ownerNumber
+			div.chaedu_profile_a
+				div.chaedu_aaa=item.username
+				div.chaedu_aaa=item.shenqingTime
+				div.chaedu_aaa=item.shengxiaoTime
+			div.chaedu_profile_a
+				div.chaedu_aaa=item.number
+				div.chaedu_aaa=item.xiakuanEdu
+				div.chaedu_aaa(style="color:red;")=item.money
