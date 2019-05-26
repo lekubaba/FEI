@@ -12,20 +12,11 @@ html(lang="en")
 		meta(name="apple-mobile-web-app-title" content="领佣金")
 		meta(name="mobile-web-app-capable" content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style" content="white")
-		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/getMoney.css")
-		script(src="http://feidaijun.xiaohongxian.com/reminds.js")
+		link(rel="stylesheet" href="/styles/getMoney.css")
+		script(src="http://feidaijun.xiaohongxian.com/remindx.js")
 	body
-		div.getMoney 11月成绩
-		div.getMoney_content
-			div.getMoney_week 第一周
-			div.getMoney_week 第二周
-			div.getMoney_week 第三周
-			div.getMoney_week 第四周
-		div.getMoney_content
-			div.getMoney_week=week1
-			div.getMoney_week=week2
-			div.getMoney_week=week3
-			div.getMoney_week=week4
+		div.getMoney 2月总成绩
+		div.getMoney_content(style="color:#474747;font-size:80px;")=zong
 		div.getMoneys(style="margin-top:10px;") 达到有效时间的客户
 		div.getMoney_a
 			div.getMoney_content
@@ -52,19 +43,21 @@ html(lang="en")
 						div.getMoney_weeks=item.ownername
 						div.getMoney_weeks=item.ownerNumber
 						if item.isSuccess
-							div.getMoney_weeks 佣金已发至上级
+							div.getMoney_weeks 佣金已发出
 						else
 							div.getMoney_weeks 佣金还未发
 						div.getMoney_weeks=item.isBecause
+		div(style="width:100vw;height:100px;margin-top:60px;")
 		div.footer 领佣金须知
 		div.footer_a(style="display:none;")
 			div.getMoney_message
 				div.chaedu_guize
-					p.p_guize <span class="span_guize">1</span>佣金发放：各级佣金直接由上级发放，也就是谁邀请你成为代理就由谁发放；
-					p.p_guize <span class="span_guize">2</span>支付宝账号：代理登记的手机号即为支付宝账号，姓名也是登记的姓名，如果不对，请及时联系"结算助手"变更；
-					p.p_guize <span class="span_guize">3</span>佣金多久到账：当佣金生效以后，1-2个工作日内会发至上级账户，即可前往上级领取，请留意佣金发放进度变化，当佣金已发放至上级，会显示"佣金已发至上级"；未发放则显示"佣金还未发"；
-					p.p_guize <span class="span_guize">4</span>结算遇到问题：加结算助手微信2445255646解决；
-					p.p_guize <span class="span_guize">5</span>注意：节假日生效的佣金延后到第一个工作日发放。
+					p.p_guize <span class="span_guize">1</span>佣金由谁发：平台直达代理人支付宝账户，安全可靠。
+					p.p_guize <span class="span_guize">2</span>佣金发放：请在后台绑定支付宝账号，佣金会在生效日后1-2个工作日内自动发放到绑定的支付宝账户；
+					p.p_guize <span class="span_guize">3</span>支付宝账号：请确保绑定的支付宝手机账号的姓名与代理姓名是匹配的，不匹配的账号佣金发放不成功；
+					p.p_guize <span class="span_guize">4</span>佣金多久到账：当佣金生效以后，1-2个工作日内发放至绑定的支付宝账户。
+					p.p_guize <span class="span_guize">5</span>结算遇到问题：加结算助手微信2445255646解决；
+					p.p_guize <span class="span_guize">6</span>注意：节假日生效的佣金延后到第一个工作日发放，另外2018年代理人的佣金由上级发放，平台监督！！
 			img.clear_t(style="margin-top:10px;" src="http://feidaijun.xiaohongxian.com/clear.png")
 	script(src="http://feidaijun.xiaohongxian.com/jquery.min.js")
 	script(src="http://feidaijun.xiaohongxian.com/getMoneys.js")

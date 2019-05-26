@@ -8,7 +8,7 @@ var fs = require('fs');
 var path = require('path');
 var logger = require('../utils/logger').logger;
 let {formatDate} = require('../utils/DateUtil');
-let {Maths,Fang,Ka,Other,zonghefen_fang,jikexishu_fang} = require('../utils/Maths');
+let {Maths,Fang,Ka,Other,zonghefen_fang,jikexishu_fang,DiyaFang} = require('../utils/Maths');
 
 //接受所有录入的数据并且处理数据得出结果
 
@@ -96,13 +96,13 @@ router.post('/chaedu_dashuju',function(req,res){
 		var zonghefen = zonghefen_fang(all_money,first_money,first_month,sec_money,sec_month,third_money,third_month,ka_num,ka_zong,ka_shengyu,ka_six,ka_first,ka_years,ka_last,ka_laste,loan_num,loan_all,loan_six,loan_three,loan_one,other_yc,other_dq,other_dc,other_zx,other_gjj,other_gjje,other_six,other_three,other_one,other_yfs,other_yqs,other_yqall);
 		var jikexishu = jikexishu_fang(all_money,first_money,first_month,sec_money,sec_month,third_money,third_month,ka_num,ka_zong,ka_shengyu,ka_six,ka_first,ka_years,ka_last,ka_laste,loan_num,loan_all,loan_six,loan_three,loan_one,other_yc,other_dq,other_dc,other_zx,other_gjj,other_gjje,other_six,other_three,other_one,other_yfs,other_yqs,other_yqall);
 		var chushiedu = Fang(all_money,first_money,first_month,sec_money,sec_month,third_money,third_month,ka_num,ka_zong,ka_shengyu,ka_six,ka_first,ka_years,ka_last,ka_laste,loan_num,loan_all,loan_three,loan_six,loan_one,other_yc,other_dq,other_dc,other_zx,other_gjj,other_gjje,other_six,other_three,other_one,other_yfs,other_yqs,other_yqall);
-		
+		var diyaedu= DiyaFang(all_money,first_money,first_month,sec_money,sec_month,third_money,third_month);
 		if(jikexishu===3.6){
 			chushiedu = Maths(Math.round(chushiedu*1.1))>30?30:Maths(Math.round(chushiedu*1.3));
 		}else if(jikexishu===3.7){
 			chushiedu = Maths(Math.round(chushiedu*1.1))>30?30:Maths(Math.round(chushiedu*1.1));
 		}else if(jikexishu===3.8){
-			chushiedu = chushiedu;
+			chushiedu = Maths(Math.round(chushiedu*0.98));
 		}else if(jikexishu===3.9){
 			chushiedu = Maths(Math.round(chushiedu*0.7));
 		}else if(jikexishu===4.0){
@@ -121,6 +121,7 @@ router.post('/chaedu_dashuju',function(req,res){
 				zonghefen:zonghefen,
 				jikexishu:jikexishu,
 				chushiedu:chushiedu,
+				diyaedu:diyaedu,
 				gonghao:gonghao,
 				jindu_:"--",
 				time:formatDate('yyyy-MM-dd hh:mm:ss')
@@ -133,6 +134,7 @@ router.post('/chaedu_dashuju',function(req,res){
 				zonghefen:zonghefen,
 				jikexishu:jikexishu,
 				chushiedu:chushiedu,
+				diyaedu:diyaedu,
 				time:formatDate('yyyy-MM-dd hh:mm:ss')	
 		})
 
@@ -142,7 +144,7 @@ router.post('/chaedu_dashuju',function(req,res){
 			}else{
 				if(ret9.length===0){
 
-					if(gonghao===19890113||gonghao===20378536){
+					// if(gonghao===19890113||gonghao===20378536||gonghao===23012719){
 						ping.save(function(err){
 							if(err){
 								logger.error(err);
@@ -158,16 +160,16 @@ router.post('/chaedu_dashuju',function(req,res){
 								})
 							}
 						})				
-					}else{
-						pg.save(function(err){
-							if(err){
-								logger.error(err);
-								return res.json({code:400})
-							}else{
-								return res.json({code:200});
-							}		
-						})
-					}
+					// }else{
+					// 	pg.save(function(err){
+					// 		if(err){
+					// 			logger.error(err);
+					// 			return res.json({code:400})
+					// 		}else{
+					// 			return res.json({code:200});
+					// 		}		
+					// 	})
+					// }
 				}else{
 					return res.json({code:900});
 				}
@@ -180,6 +182,7 @@ router.post('/chaedu_dashuju',function(req,res){
 		var zonghefen = zonghefen_fang(all_money,first_money,first_month,sec_money,sec_month,third_money,third_month,ka_num,ka_zong,ka_shengyu,ka_six,ka_first,ka_years,ka_last,ka_laste,loan_num,loan_all,loan_six,loan_three,loan_one,other_yc,other_dq,other_dc,other_zx,other_gjj,other_gjje,other_six,other_three,other_one,other_yfs,other_yqs,other_yqall);
 		var jikexishu = jikexishu_fang(all_money,first_money,first_month,sec_money,sec_month,third_money,third_month,ka_num,ka_zong,ka_shengyu,ka_six,ka_first,ka_years,ka_last,ka_laste,loan_num,loan_all,loan_six,loan_three,loan_one,other_yc,other_dq,other_dc,other_zx,other_gjj,other_gjje,other_six,other_three,other_one,other_yfs,other_yqs,other_yqall);
 		var chushiedu = Math.round(Ka(all_money,first_money,first_month,sec_money,sec_month,third_money,third_month,ka_num,ka_zong,ka_shengyu,ka_six,ka_first,ka_years,ka_last,ka_laste,loan_num,loan_all,loan_three,loan_six,loan_one,other_yc,other_dq,other_dc,other_zx,other_gjj,other_gjje,other_six,other_three,other_one,other_yfs,other_yqs,other_yqall));
+		var diyaedu = 0;
 		if(jikexishu===3.6){
 			chushiedu = Maths(Math.round(chushiedu*1.1))>30?30:Maths(Math.round(chushiedu*1.3));
 		}else if(jikexishu===3.7){
@@ -204,6 +207,7 @@ router.post('/chaedu_dashuju',function(req,res){
 				zonghefen:zonghefen,
 				jikexishu:jikexishu,
 				chushiedu:chushiedu,
+				diyaedu:diyaedu,
 				gonghao:gonghao,
 				jindu_:"--",
 				time:formatDate('yyyy-MM-dd hh:mm:ss')
@@ -216,6 +220,7 @@ router.post('/chaedu_dashuju',function(req,res){
 				zonghefen:zonghefen,
 				jikexishu:jikexishu,
 				chushiedu:chushiedu,
+				diyaedu:diyaedu,
 				time:formatDate('yyyy-MM-dd hh:mm:ss')	
 		})
 
@@ -224,7 +229,7 @@ router.post('/chaedu_dashuju',function(req,res){
 				return logger.error(err);
 			}else{
 				if(ret9.length===0){
-					if(gonghao===19890113||gonghao===20378536){
+					// if(gonghao===19890113||gonghao===20378536||gonghao===23012719){
 						ping.save(function(err){
 							if(err){
 								logger.error(err);
@@ -240,16 +245,16 @@ router.post('/chaedu_dashuju',function(req,res){
 								})
 							}
 						})				
-					}else{
-						pg.save(function(err){
-							if(err){
-								logger.error(err);
-								return res.json({code:400})
-							}else{
-								return res.json({code:200});
-							}		
-						})
-					}			
+					// }else{
+					// 	pg.save(function(err){
+					// 		if(err){
+					// 			logger.error(err);
+					// 			return res.json({code:400})
+					// 		}else{
+					// 			return res.json({code:200});
+					// 		}		
+					// 	})
+					// }			
 				}else{
 					return res.json({code:900});
 				}
@@ -261,6 +266,7 @@ router.post('/chaedu_dashuju',function(req,res){
 		var zonghefen =zonghefen_fang(all_money,first_money,first_month,sec_money,sec_month,third_money,third_month,ka_num,ka_zong,ka_shengyu,ka_six,ka_first,ka_years,ka_last,ka_laste,loan_num,loan_all,loan_six,loan_three,loan_one,other_yc,other_dq,other_dc,other_zx,other_gjj,other_gjje,other_six,other_three,other_one,other_yfs,other_yqs,other_yqall);
 		var jikexishu =jikexishu_fang(all_money,first_money,first_month,sec_money,sec_month,third_money,third_month,ka_num,ka_zong,ka_shengyu,ka_six,ka_first,ka_years,ka_last,ka_laste,loan_num,loan_all,loan_six,loan_three,loan_one,other_yc,other_dq,other_dc,other_zx,other_gjj,other_gjje,other_six,other_three,other_one,other_yfs,other_yqs,other_yqall);
 		var chushiedu = 0;
+		var diyaedu = 0;
 		var pg = new Pg({
 				username:username,
 				number:usernumber,
@@ -268,6 +274,7 @@ router.post('/chaedu_dashuju',function(req,res){
 				zonghefen:zonghefen,
 				jikexishu:jikexishu,
 				chushiedu:chushiedu,
+				diyaedu:diyaedu,
 				gonghao:gonghao,
 				jindu_:"--",
 				time:formatDate('yyyy-MM-dd hh:mm:ss')
@@ -280,6 +287,7 @@ router.post('/chaedu_dashuju',function(req,res){
 				zonghefen:zonghefen,
 				jikexishu:jikexishu,
 				chushiedu:chushiedu,
+				diyaedu:diyaedu,
 				time:formatDate('yyyy-MM-dd hh:mm:ss')	
 		})
 
@@ -288,7 +296,7 @@ router.post('/chaedu_dashuju',function(req,res){
 				return logger.error(err);
 			}else{
 				if(ret9.length===0){
-					if(gonghao===19890113||gonghao===20378536){
+					// if(gonghao===19890113||gonghao===20378536||gonghao===23012719){
 						ping.save(function(err){
 							if(err){
 								logger.error(err);
@@ -304,16 +312,16 @@ router.post('/chaedu_dashuju',function(req,res){
 								})
 							}
 						})				
-					}else{
-						pg.save(function(err){
-							if(err){
-								logger.error(err);
-								return res.json({code:400})
-							}else{
-								return res.json({code:200});
-							}		
-						})
-					}			
+					// }else{
+					// 	pg.save(function(err){
+					// 		if(err){
+					// 			logger.error(err);
+					// 			return res.json({code:400})
+					// 		}else{
+					// 			return res.json({code:200});
+					// 		}		
+					// 	})
+					// }			
 				}else{
 					return res.json({code:900});
 				}

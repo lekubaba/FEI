@@ -9,123 +9,90 @@ var path = require('path');
 var logger = require('../utils/logger').logger;
 let {formatDate} = require('../utils/DateUtil');
 let DateMe = require('../utils/DateMe');
+let DateMe2 = require('../utils/DateMe2');
+let CHAOJI = require('../utils/chaoji');
 let {Maths,Fang,Ka,Other,zonghefen_fang,jikexishu_fang} = require('../utils/Maths');
 
 
 
-//结算页面
+/*结算页面*/
 
 router.get('/getMoney',function(req,res){
 	var date = new Date();
 	var day = date.getDate();
 
 	if(req.signedCookies.mycookies){
-		var gonghao = req.signedCookies.mycookies.gonghao;
-		//截取本月1-今天的数据
-		var d0 = DateMe.slice(0,day);
-		//第一周
-		var d1 = DateMe.slice(0,7);
-		var d2 = DateMe.slice(7,14);
-		var d3 = DateMe.slice(14,21);
-		var d4 = DateMe.slice(21,31);
-
-		Hao.findOne({gonghao:gonghao}).then(function(retOne){
-
-			if(retOne.gonghao===74874189){
-
-				Money.find({shengxiaoTime:{$in:d0}}).then(function(val0){
-					Money.find({shengxiaoTime:{$in:d1}}).then(function(val1){
-						Money.find({shengxiaoTime:{$in:d2}}).then(function(val2){
-							Money.find({shengxiaoTime:{$in:d3}}).then(function(val3){
-								Money.find({shengxiaoTime:{$in:d4}}).then(function(val4){
-									var week1 =0;
-									var week2 =0;
-									var week3 =0;
-									var week4 =0;
-									for(i=0;i<val1.length;i++){
-										week1 = week1+val1[i].xiakuanEdu;
-									}
-									for(i=0;i<val2.length;i++){
-										week2 = week2+val2[i].xiakuanEdu;
-									}
-									for(i=0;i<val3.length;i++){
-										week3 = week3+val3[i].xiakuanEdu;
-									}
-									for(i=0;i<val4.length;i++){
-										week4 = week4+val4[i].xiakuanEdu;
-									}
-
-									return res.render('chaedu/getMoney',{data:val0,len:val0.length,week1:week1,week2:week2,week3:week3,week4:week4});
-								})
-							})
-						})
-						
+		var gonghao = Number(req.signedCookies.mycookies.gonghao);
+		/*截取本月1-今天的数据*/
+		var d0 = DateMe2.slice(0,day);
+		if(CHAOJI.includes(gonghao)){
+			Money.find({top_gonghao:gonghao,shengxiaoTime:DateMe},function(err,retz){
+				if(err){
+					return logger.error(err);
+				}else{
+					let zong = 0;
+					for(var i =0;i<retz.length;i++){
+						zong =zong+retz[i].xiakuanEdu;
+					}
+					Money.find({top_gonghao:gonghao,shengxiaoTime:d0},function(err,retz){
+						if(err){
+							return logger.error(err);
+						}else{
+							return res.render('chaedu/getMoney',{data:retz,zong:zong});
+						}
 					})
-				})
-				
-			}else if(retOne.z_gonghao===74874189){
-				Money.find({top_gonghao:retOne.gonghao,shengxiaoTime:{$in:d0}}).then(function(val0){
-					Money.find({top_gonghao:retOne.gonghao,shengxiaoTime:{$in:d1}}).then(function(val1){
-						Money.find({top_gonghao:retOne.gonghao,shengxiaoTime:{$in:d2}}).then(function(val2){
-							Money.find({top_gonghao:retOne.gonghao,shengxiaoTime:{$in:d3}}).then(function(val3){
-								Money.find({top_gonghao:retOne.gonghao,shengxiaoTime:{$in:d4}}).then(function(val4){
-									var week1 =0;
-									var week2 =0;
-									var week3 =0;
-									var week4 =0;
-									for(i=0;i<val1.length;i++){
-										week1 = week1+val1[i].xiakuanEdu;
-									}
-									for(i=0;i<val2.length;i++){
-										week2 = week2+val2[i].xiakuanEdu;
-									}
-									for(i=0;i<val3.length;i++){
-										week3 = week3+val3[i].xiakuanEdu;
-									}
-									for(i=0;i<val4.length;i++){
-										week4 = week4+val4[i].xiakuanEdu;
-									}
-
-									return res.render('chaedu/getMoney',{data:val0,len:val0.length,week1:week1,week2:week2,week3:week3,week4:week4});
-								})
-							})
-						})
-						
+				}				
+			})
+		}else if(gonghao===74874189){
+			Money.find({shengxiaoTime:DateMe},function(err,retz){
+				if(err){
+					return logger.error(err);
+				}else{
+					let zong = 0;
+					for(var i =0;i<retz.length;i++){
+						zong =zong+retz[i].xiakuanEdu;
+					}
+					Money.find({shengxiaoTime:d0},function(err,retz){
+						if(err){
+							return logger.error(err);
+						}else{
+							return res.render('chaedu/getMoney',{data:retz,zong:zong});
+						}
 					})
-				})
-			}else{
-				Money.find({$or:[{gonghao:retOne.gonghao},{z_gonghao:retOne.gonghao}],shengxiaoTime:{$in:d0}}).then(function(val0){
-					Money.find({$or:[{gonghao:retOne.gonghao},{z_gonghao:retOne.gonghao}],shengxiaoTime:{$in:d1}}).then(function(val1){
-						Money.find({$or:[{gonghao:retOne.gonghao},{z_gonghao:retOne.gonghao}],shengxiaoTime:{$in:d2}}).then(function(val2){
-							Money.find({$or:[{gonghao:retOne.gonghao},{z_gonghao:retOne.gonghao}],shengxiaoTime:{$in:d3}}).then(function(val3){
-								Money.find({$or:[{gonghao:retOne.gonghao},{z_gonghao:retOne.gonghao}],shengxiaoTime:{$in:d4}}).then(function(val4){
-									var week1 =0;
-									var week2 =0;
-									var week3 =0;
-									var week4 =0;
-									for(i=0;i<val1.length;i++){
-										week1 = week1+val1[i].xiakuanEdu;
-									}
-									for(i=0;i<val2.length;i++){
-										week2 = week2+val2[i].xiakuanEdu;
-									}
-									for(i=0;i<val3.length;i++){
-										week3 = week3+val3[i].xiakuanEdu;
-									}
-									for(i=0;i<val4.length;i++){
-										week4 = week4+val4[i].xiakuanEdu;
-									}
+				}				
+			})			
+		}else{
 
-									return res.render('chaedu/getMoney',{data:val0,len:val0.length,week1:week1,week2:week2,week3:week3,week4:week4});
-								})
-							})
-						})
-						
+			Hao.find({z_gonghao:gonghao},function(err,rets){
+				if(err){
+					return logger.error(err);
+				}else{
+					let two = rets.map(function(item){
+						return item.gonghao;
 					})
-				})				
-			}
 
-		})
+					Money.find({$or:[{gonghao:gonghao},{z_gonghao:gonghao},{z_gonghao:{$in:two}}],shengxiaoTime:DateMe},function(err,retz){
+						if(err){
+							return logger.error(err);
+						}else{
+							let zong = 0;
+							for(var i =0;i<retz.length;i++){
+								zong =zong+retz[i].xiakuanEdu;
+							}
+							Money.find({$or:[{gonghao:gonghao},{z_gonghao:gonghao},{z_gonghao:{$in:two}}],shengxiaoTime:d0},function(err,retz){
+								if(err){
+									return logger.error(err);
+								}else{
+									return res.render('chaedu/getMoney',{data:retz,zong:zong});
+								}
+							})
+						}
+					})
+				}
+			})
+
+			
+		}
 		
 	}else{
 		return res.redirect('/chaedu_enter')
@@ -136,7 +103,7 @@ router.get('/getMoney',function(req,res){
 router.get('/moneyManage/15914132569',function(req,res){
 	var date = new Date();
 	var day = date.getDate();
-	var d0 = DateMe.slice(0,day);
+	var d0 = DateMe2.slice(0,day);
 	Money.find({isSuccess:false,shengxiaoTime:{$in:d0}}).then(function(val0){
 
 		res.render('chaedu/moneyManage',{data:val0,len:val0.length})

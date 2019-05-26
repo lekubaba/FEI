@@ -2,39 +2,49 @@ doctype html
 html(lang="en")
 	head
 		meta(charset="UTF-8")
-		title 代理后台
+		title 飞侠-飞贷代理后台
 		link(rel="shortcut icon" href="http://feidaijun.xiaohongxian.com/logo.png")
 		link(rel="bookmark" href="http://feidaijun.xiaohongxian.com/logo.png")
 		link(rel="icon" href="http://feidaijun.xiaohongxian.com/logo.png" type="image/png")
 		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
 		meta(http-equiv="X-UA-Compatible" content="ie=edge")
 		link(rel="apple-touch-icon" href="http://feidaijun.xiaohongxian.com/logo.png")
-		meta(name="apple-mobile-web-app-title" content="代理后台")
+		meta(name="apple-mobile-web-app-title" content="飞侠")
 		meta(name="mobile-web-app-capable" content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style" content="white")
-		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/chaedu_zonghe.css")
-		script(src="http://feidaijun.xiaohongxian.com/reminds.js")
+		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/chaeduaa17.css")
+		script(src="http://feidaijun.xiaohongxian.com/remindx.js")
 	body
-		img.chaedu_welcome(src="https://feidaijun.xiaohongxian.com/fd_chaedu.png")
-		//- a.chaedu_new(href="/sys_home") 录新件
-		//- a.chaedu_old(href="/chaedu_profile") 已录件
-		//- a.chaedu_old(href="/chaedu_profile_1") 有效战绩
-		//- a.chaedu_old(href="/add_gonghao") 添加代理
-		//- a.chaedu_reg(href="#") 代理人规则
-		//- a.chaedu_jin(class="old_a") 领奖金(未激活)
-		a.chaedu_new(style=data.b_img href=data.url)=data.title_1
-		a.chaedu_old(style="display:"+data.displ href="/chaedu_profile") 查过的客户
-		a.chaedu_old(href="/chaedu_profile_1") 下款的客户
-		a.chaedu_reg_1(id="zs_url" style="display:"+data.disp data-url="/chaedu_activity_zs/"+data.number) 独立招商二维码
-		a.chaedu_reg_1(style="display:"+data.disp href="/chaedu_guize_zs") 招商奖励
-		a.chaedu_reg_1(id="tg_url" data-tg="/newEnter/"+data.number) 独立申请二维码
-		a.chaedu_old(style=data.b_img_2 href=data.url_1)=data.title_2
-		a.chaedu_reg(href="/chaedu_daili") 我的代理
-		a.chaedu_reg(href="/chaedu_guize") 活动规则
-		a.chaedu_jin(style="background-image: linear-gradient(135deg,#5370ac 0%,#d13467 100%);" href="/getMoney") 领佣金
+		div.feixia_name #{data.name}，您好！
+		div.feixia_all
+			div.feixia_p
+				div.feixia_a 本月业绩 #{yeji}
+				a.feixia_b(href="/chaedu_profile_1") 业绩详情 》
+			div.feixia_y 预计佣金
+			div.feixia_m=reward
+		a.chaedu_reg_1(style="color:#fff;" href="/downloadApp") 下载代理后台APP
+		a.chaedu_reg_1(id="tg_url" style="color:#fff" data-tg="/newEnter/"+data.number) 专属推广二维码
+		a.chaedu_reg_1(id="zs_url" style="color:#fff" data-url="/chaedu_activity_zs/"+data.number) 专属招商二维码
+		if isChaoji
+			a.chaedu_reg_1(id="wxgroup" style="color:#f1c678;") 官方统一管理群
+		div.otherF 大家都在看：
+		div.feixia_zonghe
+			a(href="/chaedu_profile_1") 下款记录
+			a(href="/chaedu_daili") 我的代理
+			a.chaedu_jin 绑支付宝
+			a(href="/getMoney") 生效佣金
+			a(href="/guafenProfile") 测飞贷100亿
+			a(href="https://www.yuque.com/yangjx/feidaijun") 飞贷课堂
+			a(href="https://www.yuque.com/yangjx/feidaijun/eh745z") 三提行动
+			a(href=data.url)=data.title_1
+			a(href="/add_gonghao") 添加代理
+			a(style="display:"+data.displ href="/chaedu_profile") 查额记录
+			a(id="shareNum" href="/chaedu_shareNum") 邀请记录
+			a(href="https://www.yuque.com/yangjx/aywcrp/ycmk5l") 佣金规则
 		div.frame_ba(style="display:"+data.disba)
 			div.frame_content
-				span=data.name
+				div(id="santi_code" data-santi='/santiNumber/'+data.number)
+				span
 			img.clear_ba(style="margin-top:10px;" src="http://feidaijun.xiaohongxian.com/clear.png")
 		div.qrcode_zs(style="display:none;")
 			div.qrcode_zs_b
@@ -44,6 +54,15 @@ html(lang="en")
 			div.qrcode_tg_b
 				div(id="qrcode_t")
 			img.clear_t(style="margin-top:10px;" src="http://feidaijun.xiaohongxian.com/clear.png")
+		div.alipay(style="display:none;")
+			div.alipay-c
+				div.alipaytip 填写支付宝绑定的手机号
+				if !data.alipay
+					input#alipay-number(type='text' placeholder="支付宝绑定的手机号")
+				else
+					input#alipay-number(type='text' placeholder="已经绑定："+data.alipay)
+				div#alipaycheck 确认
+			img.clear_alipay(style="margin-top:10px;" src="http://feidaijun.xiaohongxian.com/clear.png")
 	script(src="http://feidaijun.xiaohongxian.com/jquery.min.js")
 	script(src="http://feidaijun.xiaohongxian.com/qrcode.min.js")
-	script(src="http://feidaijun.xiaohongxian.com/chaedu_zonghe_1.js")
+	script(src="http://feidaijun.xiaohongxian.com/chaeduaa8.js")

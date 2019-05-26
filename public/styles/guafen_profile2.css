@@ -1,0 +1,213 @@
+ *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Helvetica Neue,PingFang SC,Microsoft YaHei;
+    -webkit-font-smoothing:antialiased;/* chorm safari 抗锯齿*/
+    -webkit-overflow-scrolling:touch;
+    outline:none;
+}
+/* 滚动条样式调节*/
+::-webkit-scrollbar{margin-right:3px;width:4px;height:4px}
+::-webkit-scrollbar,::-webkit-scrollbar-track{background-color:transparent}
+::-webkit-scrollbar-thumb{width:4px;border-radius:2px;background-color:#e4e4e4}
+
+body,html{min-height:100%;background:#d3332e;}
+a,a:visited{text-decoration:none}
+h1,h2,h3,h4,h5,h6{font-weight:500}
+input{
+	border-radius: 0px;
+}
+
+.guafen_img{
+	width:100vw;
+	height: auto;
+	border:none;
+}
+
+.guafen_button{
+	width:100vw;
+	height: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.guafen_b{
+	position: fixed;
+	bottom: 25px;
+	margin-top:50px;
+	width:70vw;
+	height: 52px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	color:#fff;
+	font-weight: bold;
+	font-size: 16px;
+	border:1px solid #fff;
+	border-radius: 26px;
+	cursor: pointer;
+}
+
+/* http://feidaijun.xiaohongxian.com/guafen_home.png */
+
+.guafen_qrcode{
+	position: fixed;
+	top: 0px;
+	width:100vw;
+	height: 100vh;
+	background-color: rgba(0,0,0,.5);
+	z-index: 1000;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.guafen_home{
+    width:320px;
+    height: 491px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('http://feidaijun.xiaohongxian.com/guafen_home1234.png');
+    background-repeat:no-repeat; 
+    background-size:100% 100%;
+    -moz-background-size:100% 100%;
+    border-radius: 10px;
+    margin-top:-20px;
+
+}
+
+.clear_a{
+    cursor: pointer;
+}
+
+#qrcode{
+    margin-top:190px;
+}
+
+
+/* --------------------guafen_home */
+
+.guafen_img_h{
+	width:100vw;
+	height: auto;
+	border:0;
+}
+
+.guafen-content{
+	margin-left: 5vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width:90vw;
+	height: auto;
+	background-color: #fff;
+	border-radius: 10px;
+	margin-bottom: 220px;
+}
+
+.guafen-content input{
+	margin-top:5px;
+	width:85vw;
+	height: 45px;
+	border:none;
+	background-color: #f1f1f1;
+	padding-left: 10px;
+	border-radius: 5px;
+}
+
+.guafen-title{
+	font-size: 18px;
+	color:#d3332e;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.guafen-titles{
+	font-size: 22px;
+	color:#333;
+	font-weight: bold;
+	margin-bottom: 10px;	
+}
+
+.linea{
+	margin-top:20px;
+}
+
+.line{
+	margin-top:50px;
+}
+
+.guafen_font{
+	margin-top: 15px;
+	display: block;
+	font-size: 12px;
+	color:#333;
+}
+
+.guafen_in{
+	margin-top: 10px;
+	font-weight: bold;
+	font-size: 16px;
+	color:#d3332e;
+	text-decoration: underline ;
+}
+
+.guafen_footer{
+	margin-left: 5vw;
+	position:fixed;
+	bottom: 20px;
+	width:90vw;
+	height: 82px;
+	background-color: #d3332e;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-size: 24px;
+	font-weight: bold;
+	border-radius: 41px;
+	border:2px solid #fff;
+	cursor: pointer;
+}
+
+
+/* 瓜分额度页面 */
+
+.guafen-name{
+	margin-top:5px;
+	font-size: 64px;
+	color:#d3332e;
+	font-weight: bold;
+	margin-bottom: 10px;		
+}
+
+.guafen-pro{
+	margin-top:5px;
+	font-size: 38px;
+	color:#333;
+	font-weight: bold;
+	margin-bottom: 10px;		
+}
+
+.gaufen-remind{
+	margin-top:15px;
+	font-size: 24px;
+	color: #d3332e;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.remind{
+	font-size: 8px;
+	color: #dedede;
+	margin-top: 30px;
+}

@@ -1,0 +1,36 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title 邀请情况
+		link(rel="shortcut icon" href="http://feidaijun.xiaohongxian.com/logo.png")
+		link(rel="bookmark" href="http://feidaijun.xiaohongxian.com/logo.png")
+		link(rel="icon" href="http://feidaijun.xiaohongxian.com/logo.png" type="image/png")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+		meta(http-equiv="X-UA-Compatible" content="ie=edge")
+		link(rel="apple-touch-icon" href="http://feidaijun.xiaohongxian.com/logo.png")
+		meta(name="apple-mobile-web-app-title" content="邀请情况")
+		meta(name="mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="white")
+		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/shareNum1.css")
+		script(src="http://feidaijun.xiaohongxian.com/remindx.js")
+	body
+		div.shareNum
+			div.share-header
+				div.share-t1 客户姓名
+				div.share-t2 客户电话
+				div.share-t3 邀请时间
+			div.share-content
+				each item in data
+					div.share-card
+						if item.username
+							div.share-c1=item.username
+						else
+							div.share-c1 飞侠
+						div.share-c2=item.number
+						div.share-c3=item.time
+		div.share-remind(style="display:;" onclick="this.style.display='none'")
+			div.share-ttt
+				text.text1 特别提醒
+				text 这里记录的是未经过滤的(粗糙的)扫码记录，不能作为客户归属凭证，如果有业绩没有刷新且是新用户首次下载注册，那肯定是在下载APP那一栏填错了个别数字，可联系群主协助找回业绩，再次强调：请检查每一次填写的手机号，确保正确再进行下一步。注意：如果客户扫码填写的手机号和注册手机号完全不相似，业绩无法找回。
+				text.text3 关闭

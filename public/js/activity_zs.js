@@ -18,47 +18,47 @@ $(document).ready(function(){
        
         if(ws>0&&ws<=0.05){
             $('.mask_first').css('display','');
-            $('.mask_first_a').text('点赞助力好友佣金翻倍');
+            $('.mask_first_a').text('飞贷推广代理');
             return;
         }
         if(ws>0.05&&ws<=0.1){
-            $('.mask_first_a').text('免费拥有查额系统');
+            $('.mask_first_a').text('每一级代理都是平等的');
             return;
         }
         if(ws>0.1&&ws<=0.2){
-            $('.mask_first_a').text('同时，你也成为了好友的代理');
+            $('.mask_first_a').text('任何级别都可以拿三级返佣');
             return;
         }
         if(ws>0.2&&ws<=0.3){
-            $('.mask_first_a').text('获得更高的返佣方式：');
+            $('.mask_first_a').text('除了拿自身佣金');
             return;
         }
         if(ws>0.3&&ws<=0.4){
-            $('.mask_first_a').text('第一提升业绩');
+            $('.mask_first_a').text('还可以拿直属代理的30%');
             return;
         }
         if(ws>0.4&&ws<=0.5){
-            $('.mask_first_a').text('第二增加代理人数');
+            $('.mask_first_a').text('拿二级代理的20%');
             return;
         }
         if(ws>0.5&&ws<=0.6){
-            $('.mask_first_a').text('可拿三级返佣！');
+            $('.mask_first_a').text('认真做，月入10万轻轻松松');
             return;
         }
         if(ws>0.6&&ws<=0.7){
-            $('.mask_first_a').text('您的飞贷推广之旅开始啦！');
+            $('.mask_first_a').text('你招的代理，永久有效');
             return;
         }
         if(ws>0.7&&ws<=0.8){
-            $('.mask_first_a').text('3');
+            $('.mask_first_a').text('累积人脉，躺在家里收钱');
             return;
         }
         if(ws>0.8&&ws<=0.9){
-            $('.mask_first_a').text('2');
+            $('.mask_first_a').text('是时候把人脉变钱脉了');
             return;
         }
         if(ws>0.9&&ws<=0.99){
-            $('.mask_first_a').text('1');
+            $('.mask_first_a').text('立即开启代理...');
             return;
         }
         if(ws>0.99){

@@ -12,8 +12,8 @@ html(lang="en")
 		meta(name="apple-mobile-web-app-title" content="飞贷福利")
 		meta(name="mobile-web-app-capable" content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style" content="white")
-		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/xiaohonga.css")
-		script(src="http://feidaijun.xiaohongxian.com/reminds.js")
+		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/xiaohongar.css")
+		script(src="http://feidaijun.xiaohongxian.com/remindx.js")
 	body
 		div.remind-top
 			div.remind-img
@@ -26,10 +26,12 @@ html(lang="en")
 				div.remind-profile-a
 					div.remind-aa 综合评分
 					div.remind-aa 饥渴系数
-					div.remind-aa 初始额度
+					div.remind-aa 信用额度
+					div.remind-aa 二押额度
 				div.remind-profile-a
 					div.remind-aa=ret.zonghefen
 					div.remind-aa=ret.jikexishu
 					div.remind-aa=ret.chushiedu
+					div.remind-aa=ret.diyaedu
 			div.remind-time=ret.time
 			a.remind-footer(href='/choose') 选择提现入口

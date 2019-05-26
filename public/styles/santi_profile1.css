@@ -1,0 +1,136 @@
+ *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Helvetica Neue,PingFang SC,Microsoft YaHei;
+    -webkit-font-smoothing:antialiased;/* chorm safari 抗锯齿*/
+    -webkit-overflow-scrolling:touch;
+    outline:none;
+}
+/* 滚动条样式调节*/
+::-webkit-scrollbar{margin-right:3px;width:4px;height:4px}
+::-webkit-scrollbar,::-webkit-scrollbar-track{background-color:transparent}
+::-webkit-scrollbar-thumb{width:4px;border-radius:2px;background-color:#e4e4e4}
+
+body,html{min-height:100%;background:#d3332e;}
+a,a:visited{text-decoration:none}
+h1,h2,h3,h4,h5,h6{font-weight:500}
+input{
+	border-radius: 0px;
+}
+
+.santi_img{
+	width:100vw;
+	height: auto;
+	border:none;
+}
+
+
+.santi_href{
+    position: fixed;
+    left: 5vw;
+    bottom: 20px;
+    width:90vw;
+    height: 60px;
+    background-color:#d72a24;
+    color:#fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border:2px solid #fff;
+    border-radius: 35px;
+    font-size: 16px;
+    font-weight: bold;
+
+
+}
+
+.santi_fixed{
+    position: fixed;
+    top:0px;
+    width:100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.santi_content{
+    width:85vw;
+    height: 250px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.santi_title{
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+}
+
+.santi_input{
+    margin-top:20px;
+    width:90%;
+    height: 50px;
+    border:none;
+    border-radius: 8px;
+    background-color: #efefef;
+    padding-left:10px;
+}
+
+.santi_submit{
+    width:90%;
+    height: 50px;
+    margin-top:30px;
+    background-color: #d3332e;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color:#fff;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+
+.santi_qrcode{
+    position: fixed;
+    top:0px;
+    width:100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,.5);
+
+}
+
+.santi_qrcode_a{
+    width:320px;
+    height: 491px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('http://feidaijun.xiaohongxian.com/santi_home.png');
+    background-repeat:no-repeat; 
+    background-size:100% 100%;
+    -moz-background-size:100% 100%;
+    border-radius: 10px;
+    margin-top:-20px;
+
+}
+
+#qrcode123{
+    margin-top:160px;
+}
+
+.clear_code{
+    cursor: pointer;
+}

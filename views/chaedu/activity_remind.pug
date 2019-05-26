@@ -12,20 +12,19 @@ html(lang="en")
 		meta(name="apple-mobile-web-app-title" content="飞贷招商")
 		meta(name="mobile-web-app-capable" content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style" content="white")
-		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/xiaohonga.css")
-		script(src="http://feidaijun.xiaohongxian.com/reminds.js")
+		link(rel="stylesheet" href="/styles/activityRemind03.css")
+		script(src="http://feidaijun.xiaohongxian.com/remindx.js")
 	body
 		div.remind-top
-			div.remind-img
-				img(style="margin-top:-20px;" src="http://feidaijun.xiaohongxian.com/greens.png")
 			div.remind-title
-				text(style="font-size:40px;margin-bottom:5px;")=ownername
-				text(style="font-size:18px;") 恭喜您成为第<span style="color:red;">#{num}</span>位飞贷推广代理
+				text(style="font-size:60px;font-weight:bold;margin-top:40px;")=ownername
+				text(style="font-size:20px;") 恭喜您成为2019年飞贷推广代理
 			div.remind-passion
-				img(src="http://feidaijun.xiaohongxian.com/feidaijun_exc.png")
+				img.remind-img-a(src="http://feidaijun.xiaohongxian.com/zs_end_123.png")
+			div.remind-remind 请保存后台二维码
 			div.remind-footer 生成后台二维码
 			div.mask(style="display:none")
 				img.mask_c(src="http://feidaijun.xiaohongxian.com/feidaijun_code_1.png")
 				img.mask_clear(src="http://feidaijun.xiaohongxian.com/clear.png")
 	script(src="http://feidaijun.xiaohongxian.com/jquery.min.js")
-	script(src="http://feidaijun.xiaohongxian.com/activity_remind.js")
+	script(src="http://feidaijun.xiaohongxian.com/activityRemind.js")

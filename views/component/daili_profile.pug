@@ -4,18 +4,21 @@ div.chaedu_zong
 		div.chaedu_daili_1 人数
 		div.chaedu_daili_1 战绩
 	div.chaedu_daili(style="border:none;")
-		div.chaedu_daili_2=level
+		div.chaedu_daili_2(id=level)=level
 		div.chaedu_daili_2=counts
 		div.chaedu_daili_2=z_yeji
 div.chaedu_fen
 	div.chaedu_daili
-		div.chaedu_daili_3(style="width:25%") 姓名
+		div.chaedu_daili_3(style="width:15%") 姓名
 		div.chaedu_daili_3(style="width:25%") 手机号
 		div.chaedu_daili_3(style="width:20%") 总战绩
-		div.chaedu_daili_a(style="width:30%") 其他
+		div.chaedu_daili_a(style="width:40%") 时间
 	each item in datas
 		div.chaedu_daili
-			div.chaedu_daili_4(style="width:25%")=item.ownername
+			div.chaedu_daili_4(style="width:15%")=item.ownername
 			div.chaedu_daili_4(style="width:25%")=item.ownerNumber
 			div.chaedu_daili_4(style="width:20%")=item.all_yeji
-			div.chaedu_daili_(style="width:30%") --
+			if !item.alipay
+				div.chaedu_daili_(style="width:40%;font-size:6px;")=item.time
+			else
+				div.chaedu_daili_(style="width:40%;font-size:6px;")=item.time

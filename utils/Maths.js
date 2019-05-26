@@ -1,7 +1,7 @@
 //将金额转化成万为单位的值
 var Maths =function(value){
 	//将数值转换成字符串
-	var str = String(value);
+	var str = String(parseInt(value));
 	//数值长度
 	var len = str.length;
 	if(len===4){
@@ -713,6 +713,46 @@ var Fang =function(all_money,first_money,first_month,sec_money,sec_month,third_m
 
 }
 
+//抵押房额度
+
+var DiyaFang = function(all_money,first_money,first_month,sec_money,sec_month,third_money,third_month){
+	var value1 = parseInt((all_money/0.8)*0.3);
+
+	var value2 = first_money*first_month;
+	
+	var value3 = sec_money*sec_month;
+
+	var value4 = third_money*third_month;
+
+
+	var value = (value1+value2+value3+value4)*0.70;
+
+
+
+	//将数值转换成字符串
+	var str = String(parseInt(value));
+	//数值长度
+	var len = str.length;
+	if(len===4){
+		return Number('0');
+	}
+	if(len===5){
+		return Number(str.slice(0,1));
+	}
+	if(len===6){
+		return Number(str.slice(0,2));
+	}
+	if(len===7){
+		return Number(str.slice(0,3));
+	}
+	if(len===8){
+		return Number(str.slice(0,4))>1000?1000:Number(str.slice(0,4));
+	}
+	if(len>8){
+		return 1000;
+	}
+}
+
 
 //信用卡无按揭房
 
@@ -774,3 +814,5 @@ module.exports.jikexishu_fang=jikexishu_fang;
 module.exports.Fang=Fang;
 module.exports.Ka=Ka;
 module.exports.Other=Other;
+module.exports.DiyaFang=DiyaFang;
+

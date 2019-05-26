@@ -12,17 +12,18 @@ html(lang="en")
 		meta(name="apple-mobile-web-app-title" content="代理详情")
 		meta(name="mobile-web-app-capable" content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style" content="white")
-		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/chaedu_dailis.css")
-		script(src="http://feidaijun.xiaohongxian.com/reminds.js")
+		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/chaeduDailiOne.css")
+		script(src="http://feidaijun.xiaohongxian.com/remindx.js")
 	body
 		div.daili_top
-			div.chaedu_daili_bar
+			div.chaedu_daili_bar(data-level='1' id='chaedu_daili_bar')
 				div.bar_1(id="mySelf") 自身
 				div.bar_1(class="active" id="zhiShu") 一
 				div.bar_1(id="erji") 二
 				div.bar_1(id="sanji") 三
 				div.bar_1(id="siji") 四
+				div.bar_1(id="zong") ...
 			div.daili_content
 				include ../component/daili_profile.pug
 	script(src="http://feidaijun.xiaohongxian.com/jquery.min.js")
-	script(src="http://feidaijun.xiaohongxian.com/chaedu_daili.js")
+	script(src="http://feidaijun.xiaohongxian.com/chaeduDailiOnea1.js")

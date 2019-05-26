@@ -1,0 +1,19 @@
+.check{
+	display: flex;
+	flex-direction: row;
+	width:100vh;
+	height:30px;
+	align-items: center;
+	justify-content: center;
+}
+
+.check tr{
+	width:100%;
+
+}
+
+.check td{
+	/*width:16.66666%;*/
+	padding:10px;
+
+}

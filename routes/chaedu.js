@@ -8,16 +8,32 @@ var fs = require('fs');
 var path = require('path');
 var logger = require('../utils/logger').logger;
 let {formatDate} = require('../utils/DateUtil');
+let M0 = require('../utils/thisMonthFX');
+let M1 = require('../utils/lastMonthFX');
+let {m,p,d} = require('../utils/aboutMoney');
+let Detail = require('../utils/moneyDetail');
+let CHAOJI = require('../utils/chaoji');
+/*后台添加超级代理微信*/
+let CJ = require('../utils/cj');
 let {Maths,Fang,Ka,Other,zonghefen_fang,jikexishu_fang} = require('../utils/Maths');
 
-//录件系统首页
+
+
+
 
 router.get('/chaedu_enter',function(req,res){
-	res.render('chaedu/chaedu_enter')
+	return res.render('feixia/FXHome');
+})
+
+/*网页版登录*/
+
+router.get('/feixiaLogin',function(req,res){
+	return res.render('chaedu/chaedu_enter');
 })
 
 
-//超级代理打开添加工号页面
+
+/*超级代理打开添加工号页面*/
 
 router.get('/add_gonghao',function(req,res){
 
@@ -43,7 +59,7 @@ router.get('/add_gonghao',function(req,res){
 })
 
 
-//杨锦旋打开添加工号页面
+/*杨锦旋打开添加工号页面*/
 
 router.get('/chaedu_gonghao',function(req,res){
 
@@ -55,7 +71,7 @@ router.get('/chaedu_gonghao',function(req,res){
 
 
 
-//保存要添加的工号
+/*保存要添加的工号*/
 
 /*isVip:tong,yin,jin*/
 
@@ -66,7 +82,7 @@ router.post('/gonghao',function(req,res){
 	}else{	
 
 		var gonghao_cookies = Number(req.signedCookies.mycookies.gonghao);
-		//如果是王亦翔添加的代理，那么这样保存数据
+		/*如果是王亦翔添加的代理，那么这样保存数据*/
 		if(gonghao_cookies===74874189){
 			var hao = new Hao({
 				ownername:req.body.ownername,
@@ -74,12 +90,12 @@ router.post('/gonghao',function(req,res){
 				gonghao:req.body.gonghao,
 				z_gonghao:req.signedCookies.mycookies.gonghao,
 				top_gonghao:req.body.gonghao,
-				isVip:"tong",
+				isVip:"yin",
 				all_yeji:0,
 				all_money:0,
 				one_money:0,
 				money_level:1,
-				act_zone:"no",
+				act_zone:"yes",
 				zan_num:0,
 				time:formatDate('yyyy-MM-dd hh:mm:ss')
 			});
@@ -117,7 +133,7 @@ router.post('/gonghao',function(req,res){
 				if(err){
 					return logger.error(err);
 				}else{
-					//如果上级代理是王亦翔，就这样保存数据
+					/*如果上级代理是王亦翔，就这样保存数据*/
 					if(retG.z_gonghao===74874189){
 						var hao = new Hao({
 							ownername:req.body.ownername,
@@ -125,12 +141,12 @@ router.post('/gonghao',function(req,res){
 							gonghao:req.body.gonghao,
 							z_gonghao:req.signedCookies.mycookies.gonghao,
 							top_gonghao:gonghao_cookies,
-							isVip:"tong",
+							isVip:"yin",
 							all_yeji:0,
 							all_money:0,
 							one_money:0,
 							money_level:1,
-							act_zone:"no",
+							act_zone:"yes",
 							zan_num:0,
 							time:formatDate('yyyy-MM-dd hh:mm:ss')
 						});
@@ -170,12 +186,12 @@ router.post('/gonghao',function(req,res){
 							gonghao:req.body.gonghao,
 							z_gonghao:req.signedCookies.mycookies.gonghao,
 							top_gonghao:retG.top_gonghao,
-							isVip:"tong",
+							isVip:"yin",
 							all_yeji:0,
 							all_money:0,
 							one_money:0,
 							money_level:1,
-							act_zone:"no",
+							act_zone:"yes",
 							zan_num:0,
 							time:formatDate('yyyy-MM-dd hh:mm:ss')
 						});
@@ -216,7 +232,7 @@ router.post('/gonghao',function(req,res){
 	}
 
 })
-//验证工号，进入到录件系统首页
+/*验证工号，进入到录件系统首页*/
 
 router.post('/check_gonghao',function(req,res){
 	Hao.find({ownername:req.body.ownername,gonghao:req.body.gonghao},function(err,rets){
@@ -235,7 +251,7 @@ router.post('/check_gonghao',function(req,res){
 	})
 })
 
-//进入到查额度的第一个界面
+/*进入到查额度的第一个界面*/
 
 router.get('/sys_home',function(req,res){
 	if(req.signedCookies.mycookies){
@@ -264,7 +280,7 @@ router.get('/sys_home',function(req,res){
 
 
 
-//提交数据审核服务器返回200码后，客户端显示返回和提醒界面；
+/*提交数据审核服务器返回200码后，客户端显示返回和提醒界面；*/
 
 router.get('/chaedu_return_remind',function(req,res){
 	if(req.signedCookies.mycookies){
@@ -287,7 +303,7 @@ router.get('/chaedu_return_remind',function(req,res){
 })
 
 
-//提交数据审核服务器返回200码后，客户端显示返回和提醒界面；
+/*提交数据审核服务器返回200码后，客户端显示返回和提醒界面；*/
 
 router.get('/chaedu_return_reminds',function(req,res){
 	if(req.signedCookies.mycookies){
@@ -311,119 +327,265 @@ router.get('/chaedu_return_reminds',function(req,res){
 
 
 
-//-------------------------------------------------------------------
+/*-------------------------------------------------------------------*/
 
 router.get('/chaedu_zonghe',function(req,res){
 
 	if(req.signedCookies.mycookies){
-		var gonghao = req.signedCookies.mycookies.gonghao;
-		Hao.find({gonghao:gonghao},function(err,rets){
+		var gonghao = Number(req.signedCookies.mycookies.gonghao);
+		Hao.find({gonghao:gonghao},function(err,rets11){
+			let isChaoji = CJ.includes(rets11[0].top_gonghao);
 			if(err){
 				return logger.error(err);
 			}else{
-				if(rets.length===0){
+				if(rets11.length===0){
 					return;
 				}else{
-					if(rets[0].isVip==="tong"){
-						if(rets[0].act_zone==="no"){
-							var datas={
-								url:"",
-								url_1:"",
-								b_img:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
-								b_img_2:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
-								title_1:"查额度(未激活)",
-								title_2:"添加代理(未激活)",
-								number:rets[0].ownerNumber,
-								name:rets[0].ownername,
-								disba:"none",
-								disp:"none",
-								displ:"none"
+
+					if(CHAOJI.includes(gonghao)){
+					
+						Money.find({top_gonghao:gonghao,shengxiaoTime:{$in:M0}},function(err,ret1){
+							if(err){
+								return logger.error(err);
+							}else{
+								let me = 0;
+								let reward;
+								for(i=0;i<ret1.length;i++){
+									me = me+ret1[i].xiakuanEdu;
+								}
+								let all=me;
+								if(me<=2000000){
+									reward = me*0.02;
+								}else if(me>2000000&&me<=10000000){
+									reward = me*0.02;
+								}else if(me>10000000&&me<=20000000){
+									reward = me*0.02;
+								}else{
+									reward = me*0.02;
+								}
+
+								if(rets11[0].isVip==="yin"){
+									var datas={
+										url:"",
+										title_1:"查额度(未激活)",
+										number:rets11[0].ownerNumber,
+										name:rets11[0].ownername,
+										alipay:rets11[0].alipay,
+										disba:"",
+										disp:"",
+										displ:"none"
+									}
+									return res.render('chaedu/chaedu_zonghe',{data:datas,isChaoji:isChaoji,yeji:all,reward:parseInt(reward)});
+								}else{
+									var datas={
+										url:"/sys_home",
+										title_1:"查额度",
+										number:rets11[0].ownerNumber,
+										name:rets11[0].ownername,
+										alipay:rets11[0].alipay,
+										disba:"",
+										disp:"",
+										displ:""
+									}
+									return res.render('chaedu/chaedu_zonghe',{data:datas,isChaoji:isChaoji,yeji:all,reward:parseInt(reward)});	
+								}
+
+
 							}
-							return res.render('chaedu/chaedu_zonghe',{data:datas});
-						}
+						})
+					}else if(gonghao===74874189){
+					
+						Money.find({shengxiaoTime:{$in:M0}},function(err,ret1){
+							if(err){
+								return logger.error(err);
+							}else{
+								let me = 0;
+								let reward;
+								for(i=0;i<ret1.length;i++){
+									me = me+ret1[i].xiakuanEdu;
+								}
+								let all=me;
+								if(me<=2000000){
+									reward = me*0.02;
+								}else if(me>2000000&&me<=10000000){
+									reward = me*0.02;
+								}else if(me>10000000&&me<=20000000){
+									reward = me*0.02;
+								}else{
+									reward = me*0.02;
+								}
+
+
+								if(rets11[0].isVip==="yin"){
+									
+									var datas={
+										url:"",
+										title_1:"查额度(未激活)",
+										number:rets11[0].ownerNumber,
+										name:rets11[0].ownername,
+										alipay:rets11[0].alipay,
+										disba:"",
+										disp:"",
+										displ:"none"
+									}
+									return res.render('chaedu/chaedu_zonghe',{data:datas,isChaoji:isChaoji,yeji:all,reward:parseInt(reward)});
+									
+								}else{
+									
+									var datas={
+										url:"/sys_home",
+										title_1:"查额度",
+										number:rets11[0].ownerNumber,
+										name:rets11[0].ownername,
+										alipay:rets11[0].alipay,
+										disba:"",
+										disp:"",
+										displ:""
+									}
+									return res.render('chaedu/chaedu_zonghe',{data:datas,isChaoji:isChaoji,yeji:all,reward:parseInt(reward)});	
+									
+								}
+
+
+							}
+						})
+					}else{
+
+						Hao.find({z_gonghao:gonghao},function(err,value){
+							if(err){
+								return logger.error(err);
+							}else{
+								var rets = []
+								rets = value.map(function(item){
+									return item.gonghao;
+								})
+
+								Money.find({gonghao:gonghao,shengxiaoTime:{$in:M0}}).then(function(ret1){
+									Money.find({z_gonghao:gonghao,shengxiaoTime:{$in:M0}}).then(function(ret2){
+										Money.find({z_gonghao:{$in:rets},shengxiaoTime:{$in:M0}}).then(function(ret3){
+											let me = 0;
+											let one = 0;
+											let two = 0;
+											for(i=0;i<ret1.length;i++){
+												me = me+ret1[i].xiakuanEdu;
+											}
+											for(i=0;i<ret2.length;i++){
+												one = one+ret2[i].xiakuanEdu;
+											}										
+											for(i=0;i<ret3.length;i++){
+												two = two+ret3[i].xiakuanEdu;
+											}
+
+											let all = me+one+two;
+											let meAndOne = me+one;
+
+											let reward;
+
+											if(meAndOne<=m.a){
+												reward = me*p.a+one*d.a+two*d.b;
+											}else if(meAndOne>m.a&&meAndOne<=m.b){
+												reward = me*p.b+one*d.a+two*d.b;
+											}else if(meAndOne>m.b&&meAndOne<=m.c){
+												reward = me*p.c+one*d.a+two*d.b;
+											}else if(meAndOne>m.c&&meAndOne<=m.d){
+												reward = me*p.d+one*d.a+two*d.b;
+											}else{
+												reward = me*p.e+one*d.a+two*d.b;
+											}
+
+
+											if(rets11[0].isVip==="yin"){
+												
+												var datas={
+													url:"",
+													title_1:"查额度(未激活)",
+													number:rets11[0].ownerNumber,
+													name:rets11[0].ownername,
+													alipay:rets11[0].alipay,
+													disba:"",
+													disp:"",
+													displ:"none"
+												}
+
+												
+												return res.render('chaedu/chaedu_zonghe',{data:datas,isChaoji:isChaoji,yeji:all,reward:parseInt(reward)});
+												
+											}else{
+												
+												var datas={
+													url:"/sys_home",
+													title_1:"查额度",
+													number:rets11[0].ownerNumber,
+													name:rets11[0].ownername,
+													alipay:rets11[0].alipay,
+													disba:"",
+													disp:"",
+													displ:""
+												}
+												
+												return res.render('chaedu/chaedu_zonghe',{data:datas,isChaoji:isChaoji,yeji:all,reward:parseInt(reward)});	
+												
+											}
+
+
+
+										})
+									})
+								})
+
+							}
+						})
+					}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*				if(rets[0].isVip==="yin"){
 						if(rets[0].act_zone==="yes"){
 							var datas={
 								url:"",
-								url_1:"",
-								b_img:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
-								b_img_2:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
 								title_1:"查额度(未激活)",
-								title_2:"添加代理(未激活)",
 								number:rets[0].ownerNumber,
 								name:rets[0].ownername,
+								alipay:rets[0].alipay,
 								disba:"",
 								disp:"",
 								displ:"none"
 							}
-							return res.render('chaedu/chaedu_zonghe',{data:datas});
-						}
-					}else if(rets[0].isVip==="yin"){
-						if(rets[0].act_zone==="no"){
-							var datas={
-								url:"",
-								url_1:"/add_gonghao",
-								b_img:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
-								b_img_2:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
-								title_1:"查额度(未激活)",
-								title_2:"添加代理",
-								number:rets[0].ownerNumber,
-								name:rets[0].ownername,
-								disba:"none",
-								disp:"none",
-								displ:"none"
-							}
-							return res.render('chaedu/chaedu_zonghe',{data:datas});
-						}
-						if(rets[0].act_zone==="yes"){
-							var datas={
-								url:"",
-								url_1:"/add_gonghao",
-								b_img:"background-image: linear-gradient(135deg,#777 0%,#555 100%)",
-								b_img_2:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
-								title_1:"查额度(未激活)",
-								title_2:"添加代理",
-								number:rets[0].ownerNumber,
-								name:rets[0].ownername,
-								disba:"",
-								disp:"",
-								displ:"none"
-							}
-							return res.render('chaedu/chaedu_zonghe',{data:datas});
+							return res.render('chaedu/chaedu_zonghe',{data:datas,isChaoji:isChaoji});
 						}
 					}else{
-						if(rets[0].act_zone==="no"){
-							var datas={
-								url:"/sys_home",
-								url_1:"/add_gonghao",
-								b_img:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
-								b_img_2:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
-								title_1:"查额度",
-								title_2:"添加代理",
-								number:rets[0].ownerNumber,
-								name:rets[0].ownername,
-								disba:"none",
-								disp:"none",
-								displ:""
-							}
-							return res.render('chaedu/chaedu_zonghe',{data:datas});	
-						}
 						if(rets[0].act_zone==="yes"){
 							var datas={
 								url:"/sys_home",
-								url_1:"/add_gonghao",
-								b_img:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
-								b_img_2:"background-image: linear-gradient(135deg,#72bf70 0%,#4f97be 100%)",
 								title_1:"查额度",
-								title_2:"添加代理",
 								number:rets[0].ownerNumber,
 								name:rets[0].ownername,
+								alipay:rets[0].alipay,
 								disba:"",
 								disp:"",
 								displ:""
 							}
-							return res.render('chaedu/chaedu_zonghe',{data:datas});	
+							return res.render('chaedu/chaedu_zonghe',{data:datas,isChaoji:isChaoji});	
 						}
-					}
+					}*/
+
+
+
+
+
+
 				}
 			}
 		})
@@ -436,7 +598,7 @@ router.get('/chaedu_zonghe',function(req,res){
 
 
 
-//进入到进度页面
+/*进入到进度页面*/
 router.get('/chaedu_profile',function(req,res){
 	if(req.signedCookies.mycookies){
 		var gonghao = req.signedCookies.mycookies.gonghao;
@@ -461,16 +623,16 @@ router.get('/chaedu_profile',function(req,res){
 
 
 
-//------------------------------------------------------------------------------管理控制
-//------------------------------------------------------------------------------管理控制
-//------------------------------------------------------------------------------管理控制
-//------------------------------------------------------------------------------管理控制
-//------------------------------------------------------------------------------管理控制
+/*------------------------------------------------------------------------------管理控制
+------------------------------------------------------------------------------管理控制
+------------------------------------------------------------------------------管理控制
+------------------------------------------------------------------------------管理控制
+------------------------------------------------------------------------------管理控制*/
 
 
 
 
-//进度控制管理页面
+/*进度控制管理页面*/
 
 router.get('/chaedu_manager_s',function(req,res){
 
@@ -488,7 +650,7 @@ router.get('/chaedu_manager_s',function(req,res){
 })
 
 
-//修改进度
+/*修改进度*/
 
 router.post('/chaedu_modify_jindu',function(req,res){
 	var number = req.body.number;
@@ -506,7 +668,7 @@ router.post('/chaedu_modify_jindu',function(req,res){
 })
 
 
-//录入有效客户
+/*录入有效客户*/
 
 router.get('/chaedu_youxiao',function(req,res){
 	res.render('chaedu/chaedu_youxiao')
@@ -546,9 +708,9 @@ router.post('/chaedu_youxiao',function(req,res){
 										shengxiaoTime:req.body.shengxiaoTime,
 										xiakuanEdu:req.body.xiakuanEdu,
 										money:req.body.money,
-										isSuccess:false, //佣金是否发放
-										isBecause:'--', //未发放的原因
-										isMyself:false//是不是本人提交
+										isSuccess:false, /*//佣金是否发放*/
+										isBecause:'--', /*//未发放的原因*/
+										isMyself:false/*//是不是本人提交*/
 									});
 									money.save(function(err){
 										if(err){
@@ -584,7 +746,7 @@ router.post('/chaedu_youxiao',function(req,res){
 
 
 
-//路由到活动规则页面
+/*路由到活动规则页面*/
 
 router.get("/chaedu_guize",function(req,res){
 
@@ -606,5 +768,83 @@ router.get("/chaedu_guize",function(req,res){
 		return res.redirect('/chaedu_enter');
 	}	
 })
+
+
+
+router.get('/savealipay',function(req,res){
+	let alipay = req.query.alipay;
+	if(req.signedCookies.mycookies){
+		var gonghao = req.signedCookies.mycookies.gonghao;
+		Hao.find({gonghao:gonghao},function(err,rets){
+			if(err){
+				return logger.error(err);
+			}else{
+				if(rets.length===0){
+					return;
+				}else{
+					if(rets[0].alipay===alipay){
+						return res.json({code:200});
+					}else{
+						Hao.update({gonghao:gonghao},{$set:{alipay:alipay}},function(err){
+							if(err){
+								res.json({code:600});
+								return logger.error(err);
+							}else{
+								return res.json({code:205});
+							}
+						})
+					}
+				}
+			}
+		})
+
+	}else{
+		return res.redirect('/chaedu_enter');
+	}		
+})
+
+router.get('/getWechatNumber',function(req,res){
+	if(req.signedCookies.mycookies){
+		var gonghao = req.signedCookies.mycookies.gonghao;
+		Hao.findOne({gonghao:gonghao},{top_gonghao:1},function(err,rets){
+			if(err){
+				return logger.error(err);
+			}else{
+				Hao.findOne({gonghao:rets.top_gonghao},{wechat:1},function(err,rets1){
+					if(err){
+						return logger.error(err);
+					}else{
+						return res.json({wechat:rets1.wechat});
+					}
+				})
+			}
+		})
+
+	}else{
+		return res.redirect('/chaedu_enter');
+	}	
+})
+
+
+
+router.get('/chaedu_shareNum',function(req,res){
+	if(req.signedCookies.mycookies){
+		var gonghao = Number(req.signedCookies.mycookies.gonghao);
+		User.find({gonghao:gonghao},{username:1,number:1,time:1},function(err,rets){
+			if(err){
+				return logger.error(err);
+			}else{
+				return res.render('chaedu/shareNum',{data:rets});
+			}
+		})
+
+
+	}else{
+		return res.redirect('/chaedu_enter');
+	}	
+})
+
+
+
 
 module.exports = router;

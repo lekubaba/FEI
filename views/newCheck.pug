@@ -1,0 +1,37 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title 业绩计算
+		link(rel="shortcut icon" href="http://feidaijun.xiaohongxian.com/logo.png")
+		link(rel="bookmark" href="http://feidaijun.xiaohongxian.com/logo.png")
+		link(rel="icon" href="http://feidaijun.xiaohongxian.com/logo.png" type="image/png")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+		meta(http-equiv="X-UA-Compatible" content="ie=edge")
+		link(rel="apple-touch-icon" href="http://feidaijun.xiaohongxian.com/logo.png")
+		meta(name="apple-mobile-web-app-title" content="业绩计算")
+		meta(name="mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="white")
+		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/newCheck.css")
+		script(src="http://feidaijun.xiaohongxian.com/remindx.js")
+	body
+		div
+			div(class='new-check topBar')
+				div 用户姓名
+				div 用户电话
+				div 下款额度
+				div 生效时间
+				div 归属者
+				div 归属者电话
+				div 自身+一级总业绩	
+			each item in data
+				div(class='new-check')
+					div=item.username
+					div=item.number
+					div=item.xiakuanEdu
+					div=item.shengxiaoTime
+					div=item.ownername
+					div=item.ownerNumber
+					div.jisuan(data-gonghao=item.gonghao) 单击获取总业绩
+		script(src="http://feidaijun.xiaohongxian.com/jquery.min.js")
+		script(src="http://feidaijun.xiaohongxian.com/newCheckWeb.js")

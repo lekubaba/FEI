@@ -10,32 +10,33 @@ var logger = require('../utils/logger').logger;
 let {formatDate} = require('../utils/DateUtil');
 
 
-//首页
+/*首页*/
 
 router.get('/',function(req,res){
 	res.render('shenqing_enter')
 })
 
-//选择通道页面
+/*选择通道页面*/
 
 router.get('/choose',function(req,res){
 	res.render('fd')
 })
 
-//保存输入的手机号
+/*保存输入的手机号*/
 
 router.post('/save_number',function(req,res){
-	//首先验证工号是否合法
+	/*首先验证工号是否合法*/
 	Hao.find({ownerNumber:req.body.authCode},function(err,results){
 		if(err){
 			return logger.error(err)
 		}else{
-			//如果合法，则保存添加的号码
+			/*如果合法，则保存添加的号码*/
 			if(results.length>0){
 				var number = req.body.number;
 				var number_s = number.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
 
 				var user = new User({
+					username:req.body.username,
 					number:req.body.number,
 					number_s:number_s,
 					authCode:req.body.authCode,
@@ -49,18 +50,18 @@ router.post('/save_number',function(req,res){
 						return logger.error(err);
 					}
 
-					//合法的基础上，查看手机号是否已经评估过
+					/*合法的基础上，查看手机号是否已经评估过*/
 
 					Ping.find({number:req.body.number},function(err,result2){
 						if(err){
 							return logger.error(err);
 						}else{
-							//如果没评估过，则返回200状态码
+							/*如果没评估过，则返回200状态码*/
 							if(result2.length===0){
 
 								var ret = {code:200};
 								return res.json(ret);
-							//否则返回700状态码
+							/*否则返回700状态码*/
 							}else{
 								var ret = {code:700};
 								return res.json(ret);
@@ -68,7 +69,7 @@ router.post('/save_number',function(req,res){
 						}
 					})
 				})
-			//不合法，则返回300状态码，前段提示授权码不合法
+		/*	不合法，则返回300状态码，前段提示授权码不合法*/
 			}else{
 				return res.json({code:300});
 			}			
@@ -76,13 +77,13 @@ router.post('/save_number',function(req,res){
 	})
 })
 
-//打开添加授权码页面
+/*打开添加授权码页面*/
 
 router.get('/open_addcode',function(req,res){
 	res.render('addcode');
 })
 
-//添加授权码
+/*添加授权码*/
 router.post('/add_authCode',function(req,res){
 	var code = new Code({
 		authCode:req.body.authCode,
@@ -113,7 +114,7 @@ router.post('/add_authCode',function(req,res){
 
 })
 
-//到看额度详情页面
+/*到看额度详情页面*/
 
 router.get('/open_profile/:number',function(req,res){
 	var number = req.params.number;
@@ -128,14 +129,14 @@ router.get('/open_profile/:number',function(req,res){
 })
 
 
-//评估额度界面
+/*评估额度界面*/
 
 router.get('/open_pinggu',function(req,res){
 	res.render('pingguedu');
 })
 
 
-//添加评估
+/*添加评估*/
 router.post('/add_pinggu',function(req,res){
 
 	var ping = new Ping({
@@ -144,6 +145,7 @@ router.post('/add_pinggu',function(req,res){
 		zonghefen:req.body.zonghefen,
 		jikexishu:req.body.jikexishu,
 		chushiedu:req.body.chushiedu,
+		diyaedu:req.body.diyaedu,
 		time:formatDate('yyyy-MM-dd hh:mm:ss')
 	})
 
@@ -156,7 +158,7 @@ router.post('/add_pinggu',function(req,res){
 					return res.json({code:200});
 				})
 			}else{
-				Ping.update({number:req.body.number},{$set:{"username":req.body.username,"zonghefen":req.body.zonghefen,"jikexishu":req.body.jikexishu,"chushiedu":req.body.chushiedu}},function(err){
+				Ping.update({number:req.body.number},{$set:{"username":req.body.username,"zonghefen":req.body.zonghefen,"jikexishu":req.body.jikexishu,"chushiedu":req.body.chushiedu,"diyaedu":req.body.diyaedu}},function(err){
 					if(err){
 						return logger.error(err)
 					}else{
@@ -169,45 +171,6 @@ router.post('/add_pinggu',function(req,res){
 
 
 })
-
-
-
-
-// router.get('/number_s',function(req,res){
-// 	User.find({},function(err,rets){
-// 		if(err){
-// 			return logger.error(err)
-// 		}else{
-// 			for(i=0;i<rets.length;i++){
-// 				var number_s = rets[i].number;
-// 				number_s = String(number_s).replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
-// 				User.update({number:rets[i].number},{$set:{number_s:number_s}},{multi:true},function(err){
-// 					if(err){
-// 						return logger.error(err)
-// 					}else{
-						
-// 					}
-// 				})
-// 			}
-// 			return res.send("hello");
-
-
-// 		}
-// 	})
-// })
-
-
-
-
-
-
-
-
-
-router.get('/baoming',function(req,res){
-	res.render('yuyue')
-})
-
 
 
 
