@@ -4,9 +4,10 @@ var logger = require('../utils/logger.js').logger;
 
 
 
-// var DB_URL   = 'mongodb://localhost/feidai';
-// var DB_URL   =  'mongodb://feidai:yjx123456@wx.feidaijun.com:27906/feidai';
-var DB_URL   =  'mongodb://feidaijun:yjx123456@wx.feidaijun.com:27906/feidaijun';
+/*var DB_URL   = 'mongodb://localhost/feidai';*/
+/*var DB_URL   =  'mongodb://feidai:yjx123456@wx.feidaijun.com:27906/feidai';*/
+var DB_URL   =  'mongodb://feidaijunfeidaijunfeidaijun:yjx123456@127.0.0.1:27019/feidaijun';
+/*var DB_URL   =  'mongodb://root:Yjx415906@jmongo-hb1-prod-mongo-erck5pepye1.jmiss.jdcloud.com:27017,jmongo-hb1-prod-mongo-erck5pepye2.jmiss.jdcloud.com:27017/admin?replicaSet=mgset-704855350';*/
 
 mongoose.Promise = require('bluebird');
 

@@ -59,13 +59,13 @@ router.get('/thisMonth',function(req,res){
 				}
 				let all=me;
 				if(me<=2000000){
-					reward = me*0.02;
+					reward = me*0.018;
 				}else if(me>2000000&&me<=10000000){
-					reward = me*0.02;
+					reward = me*0.018;
 				}else if(me>10000000&&me<=20000000){
-					reward = me*0.02;
+					reward = me*0.018;
 				}else{
-					reward = me*0.02;
+					reward = me*0.018;
 				}
 
 				return res.json({yeji:all,reward:parseInt(reward),activityImg:"http://feidaijun.xiaohongxian.com/santi_union123.png"});

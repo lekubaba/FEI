@@ -12,16 +12,6 @@ let {Maths,Fang,Ka,Other,zonghefen_fang,jikexishu_fang} = require('../utils/Math
 
 
 
-
-router.get('/checks',function(req,res){
-
-	Money.find({shengxiaoTime:"06月25日"},{_id:0,username:1,number:1,xiakuanEdu:1,ownername:1,ownerNumber:1,z_gonghao:1,top_gonghao:1},function(err,value){
-		return res.render('check',{data:value});
-	})
-	
-})
-
-
 router.get("/add_type/top_gonghao",function(req,res){
         User.find({}).then(function(val1){
                 const p = val1.map(function(item){
@@ -61,10 +51,10 @@ router.get('/top_gonghao_one_ss',function(req,res){
 /*成为超级代理-更改一级*/
 router.get('/top_gonghao_changer1',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(rets){
+	Hao.find({z_gonghao:85209735}).then(function(rets){
 		let one = rets.map(function(item){
 			return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
-				Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+				Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 					if(err){
 						return err;
 					}
@@ -87,7 +77,7 @@ router.get('/top_gonghao_changer1',function(req,res){
 /*成为超级代理-更改二级*/
 router.get('/top_gonghao_changer2',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(rets){
+	Hao.find({z_gonghao:85209735}).then(function(rets){
 		let one = rets.map(function(item){
 			return item.gonghao
 		})
@@ -99,7 +89,7 @@ router.get('/top_gonghao_changer2',function(req,res){
 
 				let two = ret2.map(function(item){
 					return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
-						Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+						Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 							if(err){
 								return err;
 							}
@@ -123,7 +113,7 @@ router.get('/top_gonghao_changer2',function(req,res){
 /*成为超级代理-更改三级*/
 router.get('/top_gonghao_changer3',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(ret1){
+	Hao.find({z_gonghao:85209735}).then(function(ret1){
 		let one = ret1.map(function(item){
 			return item.gonghao;
 		})
@@ -144,7 +134,7 @@ router.get('/top_gonghao_changer3',function(req,res){
 
 						let three = ret3.map(function(item){
 							return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
-								Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+								Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 									if(err){
 										return err;
 									}
@@ -169,7 +159,7 @@ router.get('/top_gonghao_changer3',function(req,res){
 /*成为超级代理-更改四级*/
 router.get('/top_gonghao_changer4',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(rets){
+	Hao.find({z_gonghao:85209735}).then(function(rets){
 		let one = rets.map(function(item){
 			return item.gonghao
 		})
@@ -201,7 +191,7 @@ router.get('/top_gonghao_changer4',function(req,res){
 
 								let four = ret4.map(function(item){
 									return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
-										Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+										Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 											if(err){
 												return err;
 											}
@@ -234,7 +224,7 @@ router.get('/top_gonghao_changer4',function(req,res){
 /*成为超级代理-更改五级*/
 router.get('/top_gonghao_changer5',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(rets){
+	Hao.find({z_gonghao:85209735}).then(function(rets){
 		let one = rets.map(function(item){
 			return item.gonghao
 		})
@@ -274,7 +264,7 @@ router.get('/top_gonghao_changer5',function(req,res){
 
 										let five = ret5.map(function(item){
 											return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
-												Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+												Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 													if(err){
 														return err;
 													}
@@ -305,7 +295,7 @@ router.get('/top_gonghao_changer5',function(req,res){
 /*成为超级代理-更改六级*/
 router.get('/top_gonghao_changer6',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(rets){
+	Hao.find({z_gonghao:85209735}).then(function(rets){
 		let one = rets.map(function(item){
 			return item.gonghao
 		})
@@ -357,7 +347,7 @@ router.get('/top_gonghao_changer6',function(req,res){
 
 												let six = ret6.map(function(item){
 													return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
-														Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+														Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 															if(err){
 																return err;
 															}
@@ -394,7 +384,7 @@ router.get('/top_gonghao_changer6',function(req,res){
 /*成为超级代理-更改七级*/
 router.get('/top_gonghao_changer7',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(rets){
+	Hao.find({z_gonghao:85209735}).then(function(rets){
 		let one = rets.map(function(item){
 			return item.gonghao
 		})
@@ -455,7 +445,7 @@ router.get('/top_gonghao_changer7',function(req,res){
 
 														let seven = ret7.map(function(item){
 															return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
-																Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+																Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 																	if(err){
 																		return err;
 																	}
@@ -499,7 +489,7 @@ router.get('/top_gonghao_changer7',function(req,res){
 /*成为超级代理-更改八级*/
 router.get('/top_gonghao_changer8',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(rets){
+	Hao.find({z_gonghao:85209735}).then(function(rets){
 		let one = rets.map(function(item){
 			return item.gonghao
 		})
@@ -568,7 +558,7 @@ router.get('/top_gonghao_changer8',function(req,res){
 
 																let eight = ret8.map(function(item){
 																	return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
-																		Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+																		Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 																			if(err){
 																				return err;
 																			}
@@ -613,7 +603,7 @@ router.get('/top_gonghao_changer8',function(req,res){
 /*成为超级代理-更改九级*/
 router.get('/top_gonghao_changer9',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(rets){
+	Hao.find({z_gonghao:85209735}).then(function(rets){
 		let one = rets.map(function(item){
 			return item.gonghao
 		})
@@ -693,7 +683,7 @@ router.get('/top_gonghao_changer9',function(req,res){
 
 																		let nine = ret9.map(function(item){
 																			return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
-																				Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+																				Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 																					if(err){
 																						return err;
 																					}
@@ -743,7 +733,7 @@ router.get('/top_gonghao_changer9',function(req,res){
 /*成为超级代理-更改十级*/
 router.get('/top_gonghao_changer10',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(rets){
+	Hao.find({z_gonghao:85209735}).then(function(rets){
 		let one = rets.map(function(item){
 			return item.gonghao
 		})
@@ -833,7 +823,7 @@ router.get('/top_gonghao_changer10',function(req,res){
 																				let ten = ret10.map(function(item){
 																					return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
 
-						Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+						Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 							if(err) return err;
 						})
 
@@ -887,7 +877,7 @@ router.get('/top_gonghao_changer10',function(req,res){
 /*成为超级代理-更改十一级*/
 router.get('/top_gonghao_changer11',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(rets){
+	Hao.find({z_gonghao:85209735}).then(function(rets){
 		let one = rets.map(function(item){
 			return item.gonghao
 		})
@@ -988,7 +978,7 @@ router.get('/top_gonghao_changer11',function(req,res){
 																				let eleven = ret11.map(function(item){
 																					return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
 
-						Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+						Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 							if(err) return err;
 						})
 
@@ -1049,7 +1039,7 @@ router.get('/top_gonghao_changer11',function(req,res){
 
 router.get('/top_gonghao_changer12',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(rets){
+	Hao.find({z_gonghao:85209735}).then(function(rets){
 		let one = rets.map(function(item){
 			return item.gonghao
 		})
@@ -1158,7 +1148,7 @@ router.get('/top_gonghao_changer12',function(req,res){
 																								let twl = ret12.map(function(item){
 																									return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
 
-										Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+										Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 											if(err) return err;
 										})
 
@@ -1227,7 +1217,7 @@ router.get('/top_gonghao_changer12',function(req,res){
 
 router.get('/top_gonghao_changer13',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(rets){
+	Hao.find({z_gonghao:85209735}).then(function(rets){
 		let one = rets.map(function(item){
 			return item.gonghao
 		})
@@ -1347,7 +1337,7 @@ router.get('/top_gonghao_changer13',function(req,res){
 																										let thr = ret13.map(function(item){
 																											return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
 
-												Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+												Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 													if(err) return err;
 												})
 
@@ -1418,7 +1408,7 @@ router.get('/top_gonghao_changer13',function(req,res){
 
 router.get('/top_gonghao_changer14',function(req,res){
 
-	Hao.find({z_gonghao:40865682}).then(function(rets){
+	Hao.find({z_gonghao:85209735}).then(function(rets){
 		let one = rets.map(function(item){
 			return item.gonghao
 		})
@@ -1547,7 +1537,7 @@ router.get('/top_gonghao_changer14',function(req,res){
 																												let for14 = ret14.map(function(item){
 																													return Hao.findOne({gonghao:item.gonghao}).then(function(vala){
 
-														Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:40865682}},{multi:true},function(err){
+														Hao.update({gonghao:item.gonghao},{$set:{top_gonghao:85209735}},{multi:true},function(err){
 															if(err) return err;
 														})
 

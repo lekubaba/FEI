@@ -331,6 +331,7 @@ router.get('/chaedu_return_reminds',function(req,res){
 
 router.get('/chaedu_zonghe',function(req,res){
 
+
 	if(req.signedCookies.mycookies){
 		var gonghao = Number(req.signedCookies.mycookies.gonghao);
 		Hao.find({gonghao:gonghao},function(err,rets11){
@@ -354,15 +355,9 @@ router.get('/chaedu_zonghe',function(req,res){
 									me = me+ret1[i].xiakuanEdu;
 								}
 								let all=me;
-								if(me<=2000000){
-									reward = me*0.02;
-								}else if(me>2000000&&me<=10000000){
-									reward = me*0.02;
-								}else if(me>10000000&&me<=20000000){
-									reward = me*0.02;
-								}else{
-									reward = me*0.02;
-								}
+									
+								reward = me*0.018;
+
 
 								if(rets11[0].isVip==="yin"){
 									var datas={
@@ -537,55 +532,6 @@ router.get('/chaedu_zonghe',function(req,res){
 						})
 					}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/*				if(rets[0].isVip==="yin"){
-						if(rets[0].act_zone==="yes"){
-							var datas={
-								url:"",
-								title_1:"查额度(未激活)",
-								number:rets[0].ownerNumber,
-								name:rets[0].ownername,
-								alipay:rets[0].alipay,
-								disba:"",
-								disp:"",
-								displ:"none"
-							}
-							return res.render('chaedu/chaedu_zonghe',{data:datas,isChaoji:isChaoji});
-						}
-					}else{
-						if(rets[0].act_zone==="yes"){
-							var datas={
-								url:"/sys_home",
-								title_1:"查额度",
-								number:rets[0].ownerNumber,
-								name:rets[0].ownername,
-								alipay:rets[0].alipay,
-								disba:"",
-								disp:"",
-								displ:""
-							}
-							return res.render('chaedu/chaedu_zonghe',{data:datas,isChaoji:isChaoji});	
-						}
-					}*/
-
-
-
-
-
-
 				}
 			}
 		})
@@ -696,6 +642,20 @@ router.post('/chaedu_youxiao',function(req,res){
 								if(err){
 									return logger.error(err);
 								}else{
+
+
+
+
+
+
+
+
+
+
+
+
+
+									
 									var money = new Money({
 										ownername:ret5.ownername,
 										ownerNumber:ret5.ownerNumber,
@@ -710,7 +670,8 @@ router.post('/chaedu_youxiao',function(req,res){
 										money:req.body.money,
 										isSuccess:false, /*//佣金是否发放*/
 										isBecause:'--', /*//未发放的原因*/
-										isMyself:false/*//是不是本人提交*/
+										isMyself:false,/*//是不是本人提交*/
+										time:formatDate('yyyy-MM-dd hh:mm:ss')
 									});
 									money.save(function(err){
 										if(err){

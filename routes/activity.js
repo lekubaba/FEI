@@ -253,6 +253,7 @@ router.get("/activity_success/:ownername",function(req,res){
 //新的申请页面
 
 router.get('/newEnter/:id',function(req,res){
+	logger.error('有新的请求被分配过来了');
 	return res.render('activity_enter',{number:req.params.id});
 })
 

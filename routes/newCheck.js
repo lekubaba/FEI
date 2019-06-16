@@ -8,9 +8,6 @@ var fs = require('fs');
 var path = require('path');
 var logger = require('../utils/logger').logger;
 let {formatDate} = require('../utils/DateUtil');
-let M0 = require('../utils/thisMonth');
-let M1 = require('../utils/lastMonth');
-let M2 = require('../utils/twoMonth');
 let {m,p,d} = require('../utils/aboutMoney');
 let Detail = require('../utils/moneyDetail');
 let DateMe = require('../utils/DateMe');
@@ -48,7 +45,7 @@ router.get('/newCheck',function(req,res){
 
 router.get('/findYeji',function(req,res){
 	let gonghao = Number(req.query.gonghao);
-	Money.find({$or:[{gonghao:gonghao},{z_gonghao:gonghao}],shengxiaoTime:{$in:M2}},function(err,rets){
+	Money.find({$or:[{gonghao:gonghao},{z_gonghao:gonghao}],shengxiaoTime:{$in:DateMe2}},function(err,rets){
 		if(err){
 			return logger.error(err);
 		}else{

@@ -6,6 +6,7 @@ var router = express.Router();
 var request = require('request');
 var fs = require('fs');
 var path = require('path');
+let DateMe2 = require('../utils/DateMe2');
 var logger = require('../utils/logger').logger;
 let {formatDate} = require('../utils/DateUtil');
 
@@ -32,7 +33,7 @@ router.get('/chashangji',function(req,res){
 })
 
 
-router.get('/chashangji_feixia_2019',function(req,res){
+router.get('/chashangji_feixia_201988',function(req,res){
 	return res.render('ChaShangJi')
 })
 
@@ -75,7 +76,25 @@ router.get('/shangji/:id',function(req,res){
 						if(err){
 							return logger.error(err);
 						}else{
-							return res.render('component/shangji',{namea:rets[0].ownername,numbera:rets[0].ownerNumber,yeji:rets[0].all_yeji,dailis:rets[0].zan_num,counts:counts,alipay:rets[0].alipay});
+
+
+						Money.find({$or:[{gonghao:rets[0].gonghao},{z_gonghao:rets[0].gonghao}],shengxiaoTime:{$in:DateMe2}},function(err,rets1){
+							if(err){
+								return logger.error(err);
+							}else{
+								let me = 0;
+								let reward;
+								for(i=0;i<rets1.length;i++){
+									me = me+rets1[i].xiakuanEdu;
+								}
+
+								return res.render('component/shangji',{namea:rets[0].ownername,numbera:rets[0].ownerNumber,yeji:me,dailis:rets[0].zan_num,counts:counts,alipay:rets[0].alipay});
+							}
+						})
+
+
+
+
 						}
 					})
 
