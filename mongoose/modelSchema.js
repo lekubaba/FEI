@@ -50,7 +50,8 @@ var moneySchema = new Schema({
 	isSuccess:Boolean, /*//佣金是否发放*/
 	isBecause:String, /*//未发放的原因*/
 	isMyself:Boolean, /*//是本人发起的请求？*/
-	time:String
+	time:String,
+	timeStamp:String
 });
 
 /*工号数据模型*/
@@ -70,7 +71,9 @@ var haoSchema = new Schema({
 	act_zone:String,
 	zan_num:Number,
 	wechat:String,
-	time:String
+	time:String,
+	province:String,
+	piaoNum:Number
 });
 
 /*评估系统评估数据模型*/
@@ -102,6 +105,38 @@ var guaSchema = new Schema({
 	time:String
 })
 
+/*各地区投票结果*/
+
+var piaoSchema = new Schema({
+	aname:String,
+	guangdong:Number,
+	fujian:Number,
+	zhejiang:Number,
+	jiangsu:Number,
+	anhui:Number,
+	hubei:Number,
+	hunan:Number,
+	guizhou:Number,
+	yunnan:Number,
+	guangxi:Number,
+	jiangxi:Number,
+	sichuan:Number,
+	shanxi:Number,
+	gansu:Number,
+	shandong:Number,
+	shanxio:Number,
+	hebei:Number,
+	henan:Number,
+	liaoning:Number,
+	jilin:Number,
+	heilongjiang:Number,
+	hainan:Number,
+	beijing:Number,
+	tianjin:Number,
+	chongqing:Number,
+	shanghai:Number,
+})
+
 
 var User = mongoose.model('user',userSchema);
 var Code = mongoose.model('code',codeSchema);
@@ -110,6 +145,7 @@ var Money = mongoose.model('money',moneySchema);
 var Hao= mongoose.model('hao',haoSchema);
 var Pg = mongoose.model('pg',pgSchema);
 var Gua = mongoose.model('gua',guaSchema);
+var Piao = mongoose.model('piao',piaoSchema);
 
 
 
@@ -120,3 +156,4 @@ module.exports.Money = Money;
 module.exports.Hao = Hao;
 module.exports.Pg = Pg;
 module.exports.Gua = Gua;
+module.exports.Piao = Piao;

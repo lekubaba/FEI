@@ -1,5 +1,45 @@
 $(document).ready(function(){
 
+
+
+
+
+    $('#content-list-abc').change(function(e){
+        let str = $('#content-list-abc').val();
+        let Arr = str.split(" ");
+        if(Arr[5].length===7){
+            Arr[5] = "0"+Arr[5];
+        }else if(Arr[5].length===6){
+            Arr[5] = "00"+Arr[5];
+        }else if(Arr[5].length===5){
+            Arr[5] = "000"+Arr[5];
+        }else if(Arr[5].length===4){
+            Arr[5] = "0000"+Arr[5];
+        }else if(Arr[5].length===3){
+            Arr[5] = "00000"+Arr[5];
+        }
+        if(Arr[6].length===7){
+            Arr[6] = "0"+Arr[6];
+        }else if(Arr[6].length===6){
+            Arr[6] = "00"+Arr[6];
+        }else if(Arr[6].length===5){
+            Arr[6] = "000"+Arr[6];
+        }else if(Arr[6].length===4){
+            Arr[6] = "0000"+Arr[6];
+        }else if(Arr[6].length===3){
+            Arr[6] = "00000"+Arr[6];
+        }
+        $('#content-list-abc').val(Arr[0]);
+        $('#content-list-aa').val(Arr[1]);
+        $('#content-list-bb').val(Arr[2]+" "+Arr[3]);
+        $('#content-list-cd').val(Arr[4]);
+        $('#content-list-dd').val(0);
+        $('#content-list-ee').val(Arr[5]);
+        $('#content-list-ff').val(Arr[6]);
+
+    })
+
+
     $('.content-list-aa').click(function(e){
         // var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(19[0-9]{1})|(18[0-9]{1})|(14[0-9]{1})|(17[0-8]{1}))+\d{8})$/;
         // var newreg = /^[0-9]+([.]{1}[0-9]+){0,1}$/;

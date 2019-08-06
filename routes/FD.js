@@ -18,8 +18,9 @@ router.get('/',function(req,res){
 
 /*选择通道页面*/
 
-router.get('/choose',function(req,res){
-	res.render('fd')
+router.get('/choose/:authCode',function(req,res){
+	let authCode = req.params.authCode;
+	return res.render('fd',{authCode:authCode});
 })
 
 /*保存输入的手机号*/
@@ -116,14 +117,15 @@ router.post('/add_authCode',function(req,res){
 
 /*到看额度详情页面*/
 
-router.get('/open_profile/:number',function(req,res){
+router.get('/open_profile/:number/:authCode',function(req,res){
 	var number = req.params.number;
+	var authCode = req.params.authCode;
 	Ping.findOne({number:number},function(err,results){
 		if(err){
 			return logger.error(err)
 		}else{
 
-			res.render('remind',{ret:results});
+			res.render('remind',{ret:results,authCode:authCode});
 		}
 	})
 })

@@ -245,7 +245,7 @@ router.post('/check_gonghao',function(req,res){
 			}
 			if(rets.length===1){
 				res.cookie('mycookies',{gonghao:req.body.gonghao},{signed:true,maxAge:6000*1000*1000,path:'/'});
-				return res.json({code:200})
+				return res.json({code:2000})
 			}
 		}
 	})
@@ -335,7 +335,7 @@ router.get('/chaedu_zonghe',function(req,res){
 	if(req.signedCookies.mycookies){
 		var gonghao = Number(req.signedCookies.mycookies.gonghao);
 		Hao.find({gonghao:gonghao},function(err,rets11){
-			let isChaoji = CJ.includes(rets11[0].top_gonghao);
+			let isChaoji = CHAOJI.includes(rets11[0].top_gonghao);
 			if(err){
 				return logger.error(err);
 			}else{
@@ -671,7 +671,8 @@ router.post('/chaedu_youxiao',function(req,res){
 										isSuccess:false, /*//佣金是否发放*/
 										isBecause:'--', /*//未发放的原因*/
 										isMyself:false,/*//是不是本人提交*/
-										time:formatDate('yyyy-MM-dd hh:mm:ss')
+										time:formatDate('yyyy-MM-dd hh:mm:ss'),
+										timeStamp:new Date().getTime()
 									});
 									money.save(function(err){
 										if(err){
@@ -791,7 +792,7 @@ router.get('/getWechatNumber',function(req,res){
 router.get('/chaedu_shareNum',function(req,res){
 	if(req.signedCookies.mycookies){
 		var gonghao = Number(req.signedCookies.mycookies.gonghao);
-		User.find({gonghao:gonghao},{username:1,number:1,time:1},function(err,rets){
+		User.find({gonghao:gonghao},{username:1,number:1,number_s:1,time:1},function(err,rets){
 			if(err){
 				return logger.error(err);
 			}else{

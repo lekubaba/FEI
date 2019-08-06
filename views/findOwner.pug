@@ -1,0 +1,34 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title 查找归属
+		link(rel="shortcut icon" href="http://feidaijun.xiaohongxian.com/logo.png")
+		link(rel="bookmark" href="http://feidaijun.xiaohongxian.com/logo.png")
+		link(rel="icon" href="http://feidaijun.xiaohongxian.com/logo.png" type="image/png")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+		meta(http-equiv="X-UA-Compatible" content="ie=edge")
+		link(rel="apple-touch-icon" href="http://feidaijun.xiaohongxian.com/logo.png")
+		meta(name="apple-mobile-web-app-title" content="查找归属")
+		meta(name="mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="white")
+		link(rel="stylesheet" href="/styles/check.css")
+	body
+		div
+			div(class='check')
+				span(style="padding-right:20px;") 用户姓名
+				span(style="padding-right:20px;") 用户号码
+				span(style="padding-right:20px;") 用户号码S
+				span(style="padding-right:20px;") 时间
+				span(style="padding-right:20px;") 自身工号
+				span(style="padding-right:20px;") 上级工号
+			each item in data
+				table(class='check')
+					tr
+						td=item.username
+						td(style="color:red;")=item.number
+						td=item.number_s
+						td(style="color:red;")=item.time
+						td(class='gonghao')
+							div(style="margin-right:15px;")=item.gonghao
+							div=item.z_gonghao

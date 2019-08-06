@@ -1,0 +1,34 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title 飞贷四川特别福利
+		link(rel="shortcut icon" href="http://feidaijun.xiaohongxian.com/logo.png")
+		link(rel="bookmark" href="http://feidaijun.xiaohongxian.com/logo.png")
+		link(rel="icon" href="http://feidaijun.xiaohongxian.com/logo.png" type="image/png")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+		meta(http-equiv="X-UA-Compatible" content="ie=edge")
+		link(rel="apple-touch-icon" href="http://feidaijun.xiaohongxian.com/logo.png")
+		meta(name="apple-mobile-web-app-title" content="四川独家")
+		meta(name="mobile-web-app-capable" content="yes")
+		meta(name="apple-mobile-web-app-status-bar-style" content="white")
+		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/sichuan_uni.css")
+		script(src="http://feidaijun.xiaohongxian.com/remindx.js")
+	body
+		img.santi_img(src="http://feidaijun.xiaohongxian.com/sichuan_home123.png")
+		div.santi_button
+			a.santi_href(id="tg_url" style="color:#fff" data-tg="/newEnter/"+number) 我要推广
+		div.santi_button
+			a.santi_hrefs(id="zs_url" style="color:#fff" data-url="/chaedu_activity_zs/"+number) 我要招代理
+		div.qrcode_zs(style="display:none;")
+			div.qrcode_zs_b
+				div(id="qrcode")
+			img.clear_a(style="margin-top:10px;" src="http://feidaijun.xiaohongxian.com/clear.png")
+		div.qrcode_sq(style="display:none;")
+			div.qrcode_tg_b
+				div(id="qrcode_t")
+			img.clear_t(style="margin-top:10px;" src="http://feidaijun.xiaohongxian.com/clear.png")
+
+	script(src="http://feidaijun.xiaohongxian.com/jquery.min.js")
+	script(src="http://feidaijun.xiaohongxian.com/qrcode.min.js")
+	script(src="http://feidaijun.xiaohongxian.com/sichuan_js.js")

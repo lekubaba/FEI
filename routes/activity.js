@@ -10,7 +10,7 @@ var logger = require('../utils/logger').logger;
 let {formatDate} = require('../utils/DateUtil');
 let {Maths,Fang,Ka,Other,zonghefen_fang,jikexishu_fang} = require('../utils/Maths');
 
-//路由到招商奖励页面
+/*路由到招商奖励页面*/
 
 router.get("/chaedu_guize_zs",function(req,res){
 	if(req.signedCookies.mycookies){
@@ -33,7 +33,7 @@ router.get("/chaedu_guize_zs",function(req,res){
 })
 
 
-//路由到点赞拿代理活动页面
+/*路由到点赞拿代理活动页面*/
 
 router.get("/chaedu_activity_zs/:id",function(req,res){
 	var number = req.params.id;
@@ -58,8 +58,8 @@ router.get("/chaedu_activity_zs/:id",function(req,res){
 		}
 	})
 })
-
-//代理填写信息页面
+/*
+代理填写信息页面*/
 
 router.get("/chaedu_activity_add/:id",function(req,res){
 
@@ -82,16 +82,19 @@ router.get("/chaedu_activity_add/:id",function(req,res){
 })
 
 
-//招商页来的数据
+/*招商页来的数据*/
 
 router.post("/activity_gonghao_add",function(req,res){
-	//验证前端发送过来的上级手机号是否存在
+	/*验证前端发送过来的上级手机号是否存在*/
+	let ParentPhone = req.body.z_number;
+	let Phone = req.body.ownerNumber;
+
 	Hao.find({ownerNumber:req.body.z_number},function(err,rety){
 
 		if(err){
 			return logger.error(err);
 		}else{
-			//不存在，就返回320状态码告诉客户，提交错误
+			/*不存在，就返回320状态码告诉客户，提交错误*/
 			if(rety.length===0){
 				return res.json({code:320})
 			}else{
@@ -99,27 +102,27 @@ router.post("/activity_gonghao_add",function(req,res){
 				var ownerNumber_1 =  req.body.ownerNumber;
 				var gonghao_1 = ownerNumber_1.substring(3,11);
 
-				//验证代理手机号后8位是否被占用
+				/*验证代理手机号后8位是否被占用*/
 				Hao.find({gonghao:gonghao_1},function(err,retv){
 					if(err){
 						return logger.error(err);
 					}else{
-						//如果被占用，返回330状态码告诉客户，手机号被占用
+						/*如果被占用，返回330状态码告诉客户，手机号被占用*/
 						if(retv.length!==0){
 							return res.json({code:330})
 						}else{
 
-							//验证添加的代理手机号是否存在
+							/*验证添加的代理手机号是否存在*/
 							Hao.find({ownerNumber:req.body.ownerNumber},function(err,retx){
 								if(err){
 									return logger.error(err);
 								}else{
-									//如果存在，返回310状态码告诉客户手机号已经被占用
+									/*如果存在，返回310状态码告诉客户手机号已经被占用*/
 									if(retx.length>0){
 										return res.json({code:310});
 									}else{
 
-										//如果是杨锦旋自己招商的渠道
+										/*如果是杨锦旋自己招商的渠道*/
 
 										if(rety[0].gonghao===74874189){
 											var hao = new Hao({
@@ -146,13 +149,35 @@ router.post("/activity_gonghao_add",function(req,res){
 															return logger.error(err);
 														}else{
 
-															return res.json({code:200,ownername:req.body.ownername})
-															
+															let url= "http://wx.feidai.com/view/NewActivityDetail/FeidaiJun.asmx/AddAgentByPhone?ParentPhone="+ParentPhone+"&Phone="+Phone+"&UserName="+req.body.ownername;
+															let method = "GET";
+															let options = {
+															    	headers: {"Connection": "close"},
+																	url: encodeURI(url),
+																	method: method,
+																	json: true
+															};
+
+															function callback(error, response, data) {
+
+																if (!error && response.statusCode == 200) {	
+																	let codes = Number(data.replace(/[^0-9]/ig,""));
+																
+																	return res.json({code:200,ownername:req.body.ownername});
+
+																}else{
+																	return logger.error(error);
+																	
+															  	}
+															}
+
+															request(options, callback);
+																													
 														}
 													})
 												}
 											})
-											//如果是杨锦旋的直属渠道招商，比如万力在招商
+											/*如果是杨锦旋的直属渠道招商，比如万力在招商*/
 										}else if(rety[0].z_gonghao===74874189){
 											var hao = new Hao({
 												ownername:req.body.ownername,
@@ -179,14 +204,36 @@ router.post("/activity_gonghao_add",function(req,res){
 															return logger.error(err);
 														}else{
 
-															return res.json({code:200,ownername:req.body.ownername})
+															let url= "http://wx.feidai.com/view/NewActivityDetail/FeidaiJun.asmx/AddAgentByPhone?ParentPhone="+ParentPhone+"&Phone="+Phone+"&UserName="+req.body.ownername;
+															let method = "GET";
+															let options = {
+															    	headers: {"Connection": "close"},
+																	url: encodeURI(url),
+																	method: method,
+																	json: true
+															};
+
+															function callback(error, response, data) {
+
+																if (!error && response.statusCode == 200) {	
+																	let codes = Number(data.replace(/[^0-9]/ig,""));
+																
+																	return res.json({code:200,ownername:req.body.ownername});
+
+																}else{
+																	return logger.error(error);
+																	
+															  	}
+															}
+
+															request(options, callback);
 															
 														}
 													})
 												}
 											})
 
-											//如果是下下级招商，比如万力的直属
+											/*如果是下下级招商，比如万力的直属*/
 
 										}else{
 											var hao = new Hao({
@@ -213,8 +260,29 @@ router.post("/activity_gonghao_add",function(req,res){
 														if(err){
 															return logger.error(err);
 														}else{
+															let url= "http://wx.feidai.com/view/NewActivityDetail/FeidaiJun.asmx/AddAgentByPhone?ParentPhone="+ParentPhone+"&Phone="+Phone+"&UserName="+req.body.ownername;
+															let method = "GET";
+															let options = {
+															    	headers: {"Connection": "close"},
+																	url: encodeURI(url),
+																	method: method,
+																	json: true
+															};
 
-															return res.json({code:200,ownername:req.body.ownername})
+															function callback(error, response, data) {
+
+																if (!error && response.statusCode == 200) {	
+																	let codes = Number(data.replace(/[^0-9]/ig,""));
+																
+																	return res.json({code:200,ownername:req.body.ownername});
+
+																}else{
+																	return logger.error(error);
+																	
+															  	}
+															}
+
+															request(options, callback);
 															
 														}
 													})
@@ -235,7 +303,7 @@ router.post("/activity_gonghao_add",function(req,res){
 
 })
 
-//路由到生成后台二维码页面
+/*路由到生成后台二维码页面*/
 router.get("/activity_success/:ownername",function(req,res){
 	
 	Hao.count({},function(err,count){
@@ -250,15 +318,14 @@ router.get("/activity_success/:ownername",function(req,res){
 	
 })
 
-//新的申请页面
+/*新的申请页面*/
 
 router.get('/newEnter/:id',function(req,res){
-	logger.error('有新的请求被分配过来了');
 	return res.render('activity_enter',{number:req.params.id});
 })
 
 
-//结算页面
+/*结算页面*/
 
 
 module.exports = router;

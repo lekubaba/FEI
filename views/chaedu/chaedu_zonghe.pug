@@ -12,10 +12,11 @@ html(lang="en")
 		meta(name="apple-mobile-web-app-title" content="飞侠")
 		meta(name="mobile-web-app-capable" content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style" content="white")
-		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/chaeduaa17.css")
+		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/chaeduaa22.css")
 		script(src="http://feidaijun.xiaohongxian.com/remindx.js")
 	body
-		div.feixia_name #{data.name}，您好！
+		div.feixia_name #{data.name}，单笔提现不要超过20万哦
+		//- div.feixia_name #{data.name}，您好！
 		div.feixia_all
 			div.feixia_p
 				div.feixia_a 本月业绩 #{yeji}
@@ -23,6 +24,7 @@ html(lang="en")
 			div.feixia_y 预计佣金
 			div.feixia_m=reward
 		a.chaedu_reg_1(style="color:#fff;" href="/downloadApp") 下载代理后台APP
+		a.chaedu_reg_1(style="color:#fff;background-color:#845F93;" href="/sichuan_uni") 四川省代理专属
 		a.chaedu_reg_1(id="tg_url" style="color:#fff" data-tg="/newEnter/"+data.number) 专属推广二维码
 		a.chaedu_reg_1(id="zs_url" style="color:#fff" data-url="/chaedu_activity_zs/"+data.number) 专属招商二维码
 		if isChaoji
@@ -37,13 +39,13 @@ html(lang="en")
 			a(href="https://www.yuque.com/yangjx/feidaijun") 飞贷课堂
 			a(href="https://www.yuque.com/yangjx/feidaijun/eh745z") 三提行动
 			a(href=data.url)=data.title_1
-			a(href="/add_gonghao") 添加代理
+			//-a(href="/add_gonghao") 添加代理
 			a(style="display:"+data.displ href="/chaedu_profile") 查额记录
 			a(id="shareNum" href="/chaedu_shareNum") 邀请记录
 			a(href="https://www.yuque.com/yangjx/aywcrp/ycmk5l") 佣金规则
 		div.frame_ba(style="display:"+data.disba)
 			div.frame_content
-				div(id="santi_code" data-santi='/santiNumber/'+data.number)
+				div(id="dujia_code" data-dujia='/dujia/'+data.number)
 				span
 			img.clear_ba(style="margin-top:10px;" src="http://feidaijun.xiaohongxian.com/clear.png")
 		div.qrcode_zs(style="display:none;")
@@ -63,6 +65,20 @@ html(lang="en")
 					input#alipay-number(type='text' placeholder="已经绑定："+data.alipay)
 				div#alipaycheck 确认
 			img.clear_alipay(style="margin-top:10px;" src="http://feidaijun.xiaohongxian.com/clear.png")
+		div.massRemind(style="display:;" onclick="this.style.display='none'")
+			div.massContent
+				text.massTitle 四川省代理提醒
+				text.massText 为了更好的开展业务，8月6日起，四川全省只有在地区负责人体制内的代理才给予结算，不在负责人体制内的请联系负责人变更。
+				text.massText1 各地区负责人名单如下：
+				text.massText 达州、南充：冷  13600852301
+				text.massText 乐山：孟  17312888800
+				text.massText 绵阳：田  18306692925
+				text.massText 宜宾、眉山：张  13410129969
+				text.massText 资阳、自贡：黎  15220252225
+				text.massText 德阳：李 15056501911
+				text.massText 攀枝花：周 19849785556
+				text.massText 泸州：万 18675783335
+				text.massKnow 关闭
 	script(src="http://feidaijun.xiaohongxian.com/jquery.min.js")
 	script(src="http://feidaijun.xiaohongxian.com/qrcode.min.js")
-	script(src="http://feidaijun.xiaohongxian.com/chaeduaa8.js")
+	script(src="http://feidaijun.xiaohongxian.com/chaeduaa9.js")

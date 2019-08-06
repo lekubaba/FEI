@@ -1,0 +1,203 @@
+ *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Helvetica Neue,PingFang SC,Microsoft YaHei;
+    -webkit-font-smoothing:antialiased;/* chorm safari 抗锯齿*/
+    -webkit-overflow-scrolling:touch;
+    outline:none;
+}
+/* 滚动条样式调节*/
+::-webkit-scrollbar{margin-right:3px;width:4px;height:4px}
+::-webkit-scrollbar,::-webkit-scrollbar-track{background-color:transparent}
+::-webkit-scrollbar-thumb{width:4px;border-radius:2px;background-color:#e4e4e4}
+
+body,html{min-height:100%;background:#d3332e;}
+a,a:visited{text-decoration:none}
+h1,h2,h3,h4,h5,h6{font-weight:500}
+input{
+	border-radius: 0px;
+}
+
+.tuixiu_img{
+	width:100vw;
+	height: auto;
+	border:none;
+}
+
+
+.tuixiu_href{
+    position: fixed;
+    left: 5vw;
+    bottom: 90px;
+    width:90vw;
+    height: 60px;
+    background-color:#d72a24;
+    color:#fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border:2px solid #fff;
+    border-radius: 35px;
+    font-size: 16px;
+    font-weight: bold;
+
+
+}
+
+.tuixiu_href2{
+    position: fixed;
+    left: 5vw;
+    bottom: 20px;
+    width:90vw;
+    height: 60px;
+    background-color:#d72a24;
+    color:#fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border:2px solid #fff;
+    border-radius: 35px;
+    font-size: 16px;
+    font-weight: bold;
+
+
+}
+
+
+/* 三提活动css */
+
+
+.mass{
+    position: fixed;
+    top:0;
+    width:100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.massContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*justify-content: center;*/
+    width:85vw;
+    height: 45vh;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.dujia_title{
+    margin-top: 20px;
+    font-family: "微软雅黑";
+    font-size: 22px;
+    font-weight: 600;
+    color:#333;
+}
+
+
+.city{
+    padding:0 5px 0 5px;
+    margin-top:20px;
+    width:85%;
+    height: 50px;
+    border:1px solid #eee;
+    border-radius: 5px;
+    color: #333;
+    background-color: #eee;
+}
+
+.dujia{
+    margin-top:10px;
+    padding:0 5px 0 5px;
+    width:85%;
+    height: 50px;
+    border-radius: 5px;
+    border:1px solid #eee;
+    background-color: #eee;
+
+}
+
+.dujia_button{
+    margin-top:20px;
+    width:85%;
+    height: 50px;
+    background-color:#d3332e;
+    border-radius: 5px;
+    color:#fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* success */
+
+
+.success{
+    width:100vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:30px 20px 30px 20px;
+
+}
+
+.scontent{
+    margin-top:40px;
+    font-size: 22px;
+    font-weight: 600;
+    color:#fff;
+}
+
+.simg{
+    margin-top: 20px;
+    width:90vw;
+    height: auto;
+    margin-bottom: 200px;
+}
+
+.sbutton{
+    position: fixed;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:#fff;
+    width:90vw;
+    height: 52px;
+    background-color: #d3332e;
+    border-radius: 10px;
+    border:2px solid #fff;
+}
+
+.paiming{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:100vw;
+    height: 100vh;
+}
+
+.paiming-title{
+    margin-top:30px;
+    font-weight: 600;
+    font-size: 32px;
+    color: #fff;
+}
+
+
+.paiming-city{
+    margin-top:10px;
+    font-size: 16px;
+    color: #fff;    
+}

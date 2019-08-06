@@ -33,7 +33,7 @@ router.get('/chashangji',function(req,res){
 })
 
 
-router.get('/chashangji_feixia_201988',function(req,res){
+router.get('/chashangji_feixia_20198834',function(req,res){
 	return res.render('ChaShangJi')
 })
 
@@ -64,6 +64,14 @@ router.get('/shangji/:id',function(req,res){
 		return res.render('component/shangji',{namea:"冷上亿",numbera:"13600852301",yeji:"226158900",dailis:4033,counts:2507,alipay:"13600852301"});
 	}else if(ownerNumber===15056501911){
 		return res.render('component/shangji',{namea:"兄弟加油",numbera:"15056501911",yeji:"保密",dailis:"保密",counts:"保密",alipay:"保密"});
+	}else if(ownerNumber===13591350111){
+		return res.render('component/shangji',{namea:"张伟",numbera:"13591350111",yeji:"1575430000",dailis:"保密",counts:"保密",alipay:"保密"});
+	}else if(ownerNumber===13220378536){
+		return res.render('component/shangji',{namea:"黎豪",numbera:"13288889999",yeji:"879328000",dailis:"37",counts:"0",alipay:"保密"});
+	}else if(ownerNumber===13775965815){
+		return res.render('component/shangji',{namea:"孟宪勇",numbera:"13775965815",yeji:"1854322000",dailis:"2312",counts:"0",alipay:"保密"});
+	}else if(ownerNumber===13564721960){
+		return res.render('component/shangji',{namea:"取消资格",numbera:"取消资格",yeji:"取消资格",dailis:"取消资格",counts:"取消资格",alipay:"取消资格"});
 	}else{
 		Hao.find({ownerNumber:ownerNumber},function(err,rets){
 			if(err){
@@ -130,6 +138,14 @@ router.get('/shangjione/:id',function(req,res){
 							return res.json({namea:"冷上亿",numbera:"13600852301",yeji:"226158900",dailis:4033,counts:2507,alipay:"13600852301"});
 						}else if(ret1.ownerNumber===15056501911){
 							return res.json({namea:"兄弟加油",numbera:"15056501911",yeji:"保密",dailis:"保密",counts:"保密",alipay:"保密"});
+						}else if(ret1.ownerNumber===13591350111){
+							return res.json({namea:"张伟",numbera:"13591350111",yeji:"354760000",dailis:"保密",counts:"保密",alipay:"保密"});
+						}else if(ret1.ownerNumber===13220378536){
+							return res.json({namea:"黎豪",numbera:"13288889999",yeji:"879328000",dailis:"37",counts:"0",alipay:"保密"});
+						}else if(ownerNumber===13775965815){
+							return res.json({namea:"孟宪勇",numbera:"13775965815",yeji:"1854322000",dailis:"2312",counts:"0",alipay:"保密"});
+						}else if(ownerNumber===13564721960){
+							return res.json({namea:"取消资格",numbera:"取消资格",yeji:"取消资格",dailis:"取消资格",counts:"取消资格",alipay:"取消资格"});
 						}else{
 							Hao.find({ownerNumber:ret1.ownerNumber},function(err,rets){
 								if(err){
