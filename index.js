@@ -73,7 +73,7 @@ var routesPath = __dirname +'/routes/'
 
 route.init(app,routesPath);
 
-http.createServer(app).listen(80);
+http.createServer(app).listen(8066);
 // http.createServer(app).listen(8066);
 // https.createServer(options,app).listen(443);
 

@@ -245,7 +245,7 @@ router.post('/check_gonghao',function(req,res){
 			}
 			if(rets.length===1){
 				res.cookie('mycookies',{gonghao:req.body.gonghao},{signed:true,maxAge:6000*1000*1000,path:'/'});
-				return res.json({code:2000})
+				return res.json({code:200})
 			}
 		}
 	})

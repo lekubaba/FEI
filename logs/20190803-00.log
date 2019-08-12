@@ -1,7 +1,0 @@
-[2019-08-03T00:14:27.682] [ERROR] xiaohongxian - { inspect: [Function: inspect] }
-[2019-08-03T00:14:27.690] [INFO] xiaohongxian - 连接已经断开
-[2019-08-03T00:14:30.904] [INFO] xiaohongxian - 数据库连接成功
-[2019-08-03T00:55:43.232] [INFO] xiaohongxian - server is running:8066
-[2019-08-03T00:55:43.470] [INFO] xiaohongxian - 数据库连接成功
-[2019-08-03T00:56:33.087] [INFO] xiaohongxian - server is running:8066
-[2019-08-03T00:56:33.326] [INFO] xiaohongxian - 数据库连接成功

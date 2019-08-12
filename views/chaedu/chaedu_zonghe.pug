@@ -12,7 +12,7 @@ html(lang="en")
 		meta(name="apple-mobile-web-app-title" content="飞侠")
 		meta(name="mobile-web-app-capable" content="yes")
 		meta(name="apple-mobile-web-app-status-bar-style" content="white")
-		link(rel="stylesheet" href="http://feidaijun.xiaohongxian.com/chaeduaa22.css")
+		link(rel="stylesheet" href="/styles/chaeduaa22.css")
 		script(src="http://feidaijun.xiaohongxian.com/remindx.js")
 	body
 		div.feixia_name #{data.name}，单笔提现不要超过20万哦
@@ -25,7 +25,7 @@ html(lang="en")
 			div.feixia_m=reward
 		a.chaedu_reg_1(style="color:#fff;" href="/downloadApp") 下载代理后台APP
 		a.chaedu_reg_1(style="color:#fff;background-color:#845F93;" href="/sichuan_uni") 四川省代理专属
-		a.chaedu_reg_1(id="tg_url" style="color:#fff" data-tg="/newEnter/"+data.number) 专属推广二维码
+		a.chaedu_reg_1(id="tg_url" style="color:#fff" data-phone=data.number data-tg="/newEnter/"+data.number) 专属推广二维码
 		a.chaedu_reg_1(id="zs_url" style="color:#fff" data-url="/chaedu_activity_zs/"+data.number) 专属招商二维码
 		if isChaoji
 			a.chaedu_reg_1(id="wxgroup" style="color:#f1c678;") 官方统一管理群
@@ -81,4 +81,4 @@ html(lang="en")
 				text.massKnow 关闭
 	script(src="http://feidaijun.xiaohongxian.com/jquery.min.js")
 	script(src="http://feidaijun.xiaohongxian.com/qrcode.min.js")
-	script(src="http://feidaijun.xiaohongxian.com/chaeduaa9.js")
+	script(src="/js/chaeduaa9.js")
