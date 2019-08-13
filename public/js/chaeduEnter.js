@@ -8,7 +8,6 @@ $(document).ready(function(){
         var data = {ownername:ownername,gonghao:gonghao}; 
         if(creg.test(ownername)&&myreg.test(gonghao)){
             $.post('/check_gonghao',data,function(dataa,status){
-                console.log(dataa.code)
                 if(dataa.code===200){
                     window.location.href='/chaedu_zonghe';
                 }

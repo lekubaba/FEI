@@ -13,6 +13,7 @@ var userSchema = new Schema({
 	z_gonghao:Number,/*推荐人上级ID，上级的登陆密码*/
 	top_gonghao:Number,/*管理员ID，我们在每个代理身上都插入了管理员ID，方便查看所有等级*/
 	top_name:String,/*预留字段，暂时没有意义*/
+	loanState:String,
 	time:String/*邀请时间*/
 });
 

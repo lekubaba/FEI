@@ -18,23 +18,7 @@ $(document).ready(function() {
 		},
 	});
 
-
-
-	/*退休二维码生成*/
-
-	// var path = document.getElementById("tuixiu_code").getAttribute("data-tuixiu");
-	// var tuixiu_url = 'http://wx.feidaijun.com'+path;
-	// var qrcode = new QRCode("tuixiu_code", {
-	//     text: tuixiu_url,
-	//     width: 110,
-	//     height: 110,
-	//     colorDark : "#000000",
-	//     colorLight : "#ffffff",
-	//     correctLevel : QRCode.CorrectLevel.H
-	// });
-
-	/*三提行动*/
-
+/*独家活动二维码*/
 
 	var path = document.getElementById("dujia_code").getAttribute("data-dujia");
 	var dujia_url = 'http://wx.feidaijun.com' + path;

@@ -642,19 +642,6 @@ router.post('/chaedu_youxiao',function(req,res){
 								if(err){
 									return logger.error(err);
 								}else{
-
-
-
-
-
-
-
-
-
-
-
-
-
 									
 									var money = new Money({
 										ownername:ret5.ownername,

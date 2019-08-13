@@ -178,6 +178,67 @@ router.get('/shangjione/:id',function(req,res){
 
 
 
+router.get('/openFind/:id',function(req,res){
+	let ownerNumber=Number(req.params.id);
+
+	Hao.find({ownerNumber:ownerNumber},function(err,rets){
+		if(err){
+			return logger.error(err);
+		}else{
+			if(rets.length===0){
+				return res.send('手机号错误，查额度开启失败');
+			}else{
+
+				Hao.update({ownerNumber:ownerNumber},{$set:{isVip:"jin"}},{multi:true},function(err){
+					if(err){
+						return logger.error(err);
+					}else{
+						return res.send('手机号为:'+ownerNumber+"的查额度权限开启成功");
+					}
+				})
+
+
+			}
+		}
+	})
+
+
+})
+
+/*查看超级代理的邀请量*/
+router.get('/findCount/:id',function(req,res){
+	let top_gonghao=Number(req.params.id);
+
+	if(top_gonghao===64721960){
+		return res.send('没有这个超级代理');
+	}
+
+	Hao.find({top_gonghao:top_gonghao},function(err,rets){
+		if(err){
+			return logger.error(err);
+		}else{
+			if(rets.length===0){
+				return res.send('没有这个超级代理');
+			}else{
+
+				User.count({top_gonghao:top_gonghao},function(err,counts){
+					if(err){
+						return logger.error(err);
+					}else{
+						return res.send(+"超级代理的总邀约量是：  "+counts);
+					}
+				})
+
+
+			}
+		}
+	})
+
+
+})
+
+
+
 
 
 

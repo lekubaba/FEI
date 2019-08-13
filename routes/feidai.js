@@ -11,40 +11,130 @@ let {formatDate} = require('../utils/DateUtil');
 
 
 
+/*放款数据同步*/
+router.get('/addDataToFeixia/LendingRecords',function(req,res){
+	let username = req.query.userName;
+	let number = req.query.userNumber;
+	let shenqingTime = req.query.ApplicationTime;
+	let shengxiaoTime = req.query.entryIntoForceTime;
+	let xiakuanEdu = req.query.LendingQuota;
+	let ownerNumber = req.query.ownerNumber;
 
-
-
-
-router.get('/feidaiUserCloud/:ParentPhone/:Phone/:Uname',function(req,res){
-
-	let ParentPhone = req.params.ParentPhone;
-	let Phone = req.params.Phone;
-	let Uname = req.params.Uname;
-
-	let url= "http://fweb.gzzfyj.cn/view/NewActivityDetail/FeidaiJun.asmx/AddAgentByPhone?ParentPhone="+ParentPhone+"&Phone="+Phone+"&UserName="+Uname;
-	let method = req.method.toUpperCase();
-	let options = {
-	    	headers: {"Connection": "close"},
-			url: encodeURI(url),
-			method: method,
-			json: true
-	};
-
-
-	function callback(error, response, data) {
-
-		if (!error && response.statusCode == 200) {	
-			let code = Number(data.replace(/[^0-9]/ig,""));
-			console.log(code);
-
+	Money.find({username:username,number:number,shenqingTime:shenqingTime},function(err,retA){
+		if(err){
+			return logger.error(err);
 		}else{
-			return logger.error(error);
-			
-	  	}
-	}
+			if(retA.length===0){
+				Hao.findOne({ownerNumber:ownerNumber},function(err,retB){
+					if(err){
+						return logger.error(err);
+					}else{
+						var money = new Money({
+							ownername:retB.ownername,
+							ownerNumber:ownerNumber,
+							gonghao:retB.gonghao,
+							z_gonghao:retB.z_gonghao,
+							top_gonghao:retB.top_gonghao,
+							username:username,
+							number:number,
+							shenqingTime:shenqingTime,
+							shengxiaoTime:shengxiaoTime,
+							xiakuanEdu:xiakuanEdu,
+							money:0,
+							isSuccess:false, /*//佣金是否发放*/
+							isBecause:'--', /*//未发放的原因*/
+							isMyself:false,/*//是不是本人提交*/
+							time:formatDate('yyyy-MM-dd hh:mm:ss'),
+							timeStamp:new Date().getTime()
+						});
 
-	request(options, callback);
+						money.save(function(err){
+							if(err){
+								return logger.error(err);
+							}else{
+								var all_yeji=parseInt(xiakuanEdu);
+								var all_money=0;
+								Hao.update({gonghao:retB.gonghao},{$inc:{all_yeji:all_yeji,all_money:all_money}},function(err){
+									if(err){
+										return logger.error(err);
+									}else{
+										var data ={code:2,result:username+" 借款数据同步成功"};
+										return res.json(data);		
+									}
+								})
+							}
+						})	
+
+
+					}
+				})
+			}else{
+				return res.json({code:3,result:"数据重复"});
+			}
+		}
+	})	
+
+
 })
+
+/*邀请数据同步*/
+
+router.get('/addDataToFeixia/InvitationRecords',function(req,res){
+	let username = req.query.userName;
+	let number_s = req.query.userNumber;
+	let time = req.query.time;
+	let loanState = req.query.Quota;
+	let authCode = req.query.ownerNumber;
+
+	Hao.findOne({ownerNumber:authCode},function(err,retA){
+		if(err){
+			return logger.error(err);
+		}else{
+
+
+			User.find({number_s:number_s,authCode:authCode,time:time},function(err,retB){
+				if(err){
+					return logger.error(err);
+				}else{
+					if(retB.length===0){
+						var user = new User({
+							username:username,
+							number:0,
+							number_s:number_s,
+							authCode:authCode,
+							gonghao:retA.gonghao,
+							z_gonghao:retA.z_gonghao,
+							top_gonghao:retA.top_gonghao,
+							loanState:loanState,
+							time:time
+						})
+
+						user.save(function(err){
+							if(err){
+								return logger.error(err);
+							}else{
+								return res.json({code:1,result:username+"  邀请记录同步成功"})
+							}
+						})
+						
+					}else{
+						return res.json({code:3,result:username+"  数据重复"})
+					}
+				}
+			})
+
+
+
+
+
+		}
+	})
+
+});
+
+
+
+
 
 
 
