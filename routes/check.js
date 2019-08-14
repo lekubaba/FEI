@@ -15,7 +15,7 @@ let {Maths,Fang,Ka,Other,zonghefen_fang,jikexishu_fang} = require('../utils/Math
 
 router.get('/checks',function(req,res){
 
-	Money.find({shengxiaoTime:"09月13日"},{_id:0,username:1,number:1,xiakuanEdu:1,ownername:1,ownerNumber:1,z_gonghao:1,top_gonghao:1},function(err,value){
+	Money.find({shengxiaoTime:"09月09日"},{_id:0,username:1,number:1,xiakuanEdu:1,ownername:1,ownerNumber:1,z_gonghao:1,top_gonghao:1},function(err,value){
 		return res.render('check',{data:value});
 	})
 	

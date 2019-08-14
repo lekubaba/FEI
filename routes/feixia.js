@@ -659,6 +659,33 @@ router.get('/feixiaAlipay',function(req,res){
 })
 
 
+/*查找群主微信*/
+
+
+
+router.get('/findGroup',function(req,res){
+	let gonghao = req.query.gonghao;
+	Hao.findOne({gonghao:gonghao},function(err,retA){
+		if(err){
+			return logger.error(err);
+		}else{
+			Hao.findOne({top_gonghao:retA.top_gonghao},function(err,retB){
+				if(err){
+					return logger.error(err);
+				}else{
+					if(retB.wechat){
+						return res.json({wechat:retB.wechat})
+					}else{
+						return res.json({wechat:"暂时还没有为您推荐群"})
+					}
+				}
+			})
+		}
+	})
+})
+
+
+
 router.get('/webcontent',function(req,res){
 	return res.json({webUrl:"https://www.yuque.com/yangjx/feidaijun/eh745z"})
 })

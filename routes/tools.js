@@ -238,6 +238,13 @@ router.get('/findCount/:id',function(req,res){
 })
 
 
+// router.get('/remove914',function(req,res){
+// 	Money.remove({shengxiaoTime:"09月14日"},function(err){
+// 		return res.send('ok')
+// 	})
+// })
+
+
 
 
 

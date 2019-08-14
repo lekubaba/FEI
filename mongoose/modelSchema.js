@@ -17,6 +17,21 @@ var userSchema = new Schema({
 	time:String/*邀请时间*/
 });
 
+
+/*邀请记录数据模型*/
+
+var uSchema = new Schema({
+	username:String,/*借款客户姓名*/
+	number_s:String,/*借款客户脱敏手机号，比如：132****8888*/
+	authCode:Number,/*推荐人手机号*/
+	gonghao:Number,/*推荐人ID，也就是他们的登陆密码*/
+	z_gonghao:Number,/*推荐人上级ID，上级的登陆密码*/
+	top_gonghao:Number,/*管理员ID，我们在每个代理身上都插入了管理员ID，方便查看所有等级*/
+	top_name:String,/*预留字段，暂时没有意义*/
+	loanState:String,
+	time:String/*邀请时间*/
+});
+
 /*授权码数据模型*/
 
 var codeSchema = new Schema({
@@ -140,6 +155,7 @@ var piaoSchema = new Schema({
 
 
 var User = mongoose.model('user',userSchema);
+var U = mongoose.model('u',uSchema);
 var Code = mongoose.model('code',codeSchema);
 var Ping = mongoose.model('ping',pingSchema);
 var Money = mongoose.model('money',moneySchema);
@@ -151,6 +167,7 @@ var Piao = mongoose.model('piao',piaoSchema);
 
 
 module.exports.User = User;
+module.exports.U = U;
 module.exports.Code = Code;
 module.exports.Ping = Ping;
 module.exports.Money = Money;

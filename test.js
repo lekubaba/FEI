@@ -1,4 +1,11 @@
-let cc = {"湖南":"hunan","江西":"jiangxi"};
+let cc = {};
+
+
+if(cc){
+	console.log(true);
+}else{
+	console.log(false);
+}
 
 
 
